@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='calendar_recurring_project_request_action' model='ir.actions.act_window'>
+        <field name="name">Agendamentos</field>
+        <field name="res_model">project_request.recurring</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Agendamento" id="calendar_menu" parent="category_request_configure"
+              action="calendar_recurring_project_request_action" sequence="1"/>
+
+    <record id="project_request_recurring_view_form" model="ir.ui.view">
+        <field name="name">Agendamento Form</field>
+        <field name="model">project_request.recurring</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group></group>
+                        <group>
+                            <field name="enabled" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group name="first_group">
+                        <group>
+                            <field name="user_id"/>
+                            <field name="department_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="private_message" string="Privacidade" widget='radio'
+                                   options="{'horizontal': true}"/>
+                            <field name="user_requested_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'invisible': [('private_message', '=', 'public')], 'required': [('private_message', '=', 'private')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="users_views_ids" widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': ['&amp;', ('user_create_id', '!=', True), ('is_required', '!=', True)]}"
+                                   domain="[('id', 'not in', [user_id, user_requested_id])]"/>
+                        </group>
+                        <group>
+                            <field name="department_views_ids" widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': ['&amp;', ('user_create_id', '!=', True), ('is_required', '!=', True)]}"
+                                   domain="[('id', '!=', department_id)]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="project_request_general" string="Informações Gerais">
+                            <group>
+                                <group>
+                                    <field name="category_parent_request_id"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                           domain="[('type', '=', 'parent')]"/>
+                                </group>
+                                <group>
+                                    <field name="category_child_request"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="boolean_client" invisible="1"/>
+                                <field name="request_client_ids"
+                                       widget="many2many_tags"
+                                       attrs="{'invisible':[('boolean_client', '=', False)], 'required':[('boolean_client', '=', True)]}"/>
+                            </group>
+                            <group>
+                                <field name="description_problem"/>
+                                <field name="is_required" invisible="1"/>
+                                <field name="user_create_id" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="project_request_attachment" string="Anexos">
+                        </page>
+                        <page name="project_request_recurring" string="Recorrência">
+                            <group>
+                                <label for="repeat_interval"/>
+                                <div class="o_col">
+                                    <div class="o_row">
+                                        <field name="repeat_interval" required="1"/>
+                                        <field name="repeat_unit" required="1"/>
+                                    </div>
+                                </div>
+                                <group>
+
+                                </group>
+                                <group>
+                                    <field name="dom" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="seg" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="ter" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="qua" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="qui" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="sex" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                    <field name="sab" attrs="{'invisible': [('repeat_unit', '!=', 'week')]}"/>
+                                </group>
+
+                                <label for="repeat_day" attrs="{'invisible': [('repeat_unit', '!=', 'month')]}"/>
+                                <div class="o_col">
+                                    <div class="o_row">
+                                        <field name="repeat_day" attrs="{'invisible': [('repeat_unit', '!=', 'month')], 'required': [('repeat_unit','=', 'month')]}"/>
+                                    </div>
+                                </div>
+
+                                <label for="repeat_month" attrs="{'invisible': [('repeat_unit', '!=', 'years')]}"/>
+                                <div class="o_col">
+                                    <div class="o_row">
+                                        <field name="repeat_month" attrs="{'invisible': [('repeat_unit', '!=', 'year')], 'required': [('repeat_unit','=', 'year')]}"/>
+                                        <field name="repeat_day"  attrs="{'invisible': [('repeat_unit', '!=', 'year')], 'required': [('repeat_unit','=', 'year')]}"/>
+                                    </div>
+                                </div>
+
+                                <label for="repeat_type"/>
+                                <div class="o_col">
+                                    <div class="o_row">
+                                        <field name="repeat_type" required="1"/>
+                                        <field name="repeat_until_date"
+                                               attrs="{'required': [('repeat_type', '=', 'until')], 'invisible': [('repeat_type', '!=', 'until')]}"/>
+                                        <field name="repeat_quantity"
+                                               attrs="{'required': [('repeat_type', '=', 'after')], 'invisible': [('repeat_type', '!=', 'after')]}"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </page>
+                        <page name="project_request_ids" string="Projects Gerados">
+                            <field name="project_request_ids" readonly="True"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_request_recurring_view_tree" model="ir.ui.view">
+        <field name="name">Agendamento Tree</field>
+        <field name="model">project_request.recurring</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="department_id" widget="badge"/>
+                <field name="category_parent_request_id" widget="badge"/>
+                <field name="category_child_request" widget="badge"/>
+                <field name="description_problem" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_request_recurring_view_search" model="ir.ui.view">
+        <field name="name">Agendamento Search</field>
+        <field name="model">project_request.recurring</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="user_id"/>
+                <field name="category_parent_request_id"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,3 @@
+<odoo>
+    <function model="project_request.recurring" name="_auto_generate"/>
+</odoo>

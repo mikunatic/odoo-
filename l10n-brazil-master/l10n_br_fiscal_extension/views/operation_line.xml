@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="operation_line_form_inherit" model="ir.ui.view">
+        <field name="name">l10n_br_fiscal.operation.line.form.inherit</field>
+        <field name="model">l10n_br_fiscal.operation.line</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.operation_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='icms_origin']" position="after">
+                <field
+                    name="computed_field"
+                    invisible='1'/>
+            </xpath>
+            <xpath expr="//page[@name='extra_info']" position="after">
+                <page name="ncm" string="Ncm">
+                    <field
+                        name="ncm_ids"
+                        force_save="1"
+                        nolabel="1"
+                        colspan="2"
+                    />
+                </page>
+                <page name="cests_page" string="CEST">
+                    <field
+                        name="cest_ids"
+                        force_save="1"
+                        nolabel="1"
+                        colspan="2"
+                    />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cadastro_cheque_list" model="ir.ui.view">
+        <field name="name">Cheque</field>
+        <field name="model">cadastro.cheque</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="numero_cheque"/>
+                <field name="codigo_barra"/>
+                <field name="bank_id"/>
+                <field name="agencia"/>
+                <field name="conta"/>
+                <field name="data_cadastro"/>
+                <field name="currency_id"/>
+                <field name="valor"/>
+            </tree>
+        </field>
+    </record>
+    <record id="cadastro_cheque_form" model="ir.ui.view">
+        <field name="name">Cheque</field>
+        <field name="model">cadastro.cheque</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="numero_cheque"/>
+                            <field name="codigo_barra"/>
+                            <field name="bank_id"/>
+                            <field name="agencia"/>
+                            <field name="tipo_cheque_id"/>
+                        </group>
+                        <group>
+                            <field name="conta"/>
+                            <field name="data_cadastro"/>
+                            <field name="currency_id"/>
+                            <field name="valor"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_extend_action" model="ir.actions.act_window">
+        <field name="name">Cadastro de Cheque</field>
+        <field name="res_model">cadastro.cheque</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="cheque_sub_menu" name="Cadastro de Cheque" action="account_extend_action" parent="account.menu_finance"/>
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_fipe" model="res.groups">
+        <field name="name">fipe</field>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+ <record id="group_fipe" model="res.groups">
+        <field name="name">pachave</field>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

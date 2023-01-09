@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_wiz">
+            <field name="name">Account Wiz</field>
+            <field name="model">account.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <p>Postar pagamento?</p>
+                    </group>
+                    <footer>
+                        <button name="post" type="object" string="Pagar imediatamente" class="btn btn-primary"/>
+                        <button string="Manter como rascunho" class="btn btn-secondary" special="cancel"/>
+<!--                        name="account_extend.botaopagar"-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="account_wiz_action">
+            <field name="name">Account Wiz</field>
+            <field name="res_model">account.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <!-- se o target for new, abre numa nova tela, se for current abre na mesma-->
+        </record>
+    </data>
+
+</odoo>

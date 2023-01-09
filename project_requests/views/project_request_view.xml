@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='all_department_project_request_action' model='ir.actions.act_window'>
+        <field name="name">Requisição</field>
+        <field name="res_model">project_request</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="domain">
+            ['|', '|', '|', '&amp;', ('department_id.member_ids.user_id', '=', uid), ('private_message', '=', 'public'),
+            '&amp;',
+            ('user_requested_id', '=', uid), ('private_message', '=', 'private'), ('users_views_ids', '=', uid),
+            ('department_views_ids.member_ids.user_id', '=', uid)]
+        </field>
+        <field name="context">{'search_default_status_filter': 1}</field>
+    </record>
+
+    <record id='my_project_request_action' model='ir.actions.act_window'>
+        <field name="name">Requisições</field>
+        <field name="res_model">project_request</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="context">{'search_default_status_filter': 1}</field>
+    </record>
+
+    <menuitem name="GerProc" id="project_request_base_menu"
+              web_icon="project_requests,static/description/icon.png"/>
+    <menuitem name="Configurações" id="category_request_configure" parent="project_request_base_menu"/>
+    <menuitem name="Requisições" id="project_request_menu" parent="project_request_base_menu"/>
+    <menuitem name="Todos as Requisições" id="all_project_request_menu" parent="project_request_menu"
+              action="all_department_project_request_action" groups="project_requests.group_chamados_attrs"/>
+    <menuitem name="Minhas Requisições" id="my_project_request_menu" parent="project_request_menu"
+              action="my_project_request_action"/>
+
+
+    <record id="project_request_view_form" model="ir.ui.view">
+        <field name="name">Chamado de Serviço Form</field>
+        <field name="model">project_request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="next_in_progress" string='Em Andamento' type="object"
+                            attrs="{'invisible': ['|', '|', ('status','in',['andamento', 'cancelado', 'finalizado', 'aguardando_resposta']), ('is_required', '!=', True), ('protocol', '=', False)]}"
+                    />
+                    <button name="response_progress" string='Responder Requisição' type="object"
+                            attrs="{'invisible': ['|', ('status','not in',['aguardando_resposta']), ('is_required', '=', False)]}"/>
+                    <button name="next_waiting_answer" string='Aguardando Resposta' type="object"
+                            attrs="{'invisible': ['|', ('status','in',['aberto', 'cancelado', 'finalizado', 'aguardando_resposta']), ('is_required', '!=', True)]}"
+                    />
+                    <button name="next_finished" string='Finalizado' type="object"
+                            attrs="{'invisible': ['|', ('status','in',['aberto', 'cancelado', 'finalizado']), ('is_required', '!=', True)]}"
+                    />
+                    <button name="next_canceled" string='Cancelado' type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('status','in',['aberto', 'cancelado', 'finalizado']), ('is_required', '!=', True)]}"
+                    />
+                    <button name="next_reverse" string='Estornar' type="object"
+                            attrs="{'invisible': ['|', ('status','not in',['cancelado', 'finalizado']), ('is_required', '!=', True)]}"
+                    />
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group name="first_group">
+                        <group>
+                            <field name="protocol" widget="CopyClipboardChar"/>
+                            <field name="user_id"/>
+                            <field name="private_message" string="Privacidade" widget='radio'
+                                   options="{'horizontal': true}"
+                                   attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                            <field name="department_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="opening_date"/>
+                            <field name="update_date"/>
+                            <field name="due_date"
+                                   attrs="{'readonly': ['|', ('status', 'not in', ['aberto']), '|', ('user_create_id', '=', False), ('protocol', '=', False)]}"/>
+                            <field name="user_requested_id"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'invisible': [('private_message', '=', 'public')], 'required': [('private_message', '=', 'private')], 'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="users_views_ids" widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': ['&amp;', ('user_create_id', '!=', True), ('is_required', '!=', True)]}"
+                                   domain="[('id', 'not in', [user_id, user_requested_id])]"/>
+                        </group>
+                        <group>
+                            <field name="department_views_ids" widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': ['&amp;', ('user_create_id', '!=', True), ('is_required', '!=', True)]}"
+                                   domain="[('id', '!=', department_id)]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="project_request_general" string="Informações Gerais">
+                            <group>
+                                <group>
+                                    <field name="category_parent_request_id"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                           attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"
+                                           domain="[('type', '=', 'parent')]"/>
+                                </group>
+                                <group>
+                                    <field name="category_child_request"
+                                           options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                           attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="boolean_client" invisible="1"/>
+                                <field name="request_client_ids"
+                                       widget="many2many_tags"
+                                       attrs="{'invisible':[('boolean_client', '=', False)], 'required':[('boolean_client', '=', True)], 'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="description_problem"
+                                       attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"/>
+                                <field name="is_required" invisible="1"/>
+                                <field name="user_create_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field
+                                        name='my_requests'
+                                        domain="[('create_uid', '=', uid)]"
+                                        attrs="{'readonly': ['|', ('status','!=','aberto'), '&amp;', ('user_create_id', '=', False), ('protocol', '!=', False)]}"
+                                        options="{'create': false, 'create_edit': false}">
+                                    <tree>
+                                        <field name="user_id"/>
+                                        <field name="category_parent_request_id" widget="badge"/>
+                                        <field name="protocol"/>
+                                        <field name="status" widget="badge"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="response_problem"
+                                       attrs="{'readonly': ['|', ('status','!=','finalizado'), ('is_required', '!=', True)]}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_request_view_tree" model="ir.ui.view">
+        <field name="name">Chamado de Serviço Tree</field>
+        <field name="model">project_request</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="department_id" widget="badge"/>
+                <field name="category_parent_request_id" widget="badge"/>
+                <field name="category_child_request" widget="badge"/>
+                <field name="protocol" widget="badge"/>
+                <field name="description_problem" optional="hide"/>
+                <field name="opening_date"/>
+                <field name="status" widget="badge"/>
+                <field name="due_date" widget="remaining_days"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_request_graph" model="ir.ui.view">
+        <field name="name">Chamado de Serviço Grafico</field>
+        <field name="model">project_request</field>
+        <field name="arch" type="xml">
+            <graph string="Estatísticas das Chamadas" type="bar" sample="1">
+                <field name="opening_date" type="date" modifiers="{'readonly': true}" operator="+"/>
+                <field name="category_parent_request_id" operator="+"/>
+                <field name="opening_date" operator="+"/>
+                <!--<field name="status"/>-->
+            </graph>
+        </field>
+    </record>
+
+    <!-- KANBAM -->
+    <record id="project_request_view_kanban" model="ir.ui.view">
+        <field name="name">Kanban Usuarios</field>
+        <field name="model">project_request</field>
+        <field name="arch" type="xml">
+            <kanban default_order="due_date desc" default_group_by="status" group_create="false"
+                    class="o_kanban_small_column o_kanban_project_tasks" quick_create="false" quick_create_view="false"
+                    examples="project">
+                <field name="user_id"/>
+                <field name="protocol"/>
+                <field name="category_parent_request_id"/>
+                <field name="due_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <a type="open">
+                                    <strong>
+                                        <field name="protocol"/>
+                                    </strong>
+                                    <div t-if="record.user_id.value">
+                                        <t t-esc="record.user_id.value"/>
+                                    </div>
+                                    <div t-if="record.category_parent_request_id.value">
+                                        <t t-esc="record.category_parent_request_id.value"/>
+                                    </div>
+                                    <div t-if="record.due_date.value">
+                                        <t t-esc="record.due_date.value"/>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- FIM KANBAM -->
+
+    <!--Search-->
+    <record id="project_request_view_search" model="ir.ui.view">
+        <field name="name">Chamado Servico Search</field>
+        <field name="model">project_request</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string='Status é "Aberto"' name="status_filter" domain="[('status', '=', 'aberto')]"/>
+                <field name="user_id"/>
+                <field name="category_parent_request_id"/>
+                <field name="protocol"/>
+                <field name="opening_date"/>
+                <field name="due_date"/>
+                <field name="status"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

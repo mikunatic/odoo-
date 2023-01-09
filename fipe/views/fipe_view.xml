@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='fipe_action' model='ir.actions.act_window'>
+        <field name="name">Tabela Fipe</field>
+        <field name="res_model">fipe</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Tabela Fipe" id="fipe_base_menu" web_icon="fipe,static/description/icon.png"/>
+    <menuitem name="Fipe" id="fipe_menu" parent="fipe_base_menu"/>
+    <menuitem id="fipe_menu_tree" name="Fipe" sequence="1" parent="fipe_menu" action="fipe_action"/>
+
+    <record id="fipe_view_form" model="ir.ui.view">
+        <field name="name">Fipe Form</field>
+        <field name="model">fipe</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="codigo_fipe"/>
+                            <field name="name"/>
+                            <field name="product_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="marca"/>
+                            <field name="marca_id"/>
+                            <field name="ano"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="pachave_ids" widget="many2many_tags"
+                               options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="fipe_view_tree" model="ir.ui.view">
+        <field name="name">Fipe List</field>
+        <field name="model">fipe</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="marca"/>
+                <field name="product_ids" widget="many2many_tags"/>
+                <field name="ano"/>
+                <field name="codigo_fipe"/>
+                <field name="pachave_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="fipe_view_search" model="ir.ui.view">
+        <field name="name">Fipe Search</field>
+        <field name="model">fipe</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="marca"/>
+                <field name="codigo_fipe"/>
+                <field name="product_ids"/>
+                <filter string="Sem Produtos"
+                        name="sem_produtos"
+                        domain="[('product_ids','=',False)]"/>
+                <field name="pachave_ids"/>
+                <filter string="Sem palavra chave"
+                        name="sem_palavrachave"
+                        domain="[('pachave_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

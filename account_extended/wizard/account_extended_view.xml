@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_extended_form_view" model="ir.ui.view">
+        <field name="name">Pagamento</field>
+        <field name="model">account.extend</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="banco_origem" string="Banco Originário"/>
+                            <field name="partner_id" string="Cliente Originário"/>
+                            <field name="conta_origem_id" string="Conta de Origem"/>
+                            <field name="journal_id" string="Diário" domain="[('type', 'in', ('bank', 'cash'))]"/>
+                        </group>
+                        <group>
+                            <field name="banco_destinatario" string="Banco Destinatário"/>
+                            <field name="partner_id_destino" string="Cliente Destinatário"/>
+                            <field name="conta_destinatario" string="Costa de Destino"/>
+                            <field name="journal_id_destino" string="Diário Destino" domain="[('type', 'in', ('bank', 'cash'))]"/>
+                        </group>
+                        <group>
+                            <field name="currency_id"/>
+                            <field name="forma_pagamento"/>
+                            <field name="cheque" attrs="{'invisible':[('forma_pagamento','=','2')]}"/>
+                            <field name="amount" attrs="{'invisible':[('forma_pagamento','=','1')]}"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                        </group>
+                        <footer>
+                            <button name="botaopagar" type="object" class="btn btn-primary" style="max-width:20rem;" string="Pagar"/>
+                            <button special="cancel" string="Cancelar"/>
+                        </footer>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_extend_action" model="ir.actions.act_window">
+        <field name="name">Pagamento</field>
+        <field name="res_model">account.extend</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="account_extend_sub_menu" name="Pagamento" action="account_extend_action" parent="account.menu_finance"/>
+</odoo>

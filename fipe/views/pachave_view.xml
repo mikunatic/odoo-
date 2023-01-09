@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='pachave_action' model='ir.actions.act_window'>
+        <field name="name">Palavra Chave</field>
+        <field name="res_model">pachave</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Configurações" id="conf_menu" parent="fipe_base_menu"/>
+    <menuitem id="menu_pachave_menu" name="Palavra Chave" sequence="1" parent="conf_menu" action="pachave_action"/>
+
+    <record id="pachave_view_form" model="ir.ui.view">
+        <field name="name">Palavra Chave Form</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="value_attr" readonly="1" options="{'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="fipe_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="pachave_view_tree" model="ir.ui.view">
+        <field name="name">Palavra Chave List</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fipe_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pachave_view_search" model="ir.ui.view">
+        <field name="name">Palavra Chave Search</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="fipe_ids"/>
+                <filter string="Sem veículos"
+                        name="sem_veículos"
+                        domain="[('fipe_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

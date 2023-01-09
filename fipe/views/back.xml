@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='pachave_action' model='ir.actions.act_window'>
+        <field name="name">Palavra Chave</field>
+        <field name="res_model">pachave</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_pachave" name="Palavra Chave" sequence="80" parent="fipe" action="pachave_action"/>
+
+    <record id="pachave_view_form" model="ir.ui.view">
+        <field name="name">Palavra Chave Form</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="pachave_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="pachave_view_tree" model="ir.ui.view">
+        <field name="name">Pachave List</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="pachave_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pachave_view_search" model="ir.ui.view">
+        <field name="name">pachave Search</field>
+        <field name="model">pachave</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="pachave_ids"/>
+                <filter string="Sem palavra chave"
+                        name="sem_palavrachave"
+                        domain="[('pachave_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

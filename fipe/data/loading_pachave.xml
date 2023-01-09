@@ -1,0 +1,3 @@
+<odoo>
+    <function model="pachave" name="_import_pachave_data"/>
+</odoo>

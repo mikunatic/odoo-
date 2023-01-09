@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+project_request_adm,project_request_perm_adm,model_project_request,group_chamados_attrs,1,1,1,1
+category_request_adm,chamado.category_request_perm_adm,model_category_request,group_chamados_attrs,1,1,1,1
+response_request_adm,chamado.response_request_perm_adm,model_response_request,group_chamados_attrs,1,1,1,1
+project_request_calendar_adm,chamado.project_request_calendar_perm_adm,model_project_request_recurring,group_chamados_attrs,1,1,1,1
+update_project_status_wizard_adm,access.update_project_status_wizard_adm,model_update_project_status_wizard,group_update_status,1,1,1,1

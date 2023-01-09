@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="ger_proc_inherit" model="ir.ui.view">
+            <field name="name">ger.proc.inherit</field>
+            <field name="model">project_request</field>
+            <field name="inherit_id" ref="project_requests.project_request_view_form"/>
+            <field name="arch" type="xml">
+                <field name="my_requests" position="after">
+                    <field name="payment" attrs="{'invisible':[('payment','=',[])]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

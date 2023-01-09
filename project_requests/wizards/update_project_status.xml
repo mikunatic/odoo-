@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="update_project_status_wizard_form" model="ir.ui.view">
+        <field name="name">update.project.status.wizard.form</field>
+        <field name="model">update.project.status.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="status"/>
+                        <field name="response_problem"
+                               attrs="{'invisible': [('status', '!=', 'finalizado')], 'required': [('status', '=', 'finalizado')]}"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Salvar" class="oe_highlight" type="object"
+                            name="save"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="update_project_status_wizard_request" model="ir.actions.act_window">
+        <field name="name">Update Status</field>
+        <field name="res_model">update.project.status.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_project_request"/>
+        <field name="binding_view_types">list,form</field>
+    </record>
+
+</odoo>

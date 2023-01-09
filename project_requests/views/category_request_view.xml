@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id='category_request_action' model='ir.actions.act_window'>
+        <field name="name">Categoria da Requisição</field>
+        <field name="res_model">category_request</field>
+        <field name="domain">[('department_id.member_ids.user_id', '=', uid)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Categoria da Requisição" id="reason_menu" parent="category_request_configure"
+              action="category_request_action" sequence="5"/>
+
+    <record id="category_request_view_form" model="ir.ui.view">
+        <field name="name">Categoria da Requisição</field>
+        <field name="model">category_request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="alter_state" string='Alterar Status' type="object"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group name="Informações Gerais">
+                        <group>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="parent_id"
+                                   attrs="{'invisible': [('type','=','parent')],'required': [('type','!=','parent')]}"
+                                   domain="[('type', '=', 'parent'), ('department_id.member_ids.user_id', '=', uid)]"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                        </group>
+                        <group>
+                            <field name="due_date"
+                                   attrs="{'invisible': [('type','!=','child')],'required': [('type','!=','parent')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="internal_request" widget="boolean_toggle"/>
+                        </group>
+                        <group>
+                            <field name="has_client"
+                                   widget="boolean_toggle"
+                                   attrs="{'invisible': [('type','!=','child')],'required': [('type','!=','parent')]}"/>
+                        </group>
+                    </group>
+                    <group name="children_ids"
+                           attrs="{'invisible': [('type','!=','parent')]}">
+                        <field name="child_id">
+                            <tree delete="false" create="false" edit="false">
+                                <field name="name"/>
+                                <field name="due_date"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="category_request_view_tree" model="ir.ui.view">
+        <field name="name">Lista de Categorias de Requisições</field>
+        <field name="model">category_request</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="parent_id" widget="badge"/>
+                <field name="name"/>
+                <field name="child_id" widget="badge"/>
+                <field name="due_date" string="Dias para Atendimento"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="category_request_view_search" model="ir.ui.view">
+        <field name="name">Lista de Categorias de Requisições</field>
+        <field name="model">category_request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="parent_id" widget="badge"/>
+                <field name="child_id" widget="badge"/>
+                <field name="due_date" string="Dias para Atendimento"/>
+            </search>
+        </field>
+    </record>
+</odoo>

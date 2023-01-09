@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_response_request" model="ir.actions.act_window">
+        <field name="name">Resposta da Requisição</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">response_request</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="view_response_request_form" model="ir.ui.view">
+        <field name="name">response_request.wizard.form</field>
+        <field name="model">response_request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="response"/>
+                        <field name="project_request_id" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    <button string="Enviar" class="oe_highlight" type="object"
+                            name="send_response"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
