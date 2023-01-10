@@ -35,19 +35,30 @@
                             <field name="data_cadastro"/>
                             <field name="currency_id"/>
                             <field name="valor"/>
+<!--                            <field name="bank_cheque"/>-->
+                        </group>
+                        <group>
+                            <field name="terceiro"/>
+                            <field name="terceiro_nome" attrs="{'invisible':['|',('terceiro','=','2'),('terceiro','=',False)]}"/>
+                            <field name="terceiro_cpf" attrs="{'invisible':['|',('terceiro','=','2'),('terceiro','=',False)]}"/>
+                            <field name="terceiro_endereco" attrs="{'invisible':['|',('terceiro','=','2'),('terceiro','=',False)]}"/>
                         </group>
                     </group>
+                    <footer>
+                        <button string="Cadastrar" name="postarcheque" type="object" class="btn btn-primary"/>
+                        <button special="cancel" string="Manter como rascunho"/>
+                    </footer>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="account_extend_action" model="ir.actions.act_window">
+    <record id="account_extended_action" model="ir.actions.act_window">
         <field name="name">Cadastro de Cheque</field>
         <field name="res_model">cadastro.cheque</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="cheque_sub_menu" name="Cadastro de Cheque" action="account_extend_action" parent="account.menu_finance"/>
+    <menuitem id="cheque_sub_menu" name="Cadastro de Cheque" action="account_extended_action" parent="account.menu_finance"/>
 
 </odoo>

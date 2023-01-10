@@ -5,7 +5,7 @@
     'summary': 'Account Inherit',
     'version': '1.0',
     'description': """Account Inherit""",
-    'depends': ['account'],
+    'depends': ['account','cadastro_cheque'],
     'data': [
         'security/ir.model.access.csv',
         'wizard/account_extended_view.xml',

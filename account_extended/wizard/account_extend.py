@@ -19,17 +19,18 @@ class AcountExtend(models.TransientModel):
     banco_destinatario = fields.Many2one('res.partner.bank', string="Cliente/Fornecedor", required=True)
 
     currency_id = fields.Many2one('res.currency', string='Account Currency',
-                                  help="Forces all moves for this account to have this account currency.", required=True)
-    forma_pagamento = fields.Selection([('1','Cheque'),('2','Dinheiro')])
+                                  help="Forces all moves for this account to have this account currency.", default=6)
+    forma_pagamento = fields.Selection([('1','Cheque'),('2','Dinheiro')], string="Forma de Pagamento")
     cheque = fields.Many2one('cadastro.cheque')
-    amount = fields.Monetary(currency_field='currency_id', required=True)
+    valor_cheque = fields.Monetary(related="cheque.valor")
+    amount = fields.Monetary(currency_field='currency_id')
     journal_id = fields.Many2one('account.journal', required=True)
     journal_id_destino = fields.Many2one('account.journal', required=True)
     date = fields.Date("Data do pagamento", required=True)
     descricao = fields.Text("Descrição", compute="criardescricao", readonly=True)
 
     def botaopagar(self):
-        vals = {'name': '/',
+        vals_pagar = {'name': '/',
                 'payment_type': 'outbound',
                 'partner_type': 'customer',
                 'partner_id': self.partner_id.id,
@@ -41,7 +42,7 @@ class AcountExtend(models.TransientModel):
                 'partner_bank_id': self.banco_origem.id,
                 'auto_post': True,
                 'amount': self.amount,
-                'currency_id': self.currency_id.id,
+                'currency_id': 6,
                 'check_amount_in_words': 'Zero Real',
                 'date': self.date,
                 'effective_date': False,
@@ -54,7 +55,32 @@ class AcountExtend(models.TransientModel):
                 'message_ids': [],
                 } # lista de valores para criação do pagamento
 
-        vals_dois = {'name': '/',
+        vals_pagamento_com_cheque = {'name': '/',
+                 'payment_type': 'outbound',
+                 'partner_type': 'customer',
+                 'partner_id': False,
+                 'destination_account_id': 10,
+                 'is_internal_transfer': False,
+                 'journal_id': 7,
+                 'payment_method_id': 1,
+                 'payment_token_id': False,
+                 'partner_bank_id': 10,
+                 'auto_post': True,
+                 'amount': self.valor_cheque,
+                 'currency_id': 6,
+                 'check_amount_in_words': 'Zero Real',
+                 'date': self.date,
+                 'effective_date': False,
+                 'bank_reference': False,
+                 'cheque_reference': False,
+                 'ref': False,
+                 'edi_document_ids': [],
+                 'message_follower_ids': [],
+                 'activity_ids': [],
+                 'message_ids': [],
+                 }
+
+        vals_receber = {'name': '/',
                 'payment_type': 'inbound',
                 'partner_type': 'customer',
                 'partner_id': self.partner_id_destino.id,
@@ -80,12 +106,15 @@ class AcountExtend(models.TransientModel):
                 } # lista de valores para criação do recebimento
 
         for rec in self: # erro personalizado caso o banco origem for igual ao destinatário, ou a quantia do pagamento for igual a zero
-            if rec.banco_origem.id == rec.banco_destinatario.id or rec.amount == 0:
-                raise UserError(_("Não é possível realizar transferências para a mesma conta ou sem valor"))
-
-
-        self.env['account.payment'].create(vals) # cria o pagamento com os valores da primeira lista
-        self.env['account.payment'].create(vals_dois) # cria o pagamento com os valores da segunda lista
+            # if rec.banco_origem.id == rec.banco_destinatario.id:
+            #     raise UserError(_("Não é possível realizar transferências para a mesma conta"))
+            if rec.forma_pagamento == '1':
+                self.env['account.payment'].create(vals_pagamento_com_cheque)  # cria o pagamento com os valores da primeira lista
+                self.env['account.payment'].create(vals_receber)
+            else:
+                self.env['account.payment'].create(vals_pagar)  # cria o pagamento com os valores da primeira lista
+                self.env['account.payment'].create(vals_receber)
+          # cria o pagamento com os valores da segunda lista
         return self.env['ir.actions.act_window']._for_xml_id("account_extended.account_wiz_action") # mostra o wizard que efetua a postagem do pagamento
 
     def criardescricao(self): # função para criar a descrição personalizada
@@ -101,3 +130,35 @@ class AcountExtend(models.TransientModel):
                 rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.amount) + ', criado no dia ' + str(rec.date)
 
         # ESQUEÇAM TUDO!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # @api.onchange("barcode")
+    # def on_change_barcode(self):
+    #     for rec in self:
+    #         if rec.barcode and len(rec.barcode) == 34:
+    #         rec.bank_cheque = rec.env['bank_cheque'].sudo().search([('cod', 'in', [rec.barcode[1:4]])])
+    #
+    # rec.Agency_cheque = rec.barcode[4:8]
+    # rec.number_cheque = rec.barcode[13:19]
+    # rec.account_cheque = rec.barcode[25:32]
+    # else:
+    # rec.barcode = ""

@@ -1,0 +1,501 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="bank_cheque_246" model="bank_cheque">
+            <field name="name">Banco ABC Brasil S.A.</field>
+            <field name="site">www.abcbrasil.com.br</field>
+            <field name="cod">246</field>
+        </record>
+        <record id="bank_cheque_121" model="bank_cheque">
+            <field name="name">Banco Agibank S.A.</field>
+            <field name="site">www.agibank.com.br</field>
+            <field name="cod">121</field>
+        </record>
+        <record id="bank_cheque_25" model="bank_cheque">
+            <field name="name">Banco Alfa S.A.</field>
+            <field name="site">www.bancoalfa.com.br</field>
+            <field name="cod">25</field>
+        </record>
+        <record id="bank_cheque_65" model="bank_cheque">
+            <field name="name">Banco Andbank (Brasil) S.A.</field>
+            <field name="site">www.andbank-lla.com.br</field>
+            <field name="cod">65</field>
+        </record>
+        <record id="bank_cheque_96" model="bank_cheque">
+            <field name="name">Banco B3 S.A.</field>
+            <field name="site">www.bmfbovespa.com.br/bancobmfbovespa/</field>
+            <field name="cod">96</field>
+        </record>
+        <record id="bank_cheque_24" model="bank_cheque">
+            <field name="name">Banco BANDEPE S.A.</field>
+            <field name="site">www.santander.com.br</field>
+            <field name="cod">24</field>
+        </record>
+        <record id="bank_cheque_318" model="bank_cheque">
+            <field name="name">Banco BMG S.A.</field>
+            <field name="site">www.bancobmg.com.br</field>
+            <field name="cod">318</field>
+        </record>
+        <record id="bank_cheque_752" model="bank_cheque">
+            <field name="name">Banco BNP Paribas Brasil S.A.</field>
+            <field name="site">www.bnpparibas.com.br</field>
+            <field name="cod">752</field>
+        </record>
+        <record id="bank_cheque_107" model="bank_cheque">
+            <field name="name">Banco BOCOM BBM S.A.</field>
+            <field name="site">www.bancobbm.com.br</field>
+            <field name="cod">107</field>
+        </record>
+        <record id="bank_cheque_63" model="bank_cheque">
+            <field name="name">Banco Bradescard S.A.</field>
+            <field name="site">www.ibi.com.br</field>
+            <field name="cod">63</field>
+        </record>
+        <record id="bank_cheque_36" model="bank_cheque">
+            <field name="name">Banco Bradesco BBI S.A.</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">36</field>
+        </record>
+        <record id="bank_cheque_394" model="bank_cheque">
+            <field name="name">Banco Bradesco Financiamentos S.A.</field>
+            <field name="site">não tem site</field>
+            <field name="cod">394</field>
+        </record>
+        <record id="bank_cheque_237" model="bank_cheque">
+            <field name="name">Banco Bradesco S.A.</field>
+            <field name="site">www.bradesco.com.br</field>
+            <field name="cod">237</field>
+        </record>
+        <record id="bank_cheque_218" model="bank_cheque">
+            <field name="name">Banco BS2 S.A.</field>
+            <field name="site">www.bs2.com/banco/</field>
+            <field name="cod">218</field>
+        </record>
+        <record id="bank_cheque_208" model="bank_cheque">
+            <field name="name">Banco BTG Pactual S.A.</field>
+            <field name="site">www.btgpactual.com</field>
+            <field name="cod">208</field>
+        </record>
+        <record id="bank_cheque_626" model="bank_cheque">
+            <field name="name">Banco C6 Consignado S.A.</field>
+            <field name="site">https://www.c6consig.com.br/</field>
+            <field name="cod">626</field>
+        </record>
+        <record id="bank_cheque_473" model="bank_cheque">
+            <field name="name">Banco Caixa Geral - Brasil S.A.</field>
+            <field name="site">www.bcgbrasil.com.br</field>
+            <field name="cod">473</field>
+        </record>
+        <record id="bank_cheque_40" model="bank_cheque">
+            <field name="name">Banco Cargill S.A.</field>
+            <field name="site">www.bancocargill.com.br</field>
+            <field name="cod">40</field>
+        </record>
+        <record id="bank_cheque_739" model="bank_cheque">
+            <field name="name">Banco Cetelem S.A.</field>
+            <field name="site">www.cetelem.com.br</field>
+            <field name="cod">739</field>
+        </record>
+        <record id="bank_cheque_233" model="bank_cheque">
+            <field name="name">Banco Cifra S.A.</field>
+            <field name="site">www.bancocifra.com.br</field>
+            <field name="cod">233</field>
+        </record>
+        <record id="bank_cheque_745" model="bank_cheque">
+            <field name="name">Banco Citibank S.A.</field>
+            <field name="site">www.citibank.com.br</field>
+            <field name="cod">745</field>
+        </record>
+        <record id="bank_cheque_756" model="bank_cheque">
+            <field name="name">Banco Cooperativo Sicoob S.A.</field>
+            <field name="site">www.Sicoob.com.br</field>
+            <field name="cod">756</field>
+        </record>
+        <record id="bank_cheque_748" model="bank_cheque">
+            <field name="name">Banco Cooperativo Sicredi S.A.</field>
+            <field name="site">www.sicredi.com.br</field>
+            <field name="cod">748</field>
+        </record>
+        <record id="bank_cheque_222" model="bank_cheque">
+            <field name="name">Banco Credit Agricole Brasil S.A.</field>
+            <field name="site">www.calyon.com.br</field>
+            <field name="cod">222</field>
+        </record>
+        <record id="bank_cheque_505" model="bank_cheque">
+            <field name="name">Banco Credit Suisse (Brasil) S.A.</field>
+            <field name="site">www.csfb.com</field>
+            <field name="cod">505</field>
+        </record>
+        <record id="bank_cheque_3" model="bank_cheque">
+            <field name="name">Banco da Amazônia S.A.</field>
+            <field name="site">www.bancoamazonia.com.br</field>
+            <field name="cod">3</field>
+        </record>
+        <record id="bank_cheque_83" model="bank_cheque">
+            <field name="name">Banco da China Brasil S.A.</field>
+            <field name="site">www.boc-brazil.com</field>
+            <field name="cod">83</field>
+        </record>
+        <record id="bank_cheque_707" model="bank_cheque">
+            <field name="name">Banco Daycoval S.A.</field>
+            <field name="site">www.daycoval.com.br</field>
+            <field name="cod">707</field>
+        </record>
+        <record id="bank_cheque_654" model="bank_cheque">
+            <field name="name">Banco Digimais S.A.</field>
+            <field name="site">www.bancodigimais.com.br/</field>
+            <field name="cod">654</field>
+        </record>
+        <record id="bank_cheque_1" model="bank_cheque">
+            <field name="name">Banco do Brasil S.A.</field>
+            <field name="site">www.bb.com.br</field>
+            <field name="cod">1</field>
+        </record>
+        <record id="bank_cheque_47" model="bank_cheque">
+            <field name="name">Banco do Estado de Sergipe S.A.</field>
+            <field name="site">www.banese.com.br</field>
+            <field name="cod">47</field>
+        </record>
+        <record id="bank_cheque_37" model="bank_cheque">
+            <field name="name">Banco do Estado do Pará S.A.</field>
+            <field name="site">www.banpara.b.br</field>
+            <field name="cod">37</field>
+        </record>
+        <record id="bank_cheque_41" model="bank_cheque">
+            <field name="name">Banco do Estado do Rio Grande do Sul S.A.</field>
+            <field name="site">www.banrisul.com.br</field>
+            <field name="cod">41</field>
+        </record>
+        <record id="bank_cheque_4" model="bank_cheque">
+            <field name="name">Banco do Nordeste do Brasil S.A.</field>
+            <field name="site">www.banconordeste.gov.br</field>
+            <field name="cod">4</field>
+        </record>
+        <record id="bank_cheque_224" model="bank_cheque">
+            <field name="name">Banco Fibra S.A.</field>
+            <field name="site">www.bancofibra.com.br</field>
+            <field name="cod">224</field>
+        </record>
+        <record id="bank_cheque_94" model="bank_cheque">
+            <field name="name">Banco Finaxis S.A.</field>
+            <field name="site">www.bancofinaxis.com.br</field>
+            <field name="cod">94</field>
+        </record>
+        <record id="bank_cheque_125" model="bank_cheque">
+            <field name="name">Banco Genial S.A.</field>
+            <field name="site">www.bancogenial.com</field>
+            <field name="cod">125</field>
+        </record>
+        <record id="bank_cheque_612" model="bank_cheque">
+            <field name="name">Banco Guanabara S.A.</field>
+            <field name="site">www.bancoguanabara.com.br</field>
+            <field name="cod">612</field>
+        </record>
+        <record id="bank_cheque_12" model="bank_cheque">
+            <field name="name">Banco Inbursa S.A.</field>
+            <field name="site">www.bancoinbursa.com</field>
+            <field name="cod">12</field>
+        </record>
+        <record id="bank_cheque_604" model="bank_cheque">
+            <field name="name">Banco Industrial do Brasil S.A.</field>
+            <field name="site">www.bancoindustrial.com.br</field>
+            <field name="cod">604</field>
+        </record>
+        <record id="bank_cheque_77" model="bank_cheque">
+            <field name="name">Banco Inter S.A.</field>
+            <field name="site">www.bancointer.com.br</field>
+            <field name="cod">77</field>
+        </record>
+        <record id="bank_cheque_249" model="bank_cheque">
+            <field name="name">Banco Investcred Unibanco S.A.</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">249</field>
+        </record>
+        <record id="bank_cheque_184" model="bank_cheque">
+            <field name="name">Banco Itaú BBA S.A.</field>
+            <field name="site">www.itaubba.com.br</field>
+            <field name="cod">184</field>
+        </record>
+        <record id="bank_cheque_29" model="bank_cheque">
+            <field name="name">Banco Itaú Consignado S.A.</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">29</field>
+        </record>
+        <record id="bank_cheque_479" model="bank_cheque">
+            <field name="name">Banco ItauBank S.A</field>
+            <field name="site">www.itaubank.com.br</field>
+            <field name="cod">479</field>
+        </record>
+        <record id="bank_cheque_376" model="bank_cheque">
+            <field name="name">Banco J. P. Morgan S.A.</field>
+            <field name="site">www.jpmorgan.com</field>
+            <field name="cod">376</field>
+        </record>
+        <record id="bank_cheque_74" model="bank_cheque">
+            <field name="name">Banco J. Safra S.A.</field>
+            <field name="site">www.safra.com.br</field>
+            <field name="cod">74</field>
+        </record>
+        <record id="bank_cheque_217" model="bank_cheque">
+            <field name="name">Banco John Deere S.A.</field>
+            <field name="site">www.johndeere.com.br</field>
+            <field name="cod">217</field>
+        </record>
+        <record id="bank_cheque_630" model="bank_cheque">
+            <field name="name">Banco Letsbank S.A.</field>
+            <field name="site">www.letsbank.com.br</field>
+            <field name="cod">630</field>
+        </record>
+        <record id="bank_cheque_600" model="bank_cheque">
+            <field name="name">Banco Luso Brasileiro S.A.</field>
+            <field name="site">www.lusobrasileiro.com.br</field>
+            <field name="cod">600</field>
+        </record>
+        <record id="bank_cheque_243" model="bank_cheque">
+            <field name="name">Banco Master S.A.</field>
+            <field name="site">www.bancomaster.com.br</field>
+            <field name="cod">243</field>
+        </record>
+        <record id="bank_cheque_389" model="bank_cheque">
+            <field name="name">Banco Mercantil do Brasil S.A.</field>
+            <field name="site">www.mercantil.com.br</field>
+            <field name="cod">389</field>
+        </record>
+        <record id="bank_cheque_370" model="bank_cheque">
+            <field name="name">Banco Mizuho do Brasil S.A.</field>
+            <field name="site">www.mizuhobank.com/brazil/pt/</field>
+            <field name="cod">370</field>
+        </record>
+        <record id="bank_cheque_746" model="bank_cheque">
+            <field name="name">Banco Modal S.A.</field>
+            <field name="site">www.bancomodal.com.br</field>
+            <field name="cod">746</field>
+        </record>
+        <record id="bank_cheque_456" model="bank_cheque">
+            <field name="name">Banco MUFG Brasil S.A.</field>
+            <field name="site">www.br.bk.mufg.jp</field>
+            <field name="cod">456</field>
+        </record>
+        <record id="bank_cheque_169" model="bank_cheque">
+            <field name="name">Banco Olé Bonsucesso Consignado S.A.</field>
+            <field name="site">www.oleconsignado.com.br</field>
+            <field name="cod">169</field>
+        </record>
+        <record id="bank_cheque_212" model="bank_cheque">
+            <field name="name">Banco Original S.A.</field>
+            <field name="site">www.original.com.br</field>
+            <field name="cod">212</field>
+        </record>
+        <record id="bank_cheque_623" model="bank_cheque">
+            <field name="name">Banco PAN S.A.</field>
+            <field name="site">www.bancopan.com.br</field>
+            <field name="cod">623</field>
+        </record>
+        <record id="bank_cheque_611" model="bank_cheque">
+            <field name="name">Banco Paulista S.A.</field>
+            <field name="site">www.bancopaulista.com.br</field>
+            <field name="cod">611</field>
+        </record>
+        <record id="bank_cheque_643" model="bank_cheque">
+            <field name="name">Banco Pine S.A.</field>
+            <field name="site">www.pine.com</field>
+            <field name="cod">643</field>
+        </record>
+        <record id="bank_cheque_747" model="bank_cheque">
+            <field name="name">Banco Rabobank International Brasil S.A.</field>
+            <field name="site">www.rabobank.com.br</field>
+            <field name="cod">747</field>
+        </record>
+        <record id="bank_cheque_633" model="bank_cheque">
+            <field name="name">Banco Rendimento S.A.</field>
+            <field name="site">www.rendimento.com.br</field>
+            <field name="cod">633</field>
+        </record>
+        <record id="bank_cheque_120" model="bank_cheque">
+            <field name="name">Banco Rodobens S.A.</field>
+            <field name="site">www.rodobens.com.br</field>
+            <field name="cod">120</field>
+        </record>
+        <record id="bank_cheque_422" model="bank_cheque">
+            <field name="name">Banco Safra S.A.</field>
+            <field name="site">www.safra.com.br</field>
+            <field name="cod">422</field>
+        </record>
+        <record id="bank_cheque_33" model="bank_cheque">
+            <field name="name">Banco Santander (Brasil) S.A.</field>
+            <field name="site">www.santander.com.br</field>
+            <field name="cod">33</field>
+        </record>
+        <record id="bank_cheque_743" model="bank_cheque">
+            <field name="name">Banco Semear S.A.</field>
+            <field name="site">www.bancosemear.com.br</field>
+            <field name="cod">743</field>
+        </record>
+        <record id="bank_cheque_276" model="bank_cheque">
+            <field name="name">Banco Senff S.A.</field>
+            <field name="site">https://www.senff.com.br/</field>
+            <field name="cod">276</field>
+        </record>
+        <record id="bank_cheque_366" model="bank_cheque">
+            <field name="name">Banco Société Générale Brasil S.A.</field>
+            <field name="site">www.sgbrasil.com.br</field>
+            <field name="cod">366</field>
+        </record>
+        <record id="bank_cheque_299" model="bank_cheque">
+            <field name="name">Banco Sorocred S.A. - Banco Múltiplo (AFINZ)</field>
+            <field name="site">afinz.com.br</field>
+            <field name="cod">299</field>
+        </record>
+        <record id="bank_cheque_464" model="bank_cheque">
+            <field name="name">Banco Sumitomo Mitsui Brasileiro S.A.</field>
+            <field name="site">www.smbcgroup.com.br</field>
+            <field name="cod">464</field>
+        </record>
+        <record id="bank_cheque_82" model="bank_cheque">
+            <field name="name">Banco Topázio S.A.</field>
+            <field name="site">www.bancotopazio.com.br</field>
+            <field name="cod">82</field>
+        </record>
+        <record id="bank_cheque_634" model="bank_cheque">
+            <field name="name">Banco Triângulo S.A.</field>
+            <field name="site">www.tribanco.com.br</field>
+            <field name="cod">634</field>
+        </record>
+        <record id="bank_cheque_653" model="bank_cheque">
+            <field name="name">Banco Voiter S.A.</field>
+            <field name="site">www.voiter.com</field>
+            <field name="cod">653</field>
+        </record>
+        <record id="bank_cheque_655" model="bank_cheque">
+            <field name="name">Banco Votorantim S.A.</field>
+            <field name="site">www.bancovotorantim.com.br</field>
+            <field name="cod">655</field>
+        </record>
+        <record id="bank_cheque_610" model="bank_cheque">
+            <field name="name">Banco VR S.A.</field>
+            <field name="site">www.vrinvestimentos.com.br</field>
+            <field name="cod">610</field>
+        </record>
+        <record id="bank_cheque_119" model="bank_cheque">
+            <field name="name">Banco Western Union do Brasil S.A.</field>
+            <field name="site">www.bancowesternunion.com.br</field>
+            <field name="cod">119</field>
+        </record>
+        <record id="bank_cheque_102" model="bank_cheque">
+            <field name="name">Banco XP S.A.</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">102</field>
+        </record>
+        <record id="bank_cheque_21" model="bank_cheque">
+            <field name="name">BANESTES S.A. Banco do Estado do Espírito Santo</field>
+            <field name="site">www.banestes.com.br</field>
+            <field name="cod">21</field>
+        </record>
+        <record id="bank_cheque_755" model="bank_cheque">
+            <field name="name">Bank of America Merrill Lynch Banco Múltiplo S.A.</field>
+            <field name="site">www.ml.com</field>
+            <field name="cod">755</field>
+        </record>
+        <record id="bank_cheque_250" model="bank_cheque">
+            <field name="name">BCV - Banco de Crédito e Varejo S.A.</field>
+            <field name="site">www.bancobcv.com.br</field>
+            <field name="cod">250</field>
+        </record>
+        <record id="bank_cheque_144" model="bank_cheque">
+            <field name="name">BEXS Banco de Câmbio S.A.</field>
+            <field name="site">www.bexs.com.br</field>
+            <field name="cod">144</field>
+        </record>
+        <record id="bank_cheque_17" model="bank_cheque">
+            <field name="name">BNY Mellon Banco S.A.</field>
+            <field name="site">www.bnymellon.com.br</field>
+            <field name="cod">17</field>
+        </record>
+        <record id="bank_cheque_70" model="bank_cheque">
+            <field name="name">BRB - Banco de Brasília S.A.</field>
+            <field name="site">www.brb.com.br</field>
+            <field name="cod">70</field>
+        </record>
+        <record id="bank_cheque_104" model="bank_cheque">
+            <field name="name">Caixa Econômica Federal</field>
+            <field name="site">www.caixa.gov.br</field>
+            <field name="cod">104</field>
+        </record>
+        <record id="bank_cheque_320" model="bank_cheque">
+            <field name="name">China Construction Bank (Brasil) Banco Múltiplo S.A.</field>
+            <field name="site">www.br.ccb.com</field>
+            <field name="cod">320</field>
+        </record>
+        <record id="bank_cheque_477" model="bank_cheque">
+            <field name="name">Citibank N.A.</field>
+            <field name="site">www.citibank.com</field>
+            <field name="cod">477</field>
+        </record>
+        <record id="bank_cheque_487" model="bank_cheque">
+            <field name="name">Deutsche Bank S.A. - Banco Alemão</field>
+            <field name="site">www.deutsche-bank.com.br</field>
+            <field name="cod">487</field>
+        </record>
+        <record id="bank_cheque_62" model="bank_cheque">
+            <field name="name">Hipercard Banco Múltiplo S.A.</field>
+            <field name="site">www.hipercard.com.br</field>
+            <field name="cod">62</field>
+        </record>
+        <record id="bank_cheque_269" model="bank_cheque">
+            <field name="name">HSBC Brasil S.A. - Banco de Investimento</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">269</field>
+        </record>
+        <record id="bank_cheque_492" model="bank_cheque">
+            <field name="name">ING Bank N.V.</field>
+            <field name="site">www.ing.com</field>
+            <field name="cod">492</field>
+        </record>
+        <record id="bank_cheque_341" model="bank_cheque">
+            <field name="name">Itaú Unibanco S.A.</field>
+            <field name="site">www.itau.com.br</field>
+            <field name="cod">341</field>
+        </record>
+        <record id="bank_cheque_488" model="bank_cheque">
+            <field name="name">JPMorgan Chase Bank, National Association</field>
+            <field name="site">www.jpmorganchase.com</field>
+            <field name="cod">488</field>
+        </record>
+        <record id="bank_cheque_399" model="bank_cheque">
+            <field name="name">Kirton Bank S.A. - Banco Múltiplo</field>
+            <field name="site">Não possui site</field>
+            <field name="cod">399</field>
+        </record>
+        <record id="bank_cheque_128" model="bank_cheque">
+            <field name="name">MS Bank S.A. Banco de Câmbio</field>
+            <field name="site">www.msbank.com.br</field>
+            <field name="cod">128</field>
+        </record>
+        <record id="bank_cheque_254" model="bank_cheque">
+            <field name="name">Paraná Banco S.A.</field>
+            <field name="site">www.paranabanco.com.br</field>
+            <field name="cod">254</field>
+        </record>
+        <record id="bank_cheque_751" model="bank_cheque">
+            <field name="name">Scotiabank Brasil S.A. Banco Múltiplo</field>
+            <field name="site">www.br.scotiabank.com</field>
+            <field name="cod">751</field>
+        </record>
+        <record id="bank_cheque_14" model="bank_cheque">
+            <field name="name">State Street Brasil S.A. - Banco Comercial</field>
+            <field name="site">www.statestreet.com</field>
+            <field name="cod">14</field>
+        </record>
+        <record id="bank_cheque_95" model="bank_cheque">
+            <field name="name">Travelex Banco de Câmbio S.A.</field>
+            <field name="site">www.bancoconfidence.com.br</field>
+            <field name="cod">95</field>
+        </record>
+        <record id="bank_cheque_129" model="bank_cheque">
+            <field name="name">UBS Brasil Banco de Investimento S.A.</field>
+            <field name="site">www.ubs.com</field>
+            <field name="cod">129</field>
+        </record>
+
+    </data>
+</odoo>

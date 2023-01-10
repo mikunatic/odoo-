@@ -8,6 +8,10 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="forma_pagamento" required="True"/>
+                        </group>
+                        <group></group>
+                        <group>
                             <field name="banco_origem" string="Banco Originário"/>
                             <field name="partner_id" string="Cliente Originário"/>
                             <field name="conta_origem_id" string="Conta de Origem"/>
@@ -20,10 +24,10 @@
                             <field name="journal_id_destino" string="Diário Destino" domain="[('type', 'in', ('bank', 'cash'))]"/>
                         </group>
                         <group>
-                            <field name="currency_id"/>
-                            <field name="forma_pagamento"/>
-                            <field name="cheque" attrs="{'invisible':[('forma_pagamento','=','2')]}"/>
-                            <field name="amount" attrs="{'invisible':[('forma_pagamento','=','1')]}"/>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="cheque" attrs="{'invisible':['|',('forma_pagamento','=','2'),('forma_pagamento','=',False)]}"/>
+                            <field name="valor_cheque" attrs="{'invisible':['|',('forma_pagamento','=','2'),('forma_pagamento','=',False)]}"/>
+                            <field name="amount" attrs="{'invisible':['|',('forma_pagamento','=','1'),('forma_pagamento','=',False)]}"/>
                             <field name="date"/>
                         </group>
                         <group>

@@ -8,6 +8,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/cadastro_cheque_view.xml',
+        # 'data/bank_cheque.xml',
     ],
     'installable': True,
     'application': True,
