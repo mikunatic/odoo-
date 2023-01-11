@@ -6,9 +6,10 @@
     'description': """Cadastro de Cheque""",
     'depends': ['account'],
     'data': [
+        'data/bank_cheque.xml',
         'security/ir.model.access.csv',
         'views/cadastro_cheque_view.xml',
-        # 'data/bank_cheque.xml',
+        'wizard/cheque_wizard_view.xml',
     ],
     'installable': True,
     'application': True,

@@ -21,144 +21,130 @@ class AcountExtend(models.TransientModel):
     currency_id = fields.Many2one('res.currency', string='Account Currency',
                                   help="Forces all moves for this account to have this account currency.", default=6)
     forma_pagamento = fields.Selection([('1','Cheque'),('2','Dinheiro')], string="Forma de Pagamento")
-    cheque = fields.Many2one('cadastro.cheque')
+    cheque = fields.Many2one('cadastro.cheque', domain="[('pagamentos','=',False)]")
     valor_cheque = fields.Monetary(related="cheque.valor")
     amount = fields.Monetary(currency_field='currency_id')
     journal_id = fields.Many2one('account.journal', required=True)
     journal_id_destino = fields.Many2one('account.journal', required=True)
     date = fields.Date("Data do pagamento", required=True)
     descricao = fields.Text("Descrição", compute="criardescricao", readonly=True)
-
+    
     def botaopagar(self):
+        for rec in self:
+            if rec.forma_pagamento == '1':
+                valor = rec.valor_cheque
+            elif rec.forma_pagamento == '2':
+                valor = rec.amount
         vals_pagar = {'name': '/',
-                'payment_type': 'outbound',
-                'partner_type': 'customer',
-                'partner_id': self.partner_id.id,
-                'destination_account_id': self.conta_origem_id.id,
-                'is_internal_transfer': False,
-                'journal_id': self.journal_id.id,
-                'payment_method_id': 1,
-                'payment_token_id': False,
-                'partner_bank_id': self.banco_origem.id,
-                'auto_post': True,
-                'amount': self.amount,
-                'currency_id': 6,
-                'check_amount_in_words': 'Zero Real',
-                'date': self.date,
-                'effective_date': False,
-                'bank_reference': False,
-                'cheque_reference': False,
-                'ref': False,
-                'edi_document_ids': [],
-                'message_follower_ids': [],
-                'activity_ids': [],
-                'message_ids': [],
-                } # lista de valores para criação do pagamento
+                      'payment_type': 'outbound',
+                      'partner_type': 'customer',
+                      'partner_id': self.partner_id.id,
+                      'destination_account_id': self.conta_origem_id.id,
+                      'is_internal_transfer': False,
+                      'journal_id': self.journal_id.id,
+                      'payment_method_id': 1,
+                      'payment_token_id': False,
+                      'partner_bank_id': self.banco_origem.id,
+                      'auto_post': True,
+                      'amount': self.amount,
+                      'currency_id': 6,
+                      'check_amount_in_words': 'Zero Real',
+                      'date': self.date,
+                      'effective_date': False,
+                      'bank_reference': False,
+                      'cheque_reference': False,
+                      'ref': False,
+                      'edi_document_ids': [],
+                      'message_follower_ids': [],
+                      'activity_ids': [],
+                      'message_ids': [],
+                      }
 
         vals_pagamento_com_cheque = {'name': '/',
-                 'payment_type': 'outbound',
-                 'partner_type': 'customer',
-                 'partner_id': False,
-                 'destination_account_id': 10,
-                 'is_internal_transfer': False,
-                 'journal_id': 7,
-                 'payment_method_id': 1,
-                 'payment_token_id': False,
-                 'partner_bank_id': 10,
-                 'auto_post': True,
-                 'amount': self.valor_cheque,
-                 'currency_id': 6,
-                 'check_amount_in_words': 'Zero Real',
-                 'date': self.date,
-                 'effective_date': False,
-                 'bank_reference': False,
-                 'cheque_reference': False,
-                 'ref': False,
-                 'edi_document_ids': [],
-                 'message_follower_ids': [],
-                 'activity_ids': [],
-                 'message_ids': [],
-                 }
+                     'payment_type': 'outbound',
+                     'partner_type': 'customer',
+                     'partner_id': False,
+                     'destination_account_id': 25,  # account.account clientes circulante
+                     'is_internal_transfer': False,
+                     'journal_id': 7,
+                     'payment_method_id': 1,
+                     'payment_token_id': False,
+                     'partner_bank_id': 10,
+                     'auto_post': True,
+                     'amount': self.valor_cheque,
+                     'currency_id': 6,
+                     'check_amount_in_words': 'Zero Real',
+                     'date': self.date,
+                     'effective_date': False,
+                     'bank_reference': False,
+                     'cheque_reference': False,
+                     'ref': False,
+                     'edi_document_ids': [],
+                     'message_follower_ids': [],
+                     'activity_ids': [],
+                     'message_ids': [],
+                     'cheque_pagamento':self.cheque.id,
+                    }
 
         vals_receber = {'name': '/',
-                'payment_type': 'inbound',
-                'partner_type': 'customer',
-                'partner_id': self.partner_id_destino.id,
-                'destination_account_id': self.conta_destinatario.id,
-                'is_internal_transfer': False,
-                'journal_id': self.journal_id_destino.id,
-                'payment_method_id': 1,
-                'payment_token_id': False,
-                'partner_bank_id': self.banco_destinatario.id,
-                'auto_post': True,
-                'amount': self.amount,
-                'currency_id': self.currency_id.id,
-                'check_amount_in_words': 'Zero Real',
-                'date': self.date,
-                'effective_date': False,
-                'bank_reference': False,
-                'cheque_reference': False,
-                'ref': False,
-                'edi_document_ids': [],
-                'message_follower_ids': [],
-                'activity_ids': [],
-                'message_ids': [],
-                } # lista de valores para criação do recebimento
+                        'payment_type': 'inbound',
+                        'partner_type': 'customer',
+                        'partner_id': self.partner_id_destino.id,
+                        'destination_account_id': self.conta_destinatario.id,
+                        'is_internal_transfer': False,
+                        'journal_id': self.journal_id_destino.id,
+                        'payment_method_id': 1,
+                        'payment_token_id': False,
+                        'partner_bank_id': self.banco_destinatario.id,
+                        'auto_post': True,
+                        'amount': valor,
+                        'currency_id': self.currency_id.id,
+                        'check_amount_in_words': 'Zero Real',
+                        'date': self.date,
+                        'effective_date': False,
+                        'bank_reference': False,
+                        'cheque_reference': False,
+                        'ref': False,
+                        'edi_document_ids': [],
+                        'message_follower_ids': [],
+                        'activity_ids': [],
+                        'message_ids': [],
+                        'cheque_pagamento': self.cheque.id,
+                        }
 
-        for rec in self: # erro personalizado caso o banco origem for igual ao destinatário, ou a quantia do pagamento for igual a zero
-            # if rec.banco_origem.id == rec.banco_destinatario.id:
-            #     raise UserError(_("Não é possível realizar transferências para a mesma conta"))
+        for rec in self:
             if rec.forma_pagamento == '1':
                 self.env['account.payment'].create(vals_pagamento_com_cheque)  # cria o pagamento com os valores da primeira lista
                 self.env['account.payment'].create(vals_receber)
-            else:
+            elif rec.forma_pagamento == '2':
                 self.env['account.payment'].create(vals_pagar)  # cria o pagamento com os valores da primeira lista
                 self.env['account.payment'].create(vals_receber)
           # cria o pagamento com os valores da segunda lista
+
+
         return self.env['ir.actions.act_window']._for_xml_id("account_extended.account_wiz_action") # mostra o wizard que efetua a postagem do pagamento
+
 
     def criardescricao(self): # função para criar a descrição personalizada
         for rec in self:
-            if rec.currency_id.id == 6:
-                cur = 'R$'
-                rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.amount) + ', criado no dia ' + str(rec.date)
-            elif rec.currency_id.id == 1:
-                cur = 'Є'
-                rec.descricao = 'Pagamento de valor ' + str(rec.amount) + ' ' + cur + ', criado no dia ' + str(rec.date)
-            elif rec.currency_id.id == 2:
-                cur = '$'
-                rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.amount) + ', criado no dia ' + str(rec.date)
-
+            if rec.forma_pagamento == '1':
+                if rec.currency_id.id == 6:
+                    cur = 'R$'
+                    rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.valor_cheque) + ', criado no dia ' + str(rec.date)
+                elif rec.currency_id.id == 1:
+                    cur = 'Є'
+                    rec.descricao = 'Pagamento de valor ' + str(rec.valor_cheque) + ' ' + cur + ', criado no dia ' + str(rec.date)
+                elif rec.currency_id.id == 2:
+                    cur = '$'
+                    rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.rec.valor_cheque) + ', criado no dia ' + str(rec.date)
+            elif rec.forma_pagamento == '2':
+                if rec.currency_id.id == 6:
+                    cur = 'R$'
+                    rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.amount) + ', criado no dia ' + str(rec.date)
+                elif rec.currency_id.id == 1:
+                    cur = 'Є'
+                    rec.descricao = 'Pagamento de valor ' + str(rec.amount) + ' ' + cur + ', criado no dia ' + str(rec.date)
+                elif rec.currency_id.id == 2:
+                    cur = '$'
+                    rec.descricao = 'Pagamento de valor ' + cur + ' ' + str(rec.amount) + ', criado no dia ' + str(rec.date)
         # ESQUEÇAM TUDO!!!!!!!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # @api.onchange("barcode")
-    # def on_change_barcode(self):
-    #     for rec in self:
-    #         if rec.barcode and len(rec.barcode) == 34:
-    #         rec.bank_cheque = rec.env['bank_cheque'].sudo().search([('cod', 'in', [rec.barcode[1:4]])])
-    #
-    # rec.Agency_cheque = rec.barcode[4:8]
-    # rec.number_cheque = rec.barcode[13:19]
-    # rec.account_cheque = rec.barcode[25:32]
-    # else:
-    # rec.barcode = ""

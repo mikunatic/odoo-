@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="cadastro_cheque_inherit" model="ir.ui.view">
+            <field name="name">cadastro.cheque.inherit</field>
+            <field name="model">cadastro.cheque</field>
+            <field name="inherit_id" ref="cadastro_cheque.cadastro_cheque_form"/>
+            <field name="arch" type="xml">
+                <field name="valor" position="after">
+                    <field name="pagamentos" attrs="{'invisible':[('pagamentos','=',[])]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

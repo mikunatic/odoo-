@@ -20,7 +20,7 @@
                         <group>
                             <field name="banco_destinatario" string="Banco Destinatário"/>
                             <field name="partner_id_destino" string="Cliente Destinatário"/>
-                            <field name="conta_destinatario" string="Costa de Destino"/>
+                            <field name="conta_destinatario" string="Conta de Destino"/>
                             <field name="journal_id_destino" string="Diário Destino" domain="[('type', 'in', ('bank', 'cash'))]"/>
                         </group>
                         <group>

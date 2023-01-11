@@ -7,7 +7,7 @@
             <tree>
                 <field name="numero_cheque"/>
                 <field name="codigo_barra"/>
-                <field name="bank_id"/>
+                <field name="bank_cheque"/>
                 <field name="agencia"/>
                 <field name="conta"/>
                 <field name="data_cadastro"/>
@@ -26,8 +26,9 @@
                         <group>
                             <field name="numero_cheque"/>
                             <field name="codigo_barra"/>
-                            <field name="bank_id"/>
+                            <field name="bank_cheque"/>
                             <field name="agencia"/>
+                            <field name="account_cheque"/>
                             <field name="tipo_cheque_id"/>
                         </group>
                         <group>
@@ -35,7 +36,6 @@
                             <field name="data_cadastro"/>
                             <field name="currency_id"/>
                             <field name="valor"/>
-<!--                            <field name="bank_cheque"/>-->
                         </group>
                         <group>
                             <field name="terceiro"/>

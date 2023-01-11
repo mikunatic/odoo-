@@ -1,16 +1,12 @@
-from odoo import models,_,fields
+from odoo import models,_
 
 
-class AccountWizard(models.TransientModel):
-    _name = "account.wiz"
-
-    forma_pagamento = fields.Selection([('1', 'Cheque'), ('2', 'Dinheiro')], string="Forma de Pagamento")
-    cheque = fields.Many2one('cadastro.cheque')
+class ChequeWizard(models.TransientModel):
+    _name = "cheque.wiz"
 
     def post(self):
-        print(self.forma_pagamento, self.cheque)
         pagamento = self.env['account.payment'].search([], order="id asc") # pesquisa os pagamento por ordem de id crescente
-        description = self.env['account.extend'].search([], order="id asc") # armazena na variavel os meus pagamentos criados pesquisados por ordem crescente de id
+        description = self.env['cadastro.cheque'].search([], order="id asc") # armazena na variavel os meus pagamentos criados pesquisados por ordem crescente de id
         pagamento[-1].action_post() # posta o pagamento mais recente
         pagamento[-2].action_post() # posta o pagamento mais recente
 
@@ -38,11 +34,6 @@ class AccountWizard(models.TransientModel):
         pagamento[-1].update({'gerproc':gpr.id}) # atualiza o campo gerproc, presente no account.payment, com o id do ultimo gerproc, no pagamento e recebimento
         pagamento[-2].update({'gerproc':gpr.id})
 
-        cheque_pagamento = self.cheque
-        if self.forma_pagamento == '1':
-            pagamento[-1].update({'cheque_pagamento':cheque_pagamento.id})
-            pagamento[-2].update({'cheque_pagamento':cheque_pagamento.id})
-
         # Retorna a tree com apenas o gerproc criado
         return {
             "type": "ir.actions.act_window",
@@ -52,8 +43,3 @@ class AccountWizard(models.TransientModel):
             "view_mode":"tree,form",
             "context": self.env.context
         }
-
-
-
-
-
