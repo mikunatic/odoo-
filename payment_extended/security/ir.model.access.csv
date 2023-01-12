@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 payment_user,access.payment_user,model_account_payment,base.group_user,1,1,1,1
 project_request_user,access.project_request_user,model_project_request,base.group_user,1,1,1,1
+cadastro_cheque,cadastro_cheque,model_cadastro_cheque,base.group_user,1,1,1,1
+lote_cheque,lote_cheque,model_lote_cheque,base.group_user,1,1,1,1

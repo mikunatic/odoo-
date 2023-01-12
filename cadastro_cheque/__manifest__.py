@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'views/cadastro_cheque_view.xml',
         'wizard/cheque_wizard_view.xml',
+        'views/lote_view.xml',
     ],
     'installable': True,
     'application': True,

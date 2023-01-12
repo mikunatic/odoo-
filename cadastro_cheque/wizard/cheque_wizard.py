@@ -33,13 +33,14 @@ class ChequeWizard(models.TransientModel):
         gpr = last_gp[-1] # armazena na variavel gpr o último gerproc criado
         pagamento[-1].update({'gerproc':gpr.id}) # atualiza o campo gerproc, presente no account.payment, com o id do ultimo gerproc, no pagamento e recebimento
         pagamento[-2].update({'gerproc':gpr.id})
+        description[-1].update({'gerproc_id':gpr.id})
 
         # Retorna a tree com apenas o gerproc criado
-        return {
-            "type": "ir.actions.act_window",
-            "name":_("Project Request"),
-            "res_model":"project_request",
-            "domain":[("id", "=", gpr.id)],
-            "view_mode":"tree,form",
-            "context": self.env.context
-        }
+        # return {
+        #     "type": "ir.actions.act_window",
+        #     "name":_("Project Request"),
+        #     "res_model":"project_request",
+        #     "domain":[("id", "=", gpr.id)],
+        #     "view_mode":"tree,form",
+        #     "context": self.env.context
+        # }

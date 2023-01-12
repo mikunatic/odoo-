@@ -24,9 +24,9 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="numero_cheque"/>
                             <field name="codigo_barra"/>
-                            <field name="bank_cheque"/>
+                            <field name="numero_cheque"/>
+                            <field name="bank_cheque" string="Banco"/>
                             <field name="agencia"/>
                             <field name="account_cheque"/>
                             <field name="tipo_cheque_id"/>
@@ -36,6 +36,7 @@
                             <field name="data_cadastro"/>
                             <field name="currency_id"/>
                             <field name="valor"/>
+                            <field name="valor_extenso" readonly="True"/>
                         </group>
                         <group>
                             <field name="terceiro"/>
@@ -53,12 +54,13 @@
         </field>
     </record>
 
-    <record id="account_extended_action" model="ir.actions.act_window">
+    <record id="cadastro_cheque_action" model="ir.actions.act_window">
         <field name="name">Cadastro de Cheque</field>
         <field name="res_model">cadastro.cheque</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="cheque_sub_menu" name="Cadastro de Cheque" action="account_extended_action" parent="account.menu_finance"/>
+    <menuitem id="cheque_sub_menu" name="Cheque" parent="account.menu_finance"/>
+    <menuitem id="cheque_base_menu" name="Cadastro de Cheque" action="cadastro_cheque_action" parent="cheque_sub_menu"/>
 
 </odoo>

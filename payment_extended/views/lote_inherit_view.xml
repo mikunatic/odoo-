@@ -1,0 +1,35 @@
+<!--<odoo>-->
+<!--    <record id="lote_inherit_form" model="ir.ui.view">-->
+<!--        <field name="name">lote inherit form</field>-->
+<!--        <field name="model">lote.cheque</field>-->
+<!--        <field name="inherit_id" ref="lote_cheque.lote_cheque_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="numero_lote" position="after">-->
+<!--                <field name="cheque_ids"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+<odoo>
+    <data>
+        <record id="lote_inherit_form" model="ir.ui.view">
+            <field name="name">lote.inherit.form</field>
+            <field name="model">lote.cheque</field>
+            <field name="inherit_id" ref="cadastro_cheque.lote_cheque_form"/>
+            <field name="arch" type="xml">
+                <field name="numero_lote" position="after">
+                    <field name="cheque_ids">
+                        <tree>
+                            <field name="numero_cheque"/>
+                            <field name="codigo_barra"/>
+                            <field name="bank_cheque"/>
+                            <field name="agencia"/>
+                            <field name="valor"/>
+                        </tree>
+                    </field>
+                    <field name="valor_total"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

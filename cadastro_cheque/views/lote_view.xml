@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="lote_cheque_list" model="ir.ui.view">
+        <field name="name">Cheque</field>
+        <field name="model">lote.cheque</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="numero_lote"/>
+            </tree>
+        </field>
+    </record>
+    <record id="lote_cheque_form" model="ir.ui.view">
+        <field name="name">Cheque</field>
+        <field name="model">lote.cheque</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="numero_lote"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="lote_cheque_action" model="ir.actions.act_window">
+        <field name="name">Lotes de Cheque</field>
+        <field name="res_model">lote.cheque</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="cheque_sub_menu" name="Cheque" parent="account.menu_finance"/>
+    <menuitem id="lote_mini_menu" name="Lotes de Cheque" action="lote_cheque_action" parent="cheque_sub_menu"/>
+</odoo>

@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 cadastro_cheque,access.cadastro_cheque,model_cadastro_cheque,base.group_user,1,1,1,1
 bank_cheque,bank_cheque,model_bank_cheque,base.group_user,1,1,1,1
 cheque_wiz,cheque_wiz,model_cheque_wiz,base.group_user,1,1,1,1
+lote_cheque,lote_cheque,model_lote_cheque,base.group_user,1,1,1,1

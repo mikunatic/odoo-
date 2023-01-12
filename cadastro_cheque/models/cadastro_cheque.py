@@ -20,7 +20,7 @@ class CadastroCheque(models.Model):
             ('7', 'Salário'),
             ('8', 'Administrativo'),
             ('9', 'CPMF')
-        ]
+        ], default='5'
     )
     conta = fields.Many2one('account.account', default=25, readonly=True)
     data_cadastro = fields.Date("Data de Cadastro", required=True)
@@ -29,12 +29,11 @@ class CadastroCheque(models.Model):
     valor = fields.Monetary(currency_field='currency_id', required=True)
     valor_extenso = fields.Char("Valor por extenso")
     account_cheque = fields.Char("Conta Bancária")
-    terceiro = fields.Selection([('1','Sim'),('2','Não')], string="Cheque de Terceiro?")
+    terceiro = fields.Selection([('1','Sim'),('2','Não')], string="Cheque de Terceiro?", default='2')
     terceiro_nome = fields.Char("Nome do Terceiro")
     terceiro_cpf = fields.Char("CPF do Terceiro")
     terceiro_endereco = fields.Char("Endereço do Terceiro")
     descricao = fields.Text("Descrição", compute="criardescricao", readonly=True)
-    # pagamento = fields.one2many
 
     @api.onchange("codigo_barra")
     def on_change_barcode(self):
