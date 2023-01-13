@@ -28,6 +28,7 @@
                         </tree>
                     </field>
                     <field name="valor_total"/>
+                    <field name="pagamento_ids"/>
                 </field>
             </field>
         </record>

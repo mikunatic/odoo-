@@ -1,9 +1,9 @@
 {
-    'name': 'Payment Inherit',
-    'category': 'Payment',
-    'summary': 'Payment Inherit',
+    'name': 'Inherits',
+    'category': 'Inherits',
+    'summary': 'Inherits',
     'version': '1.0',
-    'description': """Payment Inherit""",
+    'description': """Inherit""",
     'depends': ['account'],
     'data': [
         'security/ir.model.access.csv',

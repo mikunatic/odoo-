@@ -11,3 +11,4 @@ class PaymentInherit(models.Model):
     # forma_pagamento = fields.Selection([('1','Dinheiro'),('2','Cheque')])
     # cheque = fields.Many2one('cadastro.cheque', string="Cheque")
     cheque_pagamento = fields.Many2one('cadastro.cheque')
+    lote_id = fields.Many2one('lote.cheque')

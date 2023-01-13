@@ -12,10 +12,10 @@
                         </group>
                         <group></group>
                         <group>
-                            <field name="banco_origem" string="Banco Originário"/>
+                            <field name="banco_origem" string="Banco Originário" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
                             <field name="partner_id" string="Cliente Originário"/>
-                            <field name="conta_origem_id" string="Conta de Origem"/>
-                            <field name="journal_id" string="Diário" domain="[('type', 'in', ('bank', 'cash'))]"/>
+                            <field name="conta_origem_id" string="Conta de Origem" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
+                            <field name="journal_id" string="Diário" domain="[('type', 'in', ('bank', 'cash'))]" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
                         </group>
                         <group>
                             <field name="banco_destinatario" string="Banco Destinatário"/>
@@ -25,9 +25,11 @@
                         </group>
                         <group>
                             <field name="currency_id" invisible="True"/>
-                            <field name="cheque" attrs="{'invisible':['|',('forma_pagamento','=','2'),('forma_pagamento','=',False)]}"/>
-                            <field name="valor_cheque" attrs="{'invisible':['|',('forma_pagamento','=','2'),('forma_pagamento','=',False)]}"/>
-                            <field name="amount" attrs="{'invisible':['|',('forma_pagamento','=','1'),('forma_pagamento','=',False)]}"/>
+                            <field name="cheque" attrs="{'invisible':[('forma_pagamento','!=','1')]}"/>
+                            <field name="valor_cheque" attrs="{'invisible':[('forma_pagamento','!=','1')]}"/>
+                            <field name="lote_id" attrs="{'invisible':[('forma_pagamento','!=','3')]}"/>
+                            <field name="valor_lote" attrs="{'invisible':[('forma_pagamento','!=','3')]}"/>
+                            <field name="amount" attrs="{'invisible':[('forma_pagamento','!=','2')]}"/>
                             <field name="date"/>
                         </group>
                         <group>

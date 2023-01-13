@@ -8,6 +8,7 @@
                 <field name="ref" position="after">
                     <field name="gerproc" attrs="{'invisible':[('gerproc','=',False)]}"/>
                     <field name="cheque_pagamento" attrs="{'invisible':[('cheque_pagamento','=',False)]}"/>
+                    <field name="lote_id" attrs="{'invisible':[('lote_id','=',False)]}"/>
                 </field>
             </field>
         </record>
