@@ -6,6 +6,7 @@
             <field name="inherit_id" ref="cadastro_cheque.cadastro_cheque_form"/>
             <field name="arch" type="xml">
                 <field name="valor_extenso" position="after">
+                    <field name="lote_ids" attrs="{'invisible':[('lote_ids','=',[])]}" readonly="True"/>
                     <field name="pagamentos" attrs="{'invisible':[('pagamentos','=',[])]}"/>
                     <field name="gerproc_id" attrs="{'invisible':[('gerproc_id','=',False)]}"/>
                 </field>

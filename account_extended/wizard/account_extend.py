@@ -21,7 +21,7 @@ class AcountExtend(models.TransientModel):
     currency_id = fields.Many2one('res.currency', string='Account Currency',
                                   help="Forces all moves for this account to have this account currency.", default=6)
     forma_pagamento = fields.Selection([('1','Cheque'),('2','Dinheiro'),('3','Lote')], string="Forma de Pagamento")
-    cheque = fields.Many2one('cadastro.cheque', domain="[('pagamentos','=',False)]")
+    cheque = fields.Many2one('cadastro.cheque', domain="['|',('pagamentos','=',False),('lote_ids','=',False)]")
     valor_cheque = fields.Monetary(related="cheque.valor")
     lote_id = fields.Many2one('lote.cheque', domain="[('pagamento_ids','=',False)]")
     valor_lote = fields.Monetary(related="lote_id.valor_total")
@@ -89,33 +89,66 @@ class AcountExtend(models.TransientModel):
                      'message_ids': [],
                      'cheque_pagamento':self.cheque.id,
                     }
+        if self.forma_pagamento == '3':
+            for cheque in self.lote_id.cheque_ids:
+                vals_pagamento_com_lote = {'name': '/',
+                             'payment_type': 'outbound',
+                             'partner_type': 'customer',
+                             'partner_id': False,
+                             'destination_account_id': 25,  # account.account clientes circulante
+                             'is_internal_transfer': False,
+                             'journal_id': 7,
+                             'payment_method_id': 1,
+                             'payment_token_id': False,
+                             'partner_bank_id': 10,
+                             'auto_post': True,
+                             'amount': cheque.valor,
+                             'currency_id': 6,
+                             'check_amount_in_words': 'Zero Real',
+                             'date': self.date,
+                             'effective_date': False,
+                             'bank_reference': False,
+                             'cheque_reference': False,
+                             'ref': False,
+                             'edi_document_ids': [],
+                             'message_follower_ids': [],
+                             'activity_ids': [],
+                             'message_ids': [],
+                             'cheque_pagamento':cheque.id,
+                             'lote_id': self.lote_id.id,
+                            }
 
-        vals_pagamento_com_lote = {'name': '/',
-                     'payment_type': 'outbound',
-                     'partner_type': 'customer',
-                     'partner_id': False,
-                     'destination_account_id': 25,  # account.account clientes circulante
-                     'is_internal_transfer': False,
-                     'journal_id': 7,
-                     'payment_method_id': 1,
-                     'payment_token_id': False,
-                     'partner_bank_id': 10,
-                     'auto_post': True,
-                     'amount': self.valor_lote,
-                     'currency_id': 6,
-                     'check_amount_in_words': 'Zero Real',
-                     'date': self.date,
-                     'effective_date': False,
-                     'bank_reference': False,
-                     'cheque_reference': False,
-                     'ref': False,
-                     'edi_document_ids': [],
-                     'message_follower_ids': [],
-                     'activity_ids': [],
-                     'message_ids': [],
-                     'cheque_pagamento':self.cheque.id,
-                     'lote_id': self.lote_id.id,
-                    }
+                vals_receber_com_lote = {'name': '/',
+                                'payment_type': 'inbound',
+                                'partner_type': 'customer',
+                                'partner_id': self.partner_id_destino.id,
+                                'destination_account_id': self.conta_destinatario.id,
+                                'is_internal_transfer': False,
+                                'journal_id': self.journal_id_destino.id,
+                                'payment_method_id': 1,
+                                'payment_token_id': False,
+                                'partner_bank_id': self.banco_destinatario.id,
+                                'auto_post': True,
+                                'amount': cheque.valor,
+                                'currency_id': self.currency_id.id,
+                                'check_amount_in_words': 'Zero Real',
+                                'date': self.date,
+                                'effective_date': False,
+                                'bank_reference': False,
+                                'cheque_reference': False,
+                                'ref': False,
+                                'edi_document_ids': [],
+                                'message_follower_ids': [],
+                                'activity_ids': [],
+                                'message_ids': [],
+                                'cheque_pagamento': cheque.id,
+                                'lote_id': self.lote_id.id,
+                                }
+                self.env['account.payment'].create(vals_pagamento_com_lote)  # cria o pagamento com os valores da primeira lista
+                self.env['account.payment'].create(vals_receber_com_lote)
+                pagamento = self.env['account.payment'].search([],order="id asc")
+                pagamento[-1].action_post()
+                pagamento[-2].action_post()
 
         vals_receber = {'name': '/',
                         'payment_type': 'inbound',
@@ -148,18 +181,16 @@ class AcountExtend(models.TransientModel):
             if rec.forma_pagamento == '1':
                 self.env['account.payment'].create(vals_pagamento_com_cheque)  # cria o pagamento com os valores da primeira lista
                 self.env['account.payment'].create(vals_receber)
+                return self.env['ir.actions.act_window']._for_xml_id("account_extended.account_wiz_action")  # mostra o wizard que efetua a postagem do pagamento
+
             elif rec.forma_pagamento == '2':
                 self.env['account.payment'].create(vals_pagar)  # cria o pagamento com os valores da primeira lista
                 self.env['account.payment'].create(vals_receber)
-            elif rec.forma_pagamento == '3':
-                self.env['account.payment'].create(vals_pagamento_com_lote)  # cria o pagamento com os valores da primeira lista
-                self.env['account.payment'].create(vals_receber)
-
-        return self.env['ir.actions.act_window']._for_xml_id("account_extended.account_wiz_action") # mostra o wizard que efetua a postagem do pagamento
+                return self.env['ir.actions.act_window']._for_xml_id("account_extended.account_wiz_action")  # mostra o wizard que efetua a postagem do pagamento
 
     @api.onchange("forma_pagamento")
     def onchange_cheque(self):
-        if self.forma_pagamento == '1':
+        if self.forma_pagamento == '1' or self.forma_pagamento == '3':
             self.banco_origem = 10
             self.conta_origem_id = 25
             self.journal_id = 7

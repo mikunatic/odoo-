@@ -48,6 +48,7 @@
                     <footer>
                         <button string="Cadastrar" name="postarcheque" type="object" class="btn btn-primary"/>
                         <button special="cancel" string="Manter como rascunho"/>
+<!--                        attrs="{'invisible':[('gerproc_id','!=',False)]}"-->
                     </footer>
                 </sheet>
             </form>

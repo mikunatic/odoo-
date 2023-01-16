@@ -17,14 +17,14 @@ class LoteInherit(models.Model):
                 valor += cheque.valor
             lote.valor_total = valor
 
-    @api.onchange("cheque_ids","pagamento_ids")
-    def update_cheque(self):
-        pagamentos = [] # cria uma array
-        cheques = []
-        for rec in self: # caminha pelos records
-            pagamentos = rec.pagamento_ids.ids # cria variável pra armazenar todos os pagamentos que o lote fez
-            cheques = self.env['cadastro.cheque'].search(["id","in",rec.cheque_ids.ids]) # cria variável que procura e armazena os cheques
-        for cheque in cheques:
-            cheque.update({'pagamentos': pagamentos})
+    # @api.onchange("cheque_ids","pagamento_ids")
+    # def update_cheque(self):
+    #     pagamentos = [] # cria uma array
+    #     cheques = []
+    #     for rec in self: # caminha pelos records
+    #         pagamentos = rec.pagamento_ids.ids # cria variável pra armazenar todos os pagamentos que o lote fez
+    #         cheques = self.env['cadastro.cheque'].search(["id","in",rec.cheque_ids.ids]) # cria variável que procura e armazena os cheques
+    #     for cheque in cheques:
+    #         cheque.update({'pagamentos': pagamentos})
 
 

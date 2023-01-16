@@ -12,10 +12,10 @@
                         </group>
                         <group></group>
                         <group>
-                            <field name="banco_origem" string="Banco Originário" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
+                            <field name="banco_origem" string="Banco Originário" attrs="{'readonly':['|',('forma_pagamento','=','1'),('forma_pagamento','=','3')]}" force_save="1"/>
                             <field name="partner_id" string="Cliente Originário"/>
-                            <field name="conta_origem_id" string="Conta de Origem" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
-                            <field name="journal_id" string="Diário" domain="[('type', 'in', ('bank', 'cash'))]" attrs="{'readonly':[('forma_pagamento','=','1')]}" force_save="1"/>
+                            <field name="conta_origem_id" string="Conta de Origem" attrs="{'readonly':['|',('forma_pagamento','=','1'),('forma_pagamento','=','3')]}" force_save="1"/>
+                            <field name="journal_id" string="Diário" domain="[('type', 'in', ('bank', 'cash'))]" attrs="{'readonly':['|',('forma_pagamento','=','1'),('forma_pagamento','=','3')]}" force_save="1"/>
                         </group>
                         <group>
                             <field name="banco_destinatario" string="Banco Destinatário"/>
