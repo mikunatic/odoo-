@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cotacao_form_view" model="ir.ui.view">
+        <field name="name">Cotacao</field>
+        <field name="model">cotacao</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="partner_street" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_zip" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_city" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="data_vencimento"/>
+                        <field name="payment_term_id"/>
+                        <field name="product_ids"/>
+                        <field name="product_categ" invisible="True"/>
+                        <field name="template_ids" attrs="{'invisible':[('product_ids','=',False)]}"/>
+                    </group>
+                </group>
+            </form>
+            <footer>
+                <button string="Criar" name="" type="object"/>
+                <button string="Descartar" special="cancel"/>
+            </footer>
+        </field>
+    </record>
+    <record id="cotacao_action" model="ir.actions.act_window">
+        <field name="name">Cotacao</field>
+        <field name="res_model">cotacao</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="cotacao_sub_menu" action="cotacao_action" name="Cotação" parent="sale.sale_order_menu"/>
+</odoo>
