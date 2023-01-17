@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <field name="ref" position="after">
                     <field name="gerproc" attrs="{'invisible':[('gerproc','=',False)]}"/>
+                    <field name="cadastro_cheque" attrs="{'invisible':[('cadastro_cheque','=',False)]}"/>
                     <field name="cheque_pagamento" attrs="{'invisible':[('cheque_pagamento','=',False)]}"/>
                     <field name="lote_id" attrs="{'invisible':[('lote_id','=',False)]}"/>
                 </field>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='criacao_rotas_attr_action' model='ir.actions.act_window'>
+        <field name="name">Criação de Rotas</field>
+        <field name="res_model">routes</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Rotas" id="criacao_rotas_base_menu" web_icon="routes,static/description/icon.png"/>
+    <menuitem name="Rotas" id="Criacao_rotas_menu" parent="criacao_rotas_base_menu"/>
+    <menuitem name="Rotas" id="rotas_menu" parent="Criacao_rotas_menu" action="criacao_rotas_attr_action" />
+
+    <record id='criacao_rotas_view_form' model='ir.ui.view'>
+        <field name='name'>Criacao de Rotas Form</field>
+        <field name="model">routes</field>
+        <field name='arch' type='xml'>
+            <form>
+                <group>
+                    <group>
+                        <field name='nome_rota'/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id='criacao_rotas_view_tree' model='ir.ui.view'>
+        <field name='name'>Criacao de Rotas Tree</field>
+        <field name="model">routes</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='nome_rota'/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -12,3 +12,4 @@ class PaymentInherit(models.Model):
     # cheque = fields.Many2one('cadastro.cheque', string="Cheque")
     cheque_pagamento = fields.Many2one('cadastro.cheque')
     lote_id = fields.Many2one('lote.cheque')
+    cadastro_cheque = fields.Many2one('cadastro.cheque')

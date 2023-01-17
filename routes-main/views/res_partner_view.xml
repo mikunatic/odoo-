@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_routes_partner_view" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page string="Informações Adicionais" name="information_add">
+                    <group>
+                        <field name="name_fantasy" attrs="{'invisible' : [('company_type','!=','company')]}"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="cod_hitec"/>
+                        </group>
+                        <group>
+                            <field name="route_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

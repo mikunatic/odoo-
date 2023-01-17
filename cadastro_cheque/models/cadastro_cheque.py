@@ -105,7 +105,9 @@ class CadastroCheque(models.Model):
                         'message_ids': [],
                         }
         self.env['account.payment'].create(vals_credito_cheque)
+        # search no ultimo cheque
         self.env['account.payment'].create(vals_debito_cheque)
+        # update nos dois ultimos pagamentos com o campo 'cadastro_cheque'
 
         return self.env['ir.actions.act_window']._for_xml_id("cadastro_cheque.cheque_wiz_action") # mostra o wizard que efetua a postagem do pagamento
 

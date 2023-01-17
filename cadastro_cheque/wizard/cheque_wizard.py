@@ -31,8 +31,8 @@ class ChequeWizard(models.TransientModel):
         self.env['project_request'].create(vals_ger_proc) # cria um gerproc com os dados passados na lista acima
         last_gp = self.env['project_request'].search([], order="id asc") # pesquisa os gerprocs e ordena por id ascendente
         gpr = last_gp[-1] # armazena na variavel gpr o último gerproc criado
-        pagamento[-1].update({'gerproc':gpr.id}) # atualiza o campo gerproc, presente no account.payment, com o id do ultimo gerproc, no pagamento e recebimento
-        pagamento[-2].update({'gerproc':gpr.id})
+        pagamento[-1].update({'gerproc':gpr.id, 'cadastro_cheque':description[-1].id}) # atualiza o campo gerproc, presente no account.payment, com o id do ultimo gerproc, no pagamento e recebimento
+        pagamento[-2].update({'gerproc':gpr.id, 'cadastro_cheque':description[-1].id})
         description[-1].update({'gerproc_id':gpr.id})
 
         # Retorna a tree com apenas o gerproc criado

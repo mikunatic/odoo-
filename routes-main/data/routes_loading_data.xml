@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="route_id_1" model="routes">
+            <field name="nome_rota">RETIRA</field>
+        </record>
+        <record id="route_id_2" model="routes">
+            <field name="nome_rota">CAIXA</field>
+        </record>
+        <record id="route_id_3" model="routes">
+            <field name="nome_rota">ROTA SOROCABA</field>
+        </record>
+        <record id="route_id_4" model="routes">
+            <field name="nome_rota">ROTA FRANCA</field>
+        </record>
+        <record id="route_id_5" model="routes">
+            <field name="nome_rota">ROTA ARACATUBA</field>
+        </record>
+        <record id="route_id_6" model="routes">
+            <field name="nome_rota">ROTA MARILIA</field>
+        </record>
+        <record id="route_id_7" model="routes">
+            <field name="nome_rota">ROTA MOCOCA</field>
+        </record>
+        <record id="route_id_8" model="routes">
+            <field name="nome_rota">ROTA GRANDE CAMPINAS/PIRACICABA</field>
+        </record>
+        <record id="route_id_9" model="routes">
+            <field name="nome_rota">ROTA VALE</field>
+        </record>
+        <record id="route_id_10" model="routes">
+            <field name="nome_rota">ROTA CATANDUVA</field>
+        </record>
+        <record id="route_id_11" model="routes">
+            <field name="nome_rota">ROTA PRESIDENTE PRUDENTE</field>
+        </record>
+        <record id="route_id_12" model="routes">
+            <field name="nome_rota">ROTA CAMPINAS</field>
+        </record>
+        <record id="route_id_13" model="routes">
+            <field name="nome_rota">ROTA PIRACICABA</field>
+        </record>
+        <record id="route_id_14" model="routes">
+            <field name="nome_rota">ROTA VALE 2</field>
+        </record>
+        <record id="route_id_15" model="routes">
+            <field name="nome_rota">ROTA SAO PAULO</field>
+        </record>
+    </data>
+</odoo>
