@@ -4,7 +4,7 @@
     'summary': 'Cotação',
     'version': '1.0',
     'description': """Cadastro de Cotações""",
-    'depends': ['product'],
+    'depends': ['product','sale_management'],
     'data': [
         'security/ir.model.access.csv',
         'wizard/cotacao_view.xml',

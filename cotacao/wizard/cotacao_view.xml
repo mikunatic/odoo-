@@ -6,23 +6,26 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <group>
                         <field name="partner_id"/>
                         <field name="partner_street" attrs="{'invisible':[('partner_id','=',False)]}"/>
                         <field name="partner_zip" attrs="{'invisible':[('partner_id','=',False)]}"/>
                         <field name="partner_city" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_route_id" attrs="{'invisible':[('partner_route_id','=',False)]}"/>
                         <field name="data_vencimento"/>
                         <field name="payment_term_id"/>
-                        <field name="product_ids"/>
+                        <field name="desejado_id"/>
+                        <field name="qnt_desejado" invisible="True"/>
+                        <field name="alternativo_ids" invisible="True"/>
+                        <field name="alternativo" attrs="{'invisible':['|',('qnt_desejado','>',0),('desejado_id','=',False)]}"/>
                         <field name="product_categ" invisible="True"/>
-                        <field name="template_ids" attrs="{'invisible':[('product_ids','=',False)]}"/>
-                    </group>
+                        <field name="acessorio_ids" invisible="True"/>
+                        <field name="acessorio" attrs="{'invisible':[('desejado_id','=',False)]}"/>
                 </group>
+                <footer>
+    <!--                <button string="Criar" name="" type="object"/>-->
+    <!--                <button string="Descartar" special="cancel"/>-->
+                </footer>
             </form>
-            <footer>
-                <button string="Criar" name="" type="object"/>
-                <button string="Descartar" special="cancel"/>
-            </footer>
         </field>
     </record>
     <record id="cotacao_action" model="ir.actions.act_window">
