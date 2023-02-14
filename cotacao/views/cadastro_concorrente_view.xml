@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cadastro_concorrente_list_view" model="ir.ui.view">
+        <field name="name">cadastro concorrente</field>
+        <field name="model">cadastro.concorrente</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="concorrente"/>
+            </tree>
+        </field>
+    </record>
+    <record id="cadastro_concorrente_form_view" model="ir.ui.view">
+        <field name="name">cadastro concorrente</field>
+        <field name="model">cadastro.concorrente</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="concorrente"/>
+                        <field name="product_id"/>
+                        <field name="product_price"/>
+                        <field name="preco_concorrente"/>
+<!--                        <button name="criar_concorrente" string="Criar" type="object"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cadastro_concorrente_action" model="ir.actions.act_window">
+        <field name="name">Cadastro Concorrente</field>
+        <field name="res_model">cadastro.concorrente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="concorrente_sub_menu" action="cadastro_concorrente_action" name="Cadastro de Concorrente" parent="sale.sale_order_menu"/>
+</odoo>

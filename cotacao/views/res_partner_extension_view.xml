@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="respartner" model="ir.ui.view">
+        <field name="name">res_partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="cotacoes" invisible="True"/>
+                <field name="concorrente"/>
+                <!--criar concorrente com esse boolean true no one2many do concorrente e active = false,
+                pra não atrapalhar outros models que já usem o res partner-->
+            </field>
+        </field>
+    </record>
+</odoo>

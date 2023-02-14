@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="produtos_cotados_list_view" model="ir.ui.view">
+        <field name="name">Cotação</field>
+        <field name="model">produtos.cotados</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="quantidade_a_levar"/>
+                <field name="product_id"/>
+                <field name="custo"/>
+                <field name="cotacao_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="produtos_cotados_form_view" model="ir.ui.view">
+        <field name="name">Cotação</field>
+        <field name="model">produtos.cotados</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="quantidade_a_levar"/>
+                    <field name="product_id"/>
+                    <field name="custo"/>
+                    <field name="cotacao_id"/>
+                    <field name="valor_total"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="produtos_cotados_action" model="ir.actions.act_window">
+        <field name="name">Cotação</field>
+        <field name="res_model">produtos.cotados</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

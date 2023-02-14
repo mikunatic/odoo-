@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="carrega_acessorio_form_view" model="ir.ui.view">
+        <field name="name">Produto Desejado</field>
+        <field name="model">carrega.acessorio</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="desejado_id" readonly="True" options="{'no_open': True}"/>
+                        <field name="preco_desejado_id"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Acessórios do produto">
+                        <field name="acessorio_ids" invisible="True"/>
+                        <field name="acessorio" string="Produtos Acessórios" options="{'no_create':True,'no_create_edit':True,'no_open':True}"
+                        context="{'tree_view_ref': 'cotacao.product_search_more'}">
+                            <tree editable="True">
+                                <field name="quantidade_a_levar"/>
+                                <field name="name" widget="badge" readonly="True"/>
+                                <field name="standard_price" readonly="True"/>
+                                <field name="product_template_attribute_value_ids" widget="many2many_tags" readonly="True"/>
+                                <field name="qty_available" readonly="True"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Preços de Concorrente">
+                        <group>
+                            <group>
+                                <field name="concorrente_nome"/>
+                            </group>
+                            <group>
+                                <field name="concorrente_valor"/>
+                            </group>
+                            <field name="concorrente">
+                                <tree>
+                                    <field name="concorrente"/>
+                                    <field name="product_id"/>
+                                    <field name="preco_concorrente"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+                <footer>
+                    <button string="Cotar" name="cotar" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="carrega_acessorio_action" model="ir.actions.act_window">
+        <field name="name">Produto Desejado</field>
+        <field name="res_model">carrega.acessorio</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

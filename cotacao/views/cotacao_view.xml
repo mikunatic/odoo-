@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cotacao_form_view" model="ir.ui.view">
+        <field name="name">Cotacao</field>
+        <field name="model">cotacao</field>
+        <field name="arch" type="xml">
+            <form>
+                <script>
+                    document.addEventListener("keydown", function(event) {
+                        if (event.keyCode === 13) {
+                            var button = document.getElementById("botao");
+                            if (button.classList.contains("o_invisible_modifier")) {
+                                console.log("invisivu");
+                            } else {
+                                button.click();
+                            }
+                        }
+                    });
+                </script>
+                <sheet>
+                    <group>
+                        <field name="int" invisible="True"/>
+                        <field name="expirado" invisible="True"/>
+                        <field name="produtos_cotados_invisivel" invisible="True"/>
+                        <field name="xml_id" invisible="True"/>
+                        <field name="data_emissao"/>
+                        <field name="partner_id" attrs="{'readonly':['|',('prod_cot_id','!=',[]),('expirado','=',True)]}"
+                               options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" force_save="1"/>
+                        <field name="partner_street" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_zip" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_city" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                        <field name="partner_route_id" attrs="{'invisible':[('partner_route_id','=',False)]}"/>
+                        <field name="data_vencimento"/>
+                        <label for="desejado_id"/>
+                        <div class="o_row">
+                            <field name="desejado_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"
+                                   context="{'tree_view_ref': 'cotacao.product_search_more'}" attrs="{'readonly':[('expirado','=',True)]}"/>
+                            <div style="max-width:50px">
+                            <field name="quantidade_a_levar" widget="integer" attrs="{'readonly':[('expirado','=',True)]}"/>
+                            </div>
+                            <button id="botao" name="carregaproduto" type="object" string="Mostrar" attrs="{'invisible':[('desejado_id','=',False)]}"/>
+                        </div>
+                        <field name="qnt_desejado" invisible="True"/>
+                    </group>
+                    <notebook>
+                        <page string="Produtos Cotados">
+                            <group>
+                                <field name="prod_cot_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" nolabel="1">
+                                    <tree editable="True">
+                                        <field name="quantidade_a_levar"/>
+                                        <field name="product_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" readonly="True"/>
+                                        <field name="custo" readonly="True"/>
+                                        <field name="qty_available" readonly="True"/>
+                                        <field name="pre_pedido" readonly="True"/>
+                                        <field name="valor_total" readonly="True" sum="Valor da cotação"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Cotações Anteriores">
+                            <group>
+                                <field name="cot_ant" options="{'no_create': True, 'no_create_edit':True}" nolabel="1">
+                                    <tree limit="4">
+                                        <field name="id"/>
+                                        <field name="partner_id"/>
+                                        <field name="prod_cot_id" widget="many2many_tags"/>
+                                        <field name="data_vencimento"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Criar Pré Pedido" name="cria_pre_pedido" type="object" attrs="{'invisible':['|',('prod_cot_id','=',[]),('int','=',10)]}" class="btn btn-primary"/>
+                        <button string="Mostrar Pré Pedido" name="abre_pre_pedido" type="object" attrs="{'invisible':['|',('prod_cot_id','=',[]),('int','!=',10)]}" class="btn btn-primary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cotacao_list_view" model="ir.ui.view">
+        <field name="name">Cotação</field>
+        <field name="model">cotacao</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="cotacao_action" model="ir.actions.act_window">
+        <field name="name">Cotação</field>
+        <field name="res_model">cotacao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+    <menuitem id="cotacao_view_sub_menu" action="cotacao_action" name="Cotação" parent="sale.sale_order_menu"/>
+    <record id="product_search_more" model="ir.ui.view">
+        <field name="name">Product Product Search More</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="product_template_attribute_value_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
