@@ -1,0 +1,42 @@
+<odoo>
+    <record id="justification_action" model="ir.actions.act_window">
+        <field name="name">Justificativa</field>
+        <field name="res_model">justification</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="justification_menu" name="Justificativas" parent="punch_clock_menu" action="justification_action"/>
+
+    <record id="justification_tree_view" model="ir.ui.view">
+        <field name="name">Justificativa</field>
+        <field name="model">justification</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="remoteness_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="justification_form_view" model="ir.ui.view">
+        <field name="name">Justificativa</field>
+        <field name="model">justification</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="remoteness_id" options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="duration" attrs="{'invisible':[('remoteness_id','=',False)]}"/>
+                        </group>
+                        <group>
+                            <field name="first_day"/>
+                            <field name="last_day"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

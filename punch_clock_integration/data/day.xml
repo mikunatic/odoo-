@@ -1,0 +1,27 @@
+<odoo>
+    <data noupdate="1">
+        <record id='day1' model='week.days'>
+            <field name='day'>Domingo</field>
+        </record>
+        <record id='day2' model='week.days'>
+            <field name='day'>Segunda-feira</field>
+        </record>
+        <record id='day3' model='week.days'>
+            <field name='day'>Terça-feira</field>
+        </record>
+        <record id='day4' model='week.days'>
+            <field name='day'>Quarta-feira</field>
+        </record>
+        <record id='day5' model='week.days'>
+            <field name='day'>Quinta-feira</field>
+        </record>
+        <record id='day6' model='week.days'>
+            <field name='day'>Sexta-feira</field>
+        </record>
+        <record id='day7' model='week.days'>
+            <field name='day'>Sábado</field>
+        </record>
+
+
+    </data>
+</odoo>

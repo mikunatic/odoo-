@@ -1,0 +1,57 @@
+<odoo>
+    <record id="punch_clock_action" model="ir.actions.act_window">
+        <field name="name">Relógio de ponto</field>
+        <field name="res_model">punch.clock</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="punch_clock_menu" name="Pontos" web_icon="punch_clock_integration,static/description/icon.png"/>
+    <menuitem id="punch_clock_form_menu" name="Ponto" parent="punch_clock_menu" sequence="1"/>
+    <menuitem id="punch_clock_sub_menu" name="Registro de ponto" parent="punch_clock_form_menu" action="punch_clock_action" sequence="1"/>
+
+    <record id="punch_clock_tree_view" model="ir.ui.view">
+        <field name="name">Relógio de ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="(manual == True)">
+                <field name="employee_id"/>
+                <field name="punch_datetime"/>
+                <field name="employee_pis"/>
+                <field name="manual" invisible="1" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="punch_clock_form_view" model="ir.ui.view">
+        <field name="name">Relógio de ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                <group>
+                    <group>
+                        <field name="employee_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
+                        <field name="punch_datetime"/>
+                    </group>
+                    <group>
+                        <field name="employee_pis"/>
+                        <field name="manual" invisible="1"/>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="punck_clock_search_view" model="ir.ui.view">
+        <field name="name">Filtro de Ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="employee_pis"/>
+            </search>
+        </field>
+    </record>
+</odoo>

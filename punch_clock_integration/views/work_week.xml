@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- View definition for WorkWeek model -->
+        <record id="hour_form_view" model="ir.ui.view">
+            <field name="name">Horas</field>
+            <field name="model">hour</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="time"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

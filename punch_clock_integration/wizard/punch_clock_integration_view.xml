@@ -1,0 +1,29 @@
+<odoo>
+    <record id="punch_clock_integration_action" model="ir.actions.act_window">
+        <field name="name">Relógio de ponto</field>
+        <field name="res_model">punch.clock.integration</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="punch_clock_integration_menu" name="Ler arquivo" parent="punch_clock_form_menu" action="punch_clock_integration_action"/>
+
+    <record id="punch_clock_integration_form" model="ir.ui.view">
+        <field name="name">Relógio de ponto</field>
+        <field name="model">punch.clock.integration</field>
+        <field name="arch" type="xml">
+            <form>
+                <group string="Faça upload do arquivo">
+                    <group>
+<!--                        <field string="Caminho arquivo .afd:" name="afd_file_path"/>-->
+                        <field name="afd_file"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="criar" class="btn btn-primary" string="Ler arquivo"
+                            type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

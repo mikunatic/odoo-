@@ -1,0 +1,35 @@
+<odoo>
+    <record id="hour_action" model="ir.actions.act_window">
+        <field name="name">Horas</field>
+        <field name="res_model">hour</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <menuitem id="remoteness_menu" name="Afastamento" parent="punch_clock_menu" action="remoteness_action"/>-->
+
+    <record id="hour_tree_view" model="ir.ui.view">
+        <field name="name">Horas</field>
+        <field name="model">hour</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hour_form_view" model="ir.ui.view">
+        <field name="name">Horas</field>
+        <field name="model">hour</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="time"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

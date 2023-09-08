@@ -1,0 +1,80 @@
+<odoo>
+    <data noupdate="1">
+        <record id='event1' model='event'>
+            <field name='description'>HE 50%</field>
+            <field name='number'>17</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event2' model='event'>
+            <field name='description'>HE 60%</field>
+            <field name='number'>194</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event3' model='event'>
+            <field name='description'>HE 75%</field>
+            <field name='number'>149</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event4' model='event'>
+            <field name='description'>HE 80%</field>
+            <field name='number'>150</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event5' model='event'>
+            <field name='description'>HE 100%</field>
+            <field name='number'>82</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event6' model='event'>
+            <field name='description'>Adicional Noturno</field>
+            <field name='number'>106</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event7' model='event'>
+            <field name='description'>Falta</field>
+            <field name='number'>39</field>
+            <field name='credit_debit'>debit</field>
+            <field name='measurement_unit'>days</field>
+        </record>
+
+        <record id='event8' model='event'>
+            <field name='description'>Falta DSR</field>
+            <field name='number'>103</field>
+            <field name='credit_debit'>debit</field>
+            <field name='measurement_unit'>days</field>
+        </record>
+
+        <record id='event9' model='event'>
+            <field name='description'>Faltas horas/atraso</field>
+            <field name='number'>104</field>
+            <field name='credit_debit'>debit</field>
+            <field name='measurement_unit'>hours</field>
+        </record>
+
+        <record id='event10' model='event'>
+            <field name='description'>Deslocamento/Transferência</field>
+            <field name='number'>1024</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>days</field>
+        </record>
+
+        <record id='event11' model='event'>
+            <field name='description'>Pernoite</field>
+            <field name='number'>1010</field>
+            <field name='credit_debit'>credit</field>
+            <field name='measurement_unit'>days</field>
+        </record>
+    </data>
+</odoo>

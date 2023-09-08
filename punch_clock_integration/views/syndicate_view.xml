@@ -1,0 +1,43 @@
+<odoo>
+    <record id="syndicate_action" model="ir.actions.act_window">
+        <field name="name">Sindicato</field>
+        <field name="res_model">syndicate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="syndicate_menu" name="Sindicato" parent="punch_clock_menu" action="syndicate_action"/>
+
+    <record id="syndicate_tree_view" model="ir.ui.view">
+        <field name="name">Sindicato</field>
+        <field name="model">syndicate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="syndicate_form_view" model="ir.ui.view">
+        <field name="name">Sindicato</field>
+        <field name="model">syndicate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                            <page string="Eventos">
+                                <field name="events_syndicate_ids">
+                                    <tree editable="1">
+                                        <field name="event_id" decoration-bf="1"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
