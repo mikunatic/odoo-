@@ -10,23 +10,13 @@ class Justification(models.Model):
     duration = fields.Char(related="remoteness_id.duration", string="Duração")
     first_day = fields.Date("Dia inicial", required=True)
     last_day = fields.Date("Dia final", required=True)
+    holidays_ids = fields.Many2many(comodel_name='hr.employee', inverse_name='employee_id',
+                                    string="Funcionários que vão folgar no feriado")
+    holiday_id = fields.Many2one('justification.holidays', string='Feriado')
+    remuneration = fields.Boolean(related='remoteness_id.remuneration', string='Remuneração')
+    manual = fields.Boolean()
 
-    # @api.model
-    # def create(self, vals_list):
-        #iterar no range de dias, e criar UM ponto por dia com o nome da hipótese
-        #e fazer alguma forma para diferenciar essa justificativa do ponto normal
-
-        # days_range = (datetime.datetime.strptime(vals_list['last_day'], "%Y-%m-%d")).date() - (datetime.datetime.strptime(vals_list['first_day'], "%Y-%m-%d")).date()
-        # days_range = days_range.days + 1
-        # i = (datetime.datetime.strptime(vals_list['first_day'], "%Y-%m-%d"))
-        # for day in range(days_range):
-        #     vals = {
-        #         'employee_id':vals_list['employee_id'],
-        #         'punch_datetime': i,
-        #         'employee_pis': self.env['hr.employee'].browse(vals_list['employee_id']).employee_pis,
-        #         'remoteness_point': True,
-        #         'remoteness_description': self.env['remoteness'].browse(vals_list['remoteness_id']).hypothesis,
-        #     }
-        #     i += datetime.timedelta(days=1)
-        #     self.env['punch.clock'].create(vals)
-        # return super(Justification, self).create(vals_list)
+    @api.onchange('holiday_id')
+    def remover_demitidos(self):
+        return {'domain': {
+            'holidays_ids': [('id', 'not in', self.env['hr.employee'].search([('employee_pis', 'ilike', 'd')]).ids)]}}

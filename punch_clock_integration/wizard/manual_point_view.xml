@@ -1,0 +1,16 @@
+<odoo>
+    <record id="manual_point_form_view" model="ir.ui.view">
+        <field name="name">Ponto Manual</field>
+        <field name="model">manual.point</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="hour" placeholder="00:00" required="1"/>
+                </group>
+                <footer>
+                    <button name="confirm" type="object" string="Adicionar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

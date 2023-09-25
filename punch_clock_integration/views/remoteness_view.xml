@@ -15,6 +15,7 @@
                 <field name="hypothesis"/>
                 <field name="duration"/>
                 <field name="foundation"/>
+                <field name="remuneration"/>
             </tree>
         </field>
     </record>
@@ -30,6 +31,7 @@
                             <field name="hypothesis"/>
                             <field name="duration"/>
                             <field name="foundation"/>
+                            <field name="remuneration"/>
                         </group>
                         <group>
                         </group>

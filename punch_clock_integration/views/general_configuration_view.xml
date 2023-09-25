@@ -1,0 +1,47 @@
+<odoo>
+    <record id="general_configuration_action" model="ir.actions.act_window">
+        <field name="name">Configuração Geral</field>
+        <field name="res_model">general.configuration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="general_configuration_menu" name="Configuração Geral" parent="punch_clock_menu" action="general_configuration_action"/>
+    <data>
+
+        <record id="general_configuration_list_view" model="ir.ui.view">
+            <field name="name">Configuração Geral</field>
+            <field name="model">general.configuration</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nighttime_supplement"/>
+                    <field name="intraday"/>
+                    <field name="interjouney"/>
+                    <field name="arrears_tolerance"/>
+                    <field name="virtual_time_validity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="general_configuration_form_view" model="ir.ui.view">
+            <field name="name">Configuração Geral</field>
+            <field name="model">general.configuration</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="nighttime_supplement"/>
+                                <field name="intraday"/>
+                            </group>
+                            <group>
+                                <field name="interjouney"/>
+                                <field name="arrears_tolerance"/>
+                                <field name="virtual_time_validity"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

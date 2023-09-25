@@ -1,0 +1,79 @@
+<odoo>
+    <data noupdate="1">
+         <record id='holiday1' model='justification.holidays'>
+            <field name='data'>01/01</field>
+            <field name='event'>Dia da Confraternização Universal e da Paz</field>
+        </record>
+
+         <record id='holiday2' model='justification.holidays'>
+            <field name='data'>01/01</field>
+            <field name='event'>Carnaval</field>
+        </record>
+
+         <record id='holiday3' model='justification.holidays'>
+            <field name='data'>22/02</field>
+            <field name='event'>Cinzas</field>
+        </record>
+
+         <record id='holiday4' model='justification.holidays'>
+            <field name='data'>07/04</field>
+            <field name='event'>Paixão de Cristo</field>
+        </record>
+
+         <record id='holiday5' model='justification.holidays'>
+            <field name='data'>21/04</field>
+            <field name='event'>Tiradentes</field>
+        </record>
+
+         <record id='holiday6' model='justification.holidays'>
+            <field name='data'>01/05</field>
+            <field name='event'>Dia do Trabalho</field>
+        </record>
+
+         <record id='holiday7' model='justification.holidays'>
+            <field name='data'>08/06</field>
+            <field name='event'>Corpus Christi</field>
+        </record>
+
+         <record id='holiday8' model='justification.holidays'>
+            <field name='data'>09/07</field>
+            <field name='event'>Data Magna do Estado de São Paulo</field>
+        </record>
+
+         <record id='holiday9' model='justification.holidays'>
+            <field name='data'>26/07</field>
+            <field name='event'>N. S. de Sant'Ana - Padroeira da Cidade</field>
+        </record>
+
+         <record id='holiday10' model='justification.holidays'>
+            <field name='data'>01/09</field>
+            <field name='event'>Aniversário da Cidade</field>
+        </record>
+
+         <record id='holiday11' model='justification.holidays'>
+            <field name='data'>07/09</field>
+            <field name='event'>Independência</field>
+        </record>
+
+         <record id='holiday12' model='justification.holidays'>
+            <field name='data'>12/10</field>
+            <field name='event'>Nossa Senhora Aparecida</field>
+        </record>
+
+         <record id='holiday13' model='justification.holidays'>
+            <field name='data'>02/11</field>
+            <field name='event'>Finados</field>
+        </record>
+
+         <record id='holiday14' model='justification.holidays'>
+            <field name='data'>15/11</field>
+            <field name='event'>Proclamação da República</field>
+        </record>
+
+         <record id='holiday15' model='justification.holidays'>
+            <field name='data'>25/12</field>
+            <field name='event'>Natal</field>
+        </record>
+        
+    </data>
+</odoo>

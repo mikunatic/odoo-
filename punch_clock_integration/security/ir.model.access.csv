@@ -16,3 +16,7 @@ week_days,week_days,model_week_days,base.group_user,1,1,1,1
 hour,hour,model_hour,base.group_user,1,1,1,1
 manual_point,manual_point,model_manual_point,base.group_user,1,1,1,1
 justifications,justifications,model_justification,base.group_user,1,1,1,1
+intraday,intraday,model_intraday,base.group_user,1,1,1,1
+general_configuration,general_configuration,model_general_configuration,base.group_user,1,1,1,1
+justification_holidays,justification_holidays,model_justification_holidays,base.group_user,1,1,1,1
+add_justification,add_justification,model_add_justification,base.group_user,1,1,1,1

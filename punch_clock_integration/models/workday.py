@@ -7,6 +7,7 @@ class Workday(models.Model):
     hour_ids = fields.Many2many('hour', string="Horas a trabalhar")
     week_days_id = fields.Many2one('week.days', string="Dias da semana")
     employee_id = fields.Many2one('hr.employee')
+    intraday = fields.Boolean("Intrajornada")
 
     # saturday = fields.Selection([('weekly','Semanal'),('fortnightly','Quinzenal'),('monthly','Mensal'),('never','Nunca')], string="Sábado")
 

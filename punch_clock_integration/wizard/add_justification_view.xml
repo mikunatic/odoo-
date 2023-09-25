@@ -1,0 +1,21 @@
+<odoo>
+    <record id="add_justification_form_view" model="ir.ui.view">
+        <field name="name">Adicionar Justificativa</field>
+        <field name="model">add.justification</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="employee_id" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
+                    <field name="remoteness_id" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
+                    <field name="duration"/>
+                    <field name="first_day"/>
+                    <field name="last_day"/>
+                    <field name="remuneration"/>
+                </group>
+                <footer>
+                    <button name="confirm" type="object" string="Adicionar" class="btn btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

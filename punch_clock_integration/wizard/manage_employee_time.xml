@@ -19,11 +19,6 @@
                 <group>
                     <group>
                         <field name="filter" required="1"/>
-                        <field name="monthly_hours" attrs="{'invisible':[('attrs_bool','=',False)]}" />
-                        <field name="ideal_hours" attrs="{'invisible':[('attrs_bool','=',False)]}" readonly="1"/>
-                        <field name="debtor_hour" attrs="{'invisible':[('attrs_bool','=',False)]}" readonly="1"/>
-                    </group>
-                    <group>
                         <field name="day_to_search" attrs="{'invisible':['|',('filter','=',False),('filter','=','month')]}"/>
                         <field name="last_day" attrs="{'invisible':['|','|',('filter','=','day'),('filter','=','month'),('filter','=',False)]}"/>
                         <field name="employee_id" attrs="{'invisible':['|','|',('filter','=','range'),('filter','=','day'),('filter','=',False)],'required':[('filter','=','month')]}"
@@ -31,25 +26,31 @@
                         <field name="month" attrs="{'invisible':[('filter','!=','month')],'required':[('filter','=','month')]}"/>
                         <field name="year" attrs="{'invisible':[('filter','!=','month')],'required':[('filter','=','month')]}"/>
                         <field name="attrs_bool" invisible="1"/>
-
+                    </group>
+                    <group>
+                        <field name="ideal_hours" attrs="{'invisible':[('attrs_bool','=',False)]}" readonly="1"/>
+                        <field name="monthly_hours" attrs="{'invisible':['|',('attrs_bool','=',False),('filter','!=','month')]}" />
+                        <field name="debtor_hour" attrs="{'invisible':[('attrs_bool','=',False)]}" readonly="1"/>
+                        <field name="extra_hour" attrs="{'invisible':[('attrs_bool','=',False)]}" readonly="1"/>
                     </group>
                 </group>
                 <group>
                     <field name="punch_time_ids" readonly="1" attrs="{'invisible':[('punch_time_ids','=',[])]}" nolabel="1">
-                        <tree>
-                            <field name="employee_id" />
-                            <field name="date" attrs="{'column_invisible': [('parent.filter', '=', 'day')]}" />
-                            <field name="punch_clock_ids" widget="many2many_tags"/>
+                        <tree decoration-warning="(divergent_punchs == True)">
+                            <field name="employee_id" attrs="{'column_invisible': [('parent.filter', '=', 'month')]}"/>
+                            <field name="date" attrs="{'column_invisible': [('parent.filter', '=', 'day')]}"/>
+                            <field name="punch_clock_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="daily_hours"/>
                             <field name="week_day" widget="badge"/>
-                            <field name="justification_id"/>
+                            <field name="remoteness_id"/>
+                            <field name="divergent_punchs" invisible="1"/>
+                            <button name="add_punch" type="object" string="Adc. Ponto Manual"/>
                         </tree>
                     </field>
                 </group>
                 <footer>
                     <button name="search_employee_punch" class="btn btn-primary" string="Pesquisar"
-                        type="object" attrs="{'invisible':[('filter','=', 'week')]}"/>
-                    <button name="search_employee_wrong_time" class="btn btn-primary" string="Pesquisar"
-                            type="object" attrs="{'invisible':[('filter','!=', 'week')]}"/>
+                        type="object"/>
                 </footer>
             </form>
         </field>

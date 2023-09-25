@@ -26,9 +26,18 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="employee_id" options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
-                            <field name="remoteness_id" options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="employee_id"
+                                   attrs="{'invisible':[('remoteness_id', '=', 3)]}"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="remoteness_id"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="remuneration"/>
+                            <field name="holiday_id" attrs="{'invisible': [('remoteness_id', '!=', 3)]}"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
                             <field name="duration" attrs="{'invisible':[('remoteness_id','=',False)]}"/>
+                            <field name="holidays_ids" attrs="{'invisible': [('holiday_id', '=', False)]}"
+                                   widget="many2many_tags"/>
+
                         </group>
                         <group>
                             <field name="first_day"/>

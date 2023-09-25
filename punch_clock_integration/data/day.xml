@@ -21,7 +21,5 @@
         <record id='day7' model='week.days'>
             <field name='day'>Sábado</field>
         </record>
-
-
     </data>
 </odoo>

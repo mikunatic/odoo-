@@ -12,3 +12,6 @@ from . import events_syndicate
 from . import employee_remoteness
 from . import week_days
 from . import justification
+from . import intraday
+from . import general_configuration
+from . import justification_holidays

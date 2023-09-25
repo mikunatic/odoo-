@@ -66,12 +66,6 @@ class PunchClockIntegration(models.TransientModel):
             else:
                 employee_pis = str(line[23:])
 
-            # if employee_pis not in self.env['hr.employee'].search([]).mapped('employee_pis'):
-            #     self.env['hr.employee'].create({
-            #         'name': employee_name if employee_name else '/',
-            #         'employee_pis': employee_pis
-            #     })
-
             employee_id = self.env['hr.employee'].search([('employee_pis','=',employee_pis)]).id
             vals = {
                 'punch_id': punch_id,
@@ -81,6 +75,11 @@ class PunchClockIntegration(models.TransientModel):
             }
             list.append(vals)
         punch_ids = self.env['punch.clock'].create(list)
+
+        #atribuição de valores do campo de horas virtuais provavelmente estará presente nessa parte do código
+        #deve ser atribuído quantos segundos bonus ele tem, no campo virtual_seconds do hr employee
+
+
         return {
             "type": "ir.actions.act_window",
             "name": _("Relógio de ponto"),

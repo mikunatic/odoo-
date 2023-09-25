@@ -1,4 +1,4 @@
-from odoo import models, fields, _
+from odoo import models, fields, _, api
 import datetime
 from odoo.exceptions import Warning, UserError
 from dateutil.relativedelta import relativedelta
@@ -10,8 +10,7 @@ class ManageEmployeeTime(models.TransientModel):
     filter = fields.Selection([('range','Intervalo de Dias'),
                                ('day','Dia'),
                                ('month','Consulta Mensal'),
-                               ('week', 'Intervalo de semana'),
-                               # ('week_range', 'Consulta semanal')
+                               ('week', 'Divergências de horários de funcionário'),
                                 ], string="Opções de Pesquisa")
     punch_time_ids = fields.One2many('punch.time', 'manage_employee_time_id', string="Horarios")
     day_to_search = fields.Date(string="Dia a pesquisar")
@@ -31,12 +30,73 @@ class ManageEmployeeTime(models.TransientModel):
                               ],string="Mês")
     year = fields.Integer("Ano")
     employee_id = fields.Many2one('hr.employee', string="Funcionário")
-    monthly_hours = fields.Char(readonly=True, string="Horas Trabalhadas")
+    monthly_hours = fields.Char(readonly=True, string="Horas Trabalhadas", compute="_compute_monthly_hours")
     expected_hours = fields.Char(readonly=True)
     attrs_bool = fields.Boolean()
-    ideal_hours = fields.Integer("Horas Ideais")
+    ideal_hours = fields.Char("Horas Ideais", compute="_compute_ideal_hours")
     extra_hour = fields.Char("Horas Excedentes", readonly=True)
     debtor_hour = fields.Char("Horas Devedoras", readonly=True)
+
+    def _compute_ideal_hours(self):
+        ideal_seconds = 0
+        for day in self.punch_time_ids:
+            allowed_intraday = self.env['workday'].search(
+                [('week_days_id.day', '=', day.week_day), ('employee_id', '=', self.employee_id.id)]).intraday
+
+            # Cálculo em segundos das horas ideais do funcionário
+            if day.should_work:
+                if allowed_intraday:
+                    # Cálculo em segundos do tempo de intrajornada do funcionário
+                    intraday_id = self.env['hr.employee'].browse(self.employee_id.id).mapped('intraday')
+                    multiplier = 1 if intraday_id.hour_minute_selection == 'minute' else 60
+                    intraday_seconds = (intraday_id.value * multiplier) * 60
+                    workday_seconds = self.calculate_seconds(day.week_day)
+
+                    ideal_seconds += (workday_seconds) - intraday_seconds
+                else:
+                    ideal_seconds += self.calculate_seconds(day.week_day)
+
+        #Atribuição de valores para os campos de horas trabalhadas e as horas ideais do funcionário
+        self.ideal_hours = str(ideal_seconds // 3600) + ":" + str((ideal_seconds % 3600) // 60)
+
+    def _compute_monthly_hours(self):
+        seconds_diference = 0
+        for day in self.punch_time_ids:
+            allowed_intraday = self.env['workday'].search(
+                [('week_days_id.day', '=', day.week_day), ('employee_id', '=', self.employee_id.id)]).intraday
+
+            # Cálculo que armazena na variável seconds_diference quantas horas, em segundos, que o funcionário trabalhou
+            first = day.punch_clock_ids[0].punch_datetime if day.punch_clock_ids else 0
+            last = day.punch_clock_ids[-1].punch_datetime if day.punch_clock_ids else 0
+            diference = (last) - (first)
+            seconds_diference += diference.seconds if day.punch_clock_ids else 0
+            if len(day.punch_clock_ids.ids) >= 4:
+                intraday = day.punch_clock_ids[2].punch_datetime - day.punch_clock_ids[1].punch_datetime
+                seconds_diference -= intraday.seconds
+
+            # Se o afastamento for remunerado, o funcionário recebe de volta as horas
+            if day.remoteness_id and day.remoteness_id.remuneration:# Adiciona as horas trabalhadas caso a falta seja remunerada
+                if allowed_intraday:
+                    compensed_seconds = self.calculate_seconds(day.week_day)
+                    intraday_id = self.env['hr.employee'].browse(self.employee_id.id).mapped('intraday')
+                    multiplier = 1 if intraday_id.hour_minute_selection == 'minute' else 60
+                    intraday_seconds = (intraday_id.value * multiplier) * 60
+                    seconds_diference += (compensed_seconds) - intraday_seconds
+                else:
+                    seconds_diference += self.calculate_seconds(day.week_day)
+
+        # Cálculo de horas trabalhadas
+        horas = seconds_diference // 3600
+        minutos = (seconds_diference % 3600) // 60
+        self.monthly_hours = str(horas) + ":" + str(minutos)
+
+        # Cálculo de horas extras ou devedoras
+        ideal_hours, ideal_minutes = map(int,self.ideal_hours.split(':'))
+        ideal_seconds = (ideal_hours * 3600) + (ideal_minutes * 60)
+        debtor_hours = ideal_seconds - seconds_diference
+        extra_hours = seconds_diference - ideal_seconds
+        self.debtor_hour = str(debtor_hours // 3600) + ":" + str((debtor_hours % 3600) // 60) if ideal_seconds > seconds_diference else 0
+        self.extra_hour = str(extra_hours // 3600) + ":" + str((extra_hours % 3600) // 60) if ideal_seconds < seconds_diference else 0
 
     def search_employee_punch(self):
         if self.punch_time_ids:
@@ -88,55 +148,60 @@ class ManageEmployeeTime(models.TransientModel):
                     }
                     self.env['punch.time'].create(vals)
             elif self.filter == 'month':
-                #calcular horas devedoras!
-                #testar colocar falta abonada e nao justificada e calcular certinho
-                #interessante mostrar cada um por dia
-
-                #cálculo do intervalo de dias e contador de dia
+                #Cálculo do intervalo de dias e contador de dia
                 days_range = data_final - data_inicial
                 days_range = days_range.days + 1
                 i = data_inicial.date()
-                seconds_diference = 0
 
                 #Lista que contém os dias que o funcionário trabalha
                 work_days = self.employee_id.workday_ids.week_days_id.mapped('day')
 
-                for index,day in enumerate(range(days_range)):
-                    week_day = i.strftime('%A').capitalize()
-                    employee_punch_ids = punch_ids.filtered(lambda lm: lm.punch_datetime.date() == i)
-                    first = employee_punch_ids[0].punch_datetime if employee_punch_ids else 0
-                    last = employee_punch_ids[-1].punch_datetime if employee_punch_ids else 0
-                    diference = (last)-(first)
-                    seconds_diference += diference.seconds if employee_punch_ids else 0
-                    if len(employee_punch_ids.ids) >= 4:
-                        intraday = employee_punch_ids[2].punch_datetime - employee_punch_ids[1].punch_datetime
-                        seconds_diference -= intraday.seconds
+                for day in range(days_range):
+                    week_day = i.strftime('%A').capitalize()# Variável que armazena o dia da semana
+                    allowed_intraday = self.env['workday'].search(
+                        [('week_days_id.day', '=', week_day), ('employee_id', '=', self.employee_id.id)]).intraday
+                    remoteness_id = self.env['remoteness']
+                    employee_punch_ids = punch_ids.filtered(lambda lm: lm.punch_datetime.date() == i)# Pontos do dia iterado do funcionário
+                    should_work = True if week_day in work_days else False
+
+                    #Validação da justificativa adequada
+                    #erro no search
+                    justification_id = self.env['justification'].search([
+                        ('first_day','<=',i),('last_day','>=',i),('employee_id','=',self.employee_id.id)])
+                    if not employee_punch_ids and should_work and not justification_id:
+                        remoteness_id = self.env['remoteness'].browse(26)
+                    if justification_id:
+                        remoteness_id = justification_id.remoteness_id
+
+                    #Verificação se os pontos estão diferentes do esperado
+                    if should_work and allowed_intraday and not remoteness_id:
+                        if len(employee_punch_ids) != 4:
+                            divergent_punchs = True
+                        else:
+                            divergent_punchs = False
+                    elif should_work and not allowed_intraday and not remoteness_id:
+                        if len(employee_punch_ids) != 2:
+                            divergent_punchs = True
+                        else:
+                            divergent_punchs = False
+                    else:
+                        divergent_punchs = False
+
+                    #Criação da tabela da pesquisa
                     vals = {
                         'manage_employee_time_id': self.id,
                         'employee_id': self.employee_id.id,
                         'punch_clock_ids': employee_punch_ids.ids,
                         'date': i,
                         'week_day': week_day,
-                        'should_work': True if week_day in work_days else False,
+                        'should_work': should_work,
+                        'remoteness_id': remoteness_id.id if remoteness_id else False,
+                        'justification_id': justification_id.id,
+                        'divergent_punchs': divergent_punchs,
                     }
-                    if week_day in work_days:
-                        if work_days == "Sábado":
-                            self.ideal_hours += 4
-                        else:
-                            self.ideal_hours += 8
                     i += datetime.timedelta(days=1)
                     self.env['punch.time'].create(vals)
-                    if index == days_range - 1:
-                        horas = seconds_diference // 3600
-                        minutos = (seconds_diference % 3600) // 60
-                        self.monthly_hours = str(horas) + ":" + str(minutos)
 
-                worked_hour, worked_minute = map(int, self.monthly_hours.split(':'))
-                worked_seconds = (worked_hour * 3600 + worked_minute * 60)
-                debtor_hours = (self.ideal_hours * 3600) - worked_seconds
-                extra_hours = worked_seconds - (self.ideal_hours * 3600)
-                self.debtor_hour = str(debtor_hours // 3600) + ":" + str((debtor_hours % 3600) // 60) if (self.ideal_hours*3600) > worked_seconds else 0
-                self.extra_hour = str(extra_hours // 3600) + ":" + str((extra_hours % 3600) // 60) if (self.ideal_hours*3600) < worked_seconds else 0
                 ctx.update({
                     'default_attrs_bool': True,
                     'default_monthly_hours': self.monthly_hours,
@@ -144,64 +209,75 @@ class ManageEmployeeTime(models.TransientModel):
                     'default_debtor_hour': self.debtor_hour,
                     'default_extra_hour': self.extra_hour,
                 })
-            else:
-                first_work_day = self.day_to_search.strftime('%A').upper()
-                last_work_day = self.last_day.strftime('%A').upper()
-                # fazer um campo que mostra se o funcionario trabalhou mais ou menos das horas necessárias do mes
-                # pra cada dia, se o funcionário for trabalhar nesse dia, adicionar horas q ele deve trabalhar nesse dia
                 # calcular adicional noturno se for permitido no sindicato do funcionario
-                # calcular he se nao tiver devedora, se nao, só subtrai do saldo de horas
                 # relevar atrasos e horas extras se forem dentro do range de 10 minutos
                 # calcular falta por semana, se ele vai perder o dsr
 
-                # FAZER COMPARAÇÃO COM O PRIMEIRO E O ULTIMO DIA DE TRABALHO DO FUNCIONARIO
-                # if first_work_day != self.env['week.days'].browse(self.employee_id.week_days_ids[0].id).day.upper() \
-                #         or last_work_day != self.env['week.days'].browse(self.employee_id.week_days_ids[-1].id).day.upper():
-                #     raise UserError(_("Selecione uma segunda-feira e uma sexta-feira respectivamente."))
-                days_range = self.last_day - self.day_to_search
-                days_range = days_range.days + 1
-                i = self.day_to_search
-                seconds_diference = 0
-                for index, day in enumerate(range(days_range)): #Pontos referentes ao funcionario e a data seguem abaixo
-                    week_day = i.strftime('%A').capitalize()
-                    employee_punch_ids = punch_ids.filtered(
-                        lambda lm: lm.employee_pis == self.employee_id.employee_pis and lm.punch_datetime.date() == i)
+            elif self.filter == 'week':
+                if self.filter == 'week':
+                    days_range = self.last_day - self.day_to_search
+                    days_range = days_range.days + 1
+                    i = self.day_to_search
+                    justification = self.env['justification'].search(
+                        ['&', '|', ('employee_id', '=', self.employee_id.id), ('first_day', '>=', self.day_to_search),
+                         ('last_day', '<=', self.last_day)])
+                    for day in range(days_range):
+                        week_day = i.strftime('%A').capitalize()
+                        employee_punch_ids = punch_ids.filtered(
+                            lambda lm: lm.punch_datetime.date() == i)
+                        justification_id = justification.filtered(
+                            lambda lm: lm.first_day <= i <= lm.last_day) or False
+                        if len(employee_punch_ids) / 4 != 0 and len(employee_punch_ids) != 0:
+                            convert_entrance_hour = self.employee_id.workday_ids.filtered(
+                                lambda lm: lm.week_days_id.day.capitalize() == week_day).mapped('hour_ids')[0].time
+                            convert_exit_hour = self.employee_id.workday_ids.filtered(
+                                lambda lm: lm.week_days_id.day.capitalize() == week_day).mapped('hour_ids')[-1].time
+                            fh = (datetime.datetime.strptime(convert_entrance_hour, "%H:%M") + datetime.timedelta(
+                                hours=0)).time()
+                            lh = (datetime.datetime.strptime(convert_exit_hour, "%H:%M") + datetime.timedelta(
+                                hours=0)).time()
+                            zero_time = datetime.datetime(1, 1, 1, 0, 0, 0).time()
+                            entrada_negativa = (
+                                    employee_punch_ids[0].punch_datetime - datetime.timedelta(minutes=10)).time()
+                            entrada_positiva = (
+                                    employee_punch_ids[0].punch_datetime + datetime.timedelta(minutes=10)).time()
+                            saida_negativa = (employee_punch_ids[3].punch_datetime + datetime.timedelta(
+                                minutes=10)).time() if len(employee_punch_ids) == 4 else zero_time
+                            saida_positiva = (employee_punch_ids[3].punch_datetime - datetime.timedelta(
+                                minutes=10)).time() if len(employee_punch_ids) == 4 else zero_time
+                            intraday = self.employee_id.workday_ids.filtered(lambda lm: lm.intraday == False)
+                            if entrada_positiva < fh or entrada_negativa > fh or saida_positiva > lh or saida_negativa < lh or len(
+                                    employee_punch_ids) != 4:
+                                not_work_day = intraday.week_days_id
+                                not_work_day = not_work_day.mapped('day')
+                                if week_day in not_work_day:
+                                    i += datetime.timedelta(days=1)
+                                    continue
+                                else:
+                                    vals = {
+                                        'manage_employee_time_id': self.id,
+                                        'employee_id': self.employee_id.id,
+                                        'punch_clock_ids': employee_punch_ids.ids,
+                                        'date': i,
+                                        'week_day': week_day,
+                                        'employee_pis': self.employee_id.employee_pis,
+                                        'justification_id': justification_id.remoteness_id.hypothesis if justification_id else False,
 
-                    #Cálculo de horas trabalhadas
-                    first = employee_punch_ids[0].punch_datetime if employee_punch_ids else 0
-                    last = employee_punch_ids[-1].punch_datetime if employee_punch_ids else 0
-                    diference = (last) - (first)
-                    seconds_diference += diference.seconds if employee_punch_ids else 0
-                    if len(employee_punch_ids.ids) >= 4:
-                        intraday = employee_punch_ids[2].punch_datetime - employee_punch_ids[1].punch_datetime
-                        seconds_diference -= intraday.seconds
-
-                    vals = {
-                        'manage_employee_time_id': self.id,
-                        'employee_id': self.employee_id.id,
-                        'punch_clock_ids': employee_punch_ids.ids,
-                        'date': i,
-                        'employee_pis': self.employee_id.employee_pis,
-                        'week_day': week_day,
-                    }
-                    i += datetime.timedelta(days=1)
-                    self.env['punch.time'].create(vals)
-                    #horas devedoras também
-                    #arranjar maneira de mostrar as horas devedoras
-                    if index == days_range - 1:
-                        subtraction = 44 if len(self.employee_id.workday_ids) == 6 else 40
-                        horas = seconds_diference // 3600
-                        he = (seconds_diference // 3600) - subtraction
-                        # dh =
-                        minutos = (seconds_diference % 3600) // 60
-                        self.monthly_hours = str(horas) + ":" + str(minutos)
-
-                        self.extra_hour = str(he) + ":" + str(minutos) if horas >= subtraction else str(0)
-                ctx.update({
-                    'default_attrs_bool': True,
-                    'default_monthly_hours': self.monthly_hours,
-                    'default_extra_hour': self.extra_hour,
-                })
+                                    }
+                                    self.env['punch.time'].create(vals)
+                        elif justification_id:
+                            vals = {
+                                'manage_employee_time_id': self.id,
+                                'employee_id': self.employee_id.id,
+                                'punch_clock_ids': False,
+                                'date': i,
+                                'week_day': week_day,
+                                'employee_pis': self.employee_id.employee_pis,
+                                'justification_id': justification_id.remoteness_id.hypothesis,
+                            }
+                            self.env['punch.time'].create(vals)
+                        i += datetime.timedelta(days=1)
+            # ctx = dict()
             ctx.update({
                 'default_day_to_search': self.day_to_search,
                 'default_employee_id': self.employee_id.id,
@@ -222,61 +298,15 @@ class ManageEmployeeTime(models.TransientModel):
                 'target': 'new'
             }
 
-    def search_employee_wrong_time(self):
-        if self.punch_time_ids:
-            self.punch_time_ids.unlink()
-        domain = []
-        if self.filter == 'week':
-            domain.append(('punch_datetime', '>=', self.day_to_search))
-            domain.append(('punch_datetime', '<=', self.last_day))
-            domain.append(('employee_id', '=', self.employee_id.id))
+    def calculate_seconds(self, week_day):
+        # Armazena a hora de entrada e saída do dia do funcionário
+        hour_ids = self.env['workday'].search([
+            ('week_days_id.day', '=', week_day),('employee_id','=',self.employee_id.id)]).mapped('hour_ids')
 
-        punch_ids = self.env['punch.clock'].search(domain)
-        if not punch_ids:
-            raise Warning(_("Não há resultados para essa pesquisa."))
-        else:
-            if self.filter == 'week':
-                days_range = self.last_day - self.day_to_search
-                days_range = days_range.days + 1
-                i = self.day_to_search
-                week_day = i.strftime('%A').upper()
-                for day in range(days_range):
-                    employee_punch_ids = punch_ids.filtered(
-                        lambda lm: lm.punch_datetime.date() == i)
-                    if len(employee_punch_ids) / 4 != 0 and len(employee_punch_ids) != 0:
-                        a = self.employee_id.workday_ids.filtered(lambda lm:lm.week_days_id.day.upper() == week_day).mapped('hour_ids')[0].time
-                        b = self.employee_id.workday_ids.filtered(lambda lm:lm.week_days_id.day.upper() == week_day).mapped('hour_ids')[-1].time
-                        fh = (datetime.datetime.strptime(a, "%H:%M")  - datetime.timedelta(hours=3)).time()
-                        lh = (datetime.datetime.strptime(b, "%H:%M") - datetime.timedelta(hours=3)).time()
-                        entrada_negativa = (employee_punch_ids[0].punch_datetime - datetime.timedelta(minutes=10)).time()
-                        entrada_positiva = (employee_punch_ids[0].punch_datetime + datetime.timedelta(minutes=10)).time()
-                        saida_negativa = (employee_punch_ids[3].punch_datetime + datetime.timedelta(minutes=10)).time() if len(employee_punch_ids) == 4 else 0
-                        saida_positiva = (employee_punch_ids[3].punch_datetime - datetime.timedelta(minutes=10)).time() if len(employee_punch_ids) == 4 else 0
-                        if entrada_positiva < fh or entrada_negativa > fh or saida_positiva > lh or saida_negativa < lh:
-                            vals = {
-                                'manage_employee_time_id': self.id,
-                                'employee_id': self.employee_id.id,
-                                'punch_clock_ids': employee_punch_ids.ids,
-                                'date': i,
-                                'employee_pis': self.employee_id.employee_pis,
-                            }
-                            self.env['punch.time'].create(vals)
-                    i += datetime.timedelta(days=1)
-                ctx = dict()
-                ctx.update({
-                    'default_day_to_search': self.day_to_search,
-                    'default_last_day': self.last_day,
-                    'default_employee_id': self.employee_id.id,
-                    'default_punch_time_ids': self.punch_time_ids.ids,
-                    'default_filter': self.filter,
-                })
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'Pesquisa de ponto',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'manage.employee.time',
-                'views': [[self.env.ref("punch_clock_integration.manage_employee_time_form").id, 'form']],
-                'context': ctx,
-                'target': 'new'
-            }
+        # Transforma as horas em segundos para facilidade no cálculo
+        first_hour, first_minute = map(int, hour_ids[0].time.split(':'))
+        first_seconds = first_hour * 3600 + first_minute * 60
+        last_hour, last_minute = map(int, hour_ids[-1].time.split(':'))
+        last_seconds = last_hour * 3600 + last_minute * 60
+        result = last_seconds - first_seconds
+        return result
