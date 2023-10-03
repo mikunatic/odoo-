@@ -1,0 +1,211 @@
+<odoo>
+    <data>
+        <record id="hr_employee_1" model="hr.employee"><field name="employee_pis">d12980592813</field><field name="name">ANDRE ALVARO MARIN</field></record>
+        <record id="hr_employee_2" model="hr.employee"><field name="employee_pis">12335345666</field><field name="name">CLAUDIA DUARTE DE ANDRADE</field></record>
+        <record id="hr_employee_3" model="hr.employee"><field name="employee_pis">d20487995265</field><field name="name">VIVIANE DE MORAES QUINTO</field></record>
+        <record id="hr_employee_4" model="hr.employee"><field name="employee_pis">d20436833047</field><field name="name">MARCELO BARBOSA DOS SANTOS</field></record>
+        <record id="hr_employee_5" model="hr.employee"><field name="employee_pis">d12546585438</field><field name="name">ALEX RODRIGO SILVA</field></record>
+        <record id="hr_employee_6" model="hr.employee"><field name="employee_pis">d16412322265</field><field name="name">CRISTINA RODRIGUES DOS SANTOS</field></record>
+        <record id="hr_employee_7" model="hr.employee"><field name="employee_pis">13144256934</field><field name="name">ALEXANDRE APARECIDO DE NOVAES</field></record>
+        <record id="hr_employee_8" model="hr.employee"><field name="employee_pis">20216220682</field><field name="name">ALEXSANDER DA CRUZ TOLEDO</field></record>
+        <record id="hr_employee_9" model="hr.employee"><field name="employee_pis">20114827014</field><field name="name">CARLOS FELIPE NOGUEIRA GONCALVES CARNEIRO</field></record>
+        <record id="hr_employee_10" model="hr.employee"><field name="employee_pis">d20104282139</field><field name="name">CRISTIANO JESUS PEDROSO</field></record>
+        <record id="hr_employee_11" model="hr.employee"><field name="employee_pis">12798569852</field><field name="name">DANIEL CARDOSO DE OLIVEIRA</field></record>
+        <record id="hr_employee_12" model="hr.employee"><field name="employee_pis">20492730878</field><field name="name">DANILLO CAMPOS DE CARVALHO</field></record>
+        <record id="hr_employee_13" model="hr.employee"><field name="employee_pis">d13475607939</field><field name="name">DOUGLAS JOSE DOS SANTOS</field></record>
+        <record id="hr_employee_14" model="hr.employee"><field name="employee_pis">13046276930</field><field name="name">FABIO TERRA THOMAZ</field></record>
+        <record id="hr_employee_15" model="hr.employee"><field name="employee_pis">13276960892</field><field name="name">JOAO ROBERTO NOGUEIRA DO CARMO</field></record>
+        <record id="hr_employee_16" model="hr.employee"><field name="employee_pis">d20492611917</field><field name="name">LUCAS MARTINELLI BECHELLI DE PONTES</field></record>
+        <record id="hr_employee_17" model="hr.employee"><field name="employee_pis">10853335246</field><field name="name">LUIZ CONTINENTE DA ROCHA</field></record>
+        <record id="hr_employee_18" model="hr.employee"><field name="employee_pis">12879923230</field><field name="name">MARIA SILVANA PIRES</field></record>
+        <record id="hr_employee_19" model="hr.employee"><field name="employee_pis">d20322181938</field><field name="name">MESSIAS REZENDE MOREIRA</field></record>
+        <record id="hr_employee_20" model="hr.employee"><field name="employee_pis">13444654854</field><field name="name">RAFAEL ODAIRA</field></record>
+        <record id="hr_employee_21" model="hr.employee"><field name="employee_pis">d16588268948</field><field name="name">RAFAEL PAULO DE OLIVEIRA</field></record>
+        <record id="hr_employee_22" model="hr.employee"><field name="employee_pis">d20492609173</field><field name="name">RENAN ODAIRA</field></record>
+        <record id="hr_employee_23" model="hr.employee"><field name="employee_pis">13486071814</field><field name="name">RICARDO NASCIMENTO CONCEICAO</field></record>
+        <record id="hr_employee_24" model="hr.employee"><field name="employee_pis">d20980575553</field><field name="name">WALLACE GOMES FERREIRA</field></record>
+        <record id="hr_employee_25" model="hr.employee"><field name="employee_pis">d20492650483</field><field name="name">WELLINGTON DA SILVA CAMARGO</field></record>
+        <record id="hr_employee_26" model="hr.employee"><field name="employee_pis">d13499969938</field><field name="name">ALINE ERICA DE JESUS</field></record>
+        <record id="hr_employee_27" model="hr.employee"><field name="employee_pis">d13110098899</field><field name="name">ALEXSANDRE LUIS DOS SANTOS</field></record>
+        <record id="hr_employee_28" model="hr.employee"><field name="employee_pis">d16004107949</field><field name="name">ANA CLAUDIA COSTA DE OLIVEIRA</field></record>
+        <record id="hr_employee_29" model="hr.employee"><field name="employee_pis">d13426730854</field><field name="name">ANDERSON MARQUES FERREIRA</field></record>
+        <record id="hr_employee_30" model="hr.employee"><field name="employee_pis">d12665095930</field><field name="name">ADILSON LUIZ BOARRETTO</field></record>
+        <record id="hr_employee_31" model="hr.employee"><field name="employee_pis">d12999057891</field><field name="name">ADEMIR PEREIRA FERNANDES</field></record>
+        <record id="hr_employee_32" model="hr.employee"><field name="employee_pis">d12794511779</field><field name="name">ANDRE FELIPE DARIZA</field></record>
+        <record id="hr_employee_33" model="hr.employee"><field name="employee_pis">d20413219288</field><field name="name">CLAUDEMIR GONCALVES DA SILVA</field></record>
+        <record id="hr_employee_34" model="hr.employee"><field name="employee_pis">d12752843773</field><field name="name">CELSO NICOLAU MARIA</field></record>
+        <record id="hr_employee_35" model="hr.employee"><field name="employee_pis">d21289731545</field><field name="name">CAIO FERNANDO PINTO</field></record>
+        <record id="hr_employee_36" model="hr.employee"><field name="employee_pis">d13739480857</field><field name="name">BRUNO RICARDO PULSO CORREIA FERRO</field></record>
+        <record id="hr_employee_37" model="hr.employee"><field name="employee_pis">d20616012742</field><field name="name">BRUNO DA SILVA MORAES</field></record>
+        <record id="hr_employee_38" model="hr.employee"><field name="employee_pis">d16101421741</field><field name="name">ANTONIO ALEXANDRE ALMEIDA SALLES</field></record>
+        <record id="hr_employee_39" model="hr.employee"><field name="employee_pis">d13221769775</field><field name="name">FELIPE FERNANDES DE SOUZA</field></record>
+        <record id="hr_employee_40" model="hr.employee"><field name="employee_pis">d16106669393</field><field name="name">EVERSON PEDRO DA SILVA</field></record>
+        <record id="hr_employee_41" model="hr.employee"><field name="employee_pis">d12759087818</field><field name="name">EWERTON TAVARES DA COSTA OHARA</field></record>
+        <record id="hr_employee_42" model="hr.employee"><field name="employee_pis">d20488018700</field><field name="name">ERICA YUKIE GOTO</field></record>
+        <record id="hr_employee_43" model="hr.employee"><field name="employee_pis">13197267817</field><field name="name">ELISANGELA ALVES DE CAMPOS CARVALHO</field></record>
+        <record id="hr_employee_44" model="hr.employee"><field name="employee_pis">d12298380394</field><field name="name">EDERSON LUIZ DOS SANTOS</field></record>
+        <record id="hr_employee_45" model="hr.employee"><field name="employee_pis">d12425440285</field><field name="name">EDSON DOS SANTOS NUNES</field></record>
+        <record id="hr_employee_46" model="hr.employee"><field name="employee_pis">d10715578712</field><field name="name">EDSON CORREA DOS SANTOS</field></record>
+        <record id="hr_employee_47" model="hr.employee"><field name="employee_pis">d12520287138</field><field name="name">EDMARCOS DA SILVA MONTEIRO</field></record>
+        <record id="hr_employee_48" model="hr.employee"><field name="employee_pis">d10618447439</field><field name="name">DIEGO PEDRO DA SILVA</field></record>
+        <record id="hr_employee_49" model="hr.employee"><field name="employee_pis">d13397682818</field><field name="name">DIEGO APARECIDO MACHADO DE MORAES</field></record>
+        <record id="hr_employee_50" model="hr.employee"><field name="employee_pis">d16170088703</field><field name="name">DIEGO BRANDAO DA SILVA</field></record>
+        <record id="hr_employee_51" model="hr.employee"><field name="employee_pis">d12322182747</field><field name="name">DAVILSON LASINCKI</field></record>
+        <record id="hr_employee_52" model="hr.employee"><field name="employee_pis">d13253282987</field><field name="name">DAIARA MORAIS NOBREGA</field></record>
+        <record id="hr_employee_53" model="hr.employee"><field name="employee_pis">d12469795720</field><field name="name">CLECIO RICARDO ALVES DE FREITAS</field></record>
+        <record id="hr_employee_54" model="hr.employee"><field name="employee_pis">d16323467241</field><field name="name">JONATHAN GONCALVES</field></record>
+        <record id="hr_employee_55" model="hr.employee"><field name="employee_pis">d12994311773</field><field name="name">JONNY CRISTYAN DE MATOS</field></record>
+        <record id="hr_employee_56" model="hr.employee"><field name="employee_pis">d13113044811</field><field name="name">JOAO YOSHIDA NETO</field></record>
+        <record id="hr_employee_57" model="hr.employee"><field name="employee_pis">d10440315716</field><field name="name">JOAO BATISTA ROCHA</field></record>
+        <record id="hr_employee_58" model="hr.employee"><field name="employee_pis">d20488019448</field><field name="name">JORGE DOS ANJOS NETO</field></record>
+        <record id="hr_employee_59" model="hr.employee"><field name="employee_pis">d16258960066</field><field name="name">JONATA MARQUES NUNES</field></record>
+        <record id="hr_employee_60" model="hr.employee"><field name="employee_pis">d20492704230</field><field name="name">JACQUELINE ALVES PEREIRA</field></record>
+        <record id="hr_employee_61" model="hr.employee"><field name="employee_pis">d13037373856</field><field name="name">ISAIAS ALVES GONCALVES</field></record>
+        <record id="hr_employee_62" model="hr.employee"><field name="employee_pis">d12676056095</field><field name="name">IRINEU THIAGO DE OLIVEIRA</field></record>
+        <record id="hr_employee_63" model="hr.employee"><field name="employee_pis">d12796866523</field><field name="name">HEBER DE MELO SANTOS</field></record>
+        <record id="hr_employee_64" model="hr.employee"><field name="employee_pis">d12387322586</field><field name="name">HAMILTON DA CUNHA JUNIOR</field></record>
+        <record id="hr_employee_65" model="hr.employee"><field name="employee_pis">d15410596548</field><field name="name">GUSTAVO TIRADO DOS SANTOS</field></record>
+        <record id="hr_employee_66" model="hr.employee"><field name="employee_pis">d12323520182</field><field name="name">GILMAR SANTANA DOS REIS</field></record>
+        <record id="hr_employee_67" model="hr.employee"><field name="employee_pis">d12402834945</field><field name="name">GERALDO LUZ CARDOSO</field></record>
+        <record id="hr_employee_68" model="hr.employee"><field name="employee_pis">d12467956964</field><field name="name">GERSON PEREIRA DA SILVA</field></record>
+        <record id="hr_employee_69" model="hr.employee"><field name="employee_pis">d16314268479</field><field name="name">GRAZIELA EVANGELISTA DOS SANTOS</field></record>
+        <record id="hr_employee_70" model="hr.employee"><field name="employee_pis">d20488046941</field><field name="name">GABRIELA MOREIRA DO PRADO</field></record>
+        <record id="hr_employee_71" model="hr.employee"><field name="employee_pis">d13908768852</field><field name="name">MARISA SAYURI ISHIKAWA</field></record>
+        <record id="hr_employee_72" model="hr.employee"><field name="employee_pis">d12680062894</field><field name="name">MARCELO DA SILVA RIBEIRO</field></record>
+        <record id="hr_employee_73" model="hr.employee"><field name="employee_pis">d13792833777</field><field name="name">MARCELO APARECIDO RIO BRANCO</field></record>
+        <record id="hr_employee_74" model="hr.employee"><field name="employee_pis">d12271666629</field><field name="name">LUCIANO LOURENCO DE SOUZA</field></record>
+        <record id="hr_employee_75" model="hr.employee"><field name="employee_pis">d14586278737</field><field name="name">LEONARDO SOUZA DA SILVA</field></record>
+        <record id="hr_employee_76" model="hr.employee"><field name="employee_pis">d13204612855</field><field name="name">KATIA MONTEIRO DE MORAES PIMENTA</field></record>
+        <record id="hr_employee_77" model="hr.employee"><field name="employee_pis">d13440153397</field><field name="name">KAIQUE NAHUAN MARTINS</field></record>
+        <record id="hr_employee_78" model="hr.employee"><field name="employee_pis">d13138308774</field><field name="name">JULIO CESAR SANTANA</field></record>
+        <record id="hr_employee_79" model="hr.employee"><field name="employee_pis">d12085203630</field><field name="name">JOSE ROBERIO DE LIMA FERREIRA</field></record>
+        <record id="hr_employee_80" model="hr.employee"><field name="employee_pis">d13375358775</field><field name="name">JOSE LUIS AMARAL TEIXEIRA</field></record>
+        <record id="hr_employee_81" model="hr.employee"><field name="employee_pis">d13556678933</field><field name="name">JOSE DIONADAS DA SILVA</field></record>
+        <record id="hr_employee_82" model="hr.employee"><field name="employee_pis">d13296068774</field><field name="name">JOSE CLAUDIO DE LIMA</field></record>
+        <record id="hr_employee_83" model="hr.employee"><field name="employee_pis">d12868011332</field><field name="name">TALLES DANIEL DA SILVA</field></record>
+        <record id="hr_employee_84" model="hr.employee"><field name="employee_pis">d10790462521</field><field name="name">SILVIO RODRIGUES DE AGUIAR</field></record>
+        <record id="hr_employee_85" model="hr.employee"><field name="employee_pis">d16626388615</field><field name="name">SIDNEI MARTINS CRUZ</field></record>
+        <record id="hr_employee_86" model="hr.employee"><field name="employee_pis">d20162238422</field><field name="name">SERGIO DE ALMEIDA RODRIGUES JUNIOR</field></record>
+        <record id="hr_employee_87" model="hr.employee"><field name="employee_pis">d12848919223</field><field name="name">RONILDO APARECIDO BRASILINO</field></record>
+        <record id="hr_employee_88" model="hr.employee"><field name="employee_pis">d13222430933</field><field name="name">RODRIGO RAPHAEL YAMASHITA BATISTA</field></record>
+        <record id="hr_employee_89" model="hr.employee"><field name="employee_pis">d15445521749</field><field name="name">RODRIGO KIYOSHI TAJIRI</field></record>
+        <record id="hr_employee_90" model="hr.employee"><field name="employee_pis">d20492724401</field><field name="name">RICARDO DE JESUS CAMARGO JUNIOR</field></record>
+        <record id="hr_employee_91" model="hr.employee"><field name="employee_pis">d12499193494</field><field name="name">RENILTON CESAR AZALIN</field></record>
+        <record id="hr_employee_92" model="hr.employee"><field name="employee_pis">d12823260813</field><field name="name">RENATO FERREIRA DO NASCIMENTO</field></record>
+        <record id="hr_employee_93" model="hr.employee"><field name="employee_pis">d20492750070</field><field name="name">RENAN CRISTIANO BARBOSA</field></record>
+        <record id="hr_employee_94" model="hr.employee"><field name="employee_pis">d12863956770</field><field name="name">RAPHAEL RAMOS DE CARVALHO</field></record>
+        <record id="hr_employee_95" model="hr.employee"><field name="employee_pis">d20492719955</field><field name="name">PRISCILA DIAS DA SILVA</field></record>
+        <record id="hr_employee_96" model="hr.employee"><field name="employee_pis">d12721373899</field><field name="name">PAULO ROBERTO ULYSSES</field></record>
+        <record id="hr_employee_97" model="hr.employee"><field name="employee_pis">d16579466236</field><field name="name">ODAIR JOSE DA SILVA</field></record>
+        <record id="hr_employee_98" model="hr.employee"><field name="employee_pis">d16683564613</field><field name="name">WANDERSON HENRIQUE SANTOS JOAQUIM</field></record>
+        <record id="hr_employee_99" model="hr.employee"><field name="employee_pis">d13737115892</field><field name="name">THIAGO TORRES DE MEDEIROS</field></record>
+        <record id="hr_employee_100" model="hr.employee"><field name="employee_pis">d13167404891</field><field name="name">THIAGO PEREIRA DE MORAES</field></record>
+        <record id="hr_employee_101" model="hr.employee"><field name="employee_pis">d12409234803</field><field name="name">ELISABETE DE JESUS PINTO</field></record>
+        <record id="hr_employee_102" model="hr.employee"><field name="employee_pis">13015989854</field><field name="name">CARLOS TADEU GOMES</field></record>
+        <record id="hr_employee_103" model="hr.employee"><field name="employee_pis">d20414106134</field><field name="name">THAIS CAROLINE DE OLIVEIRA</field></record>
+        <record id="hr_employee_104" model="hr.employee"><field name="employee_pis">d12866577959</field><field name="name">ALBERTO CONTIERO WURTHMANN</field></record>
+        <record id="hr_employee_105" model="hr.employee"><field name="employee_pis">12409234803</field><field name="name">ELISABETE DE JESUS PINTO</field></record>
+        <record id="hr_employee_106" model="hr.employee"><field name="employee_pis">d16004107949</field><field name="name">ANA CLAUDIA COSTA DE OLIVEIRA</field></record>
+        <record id="hr_employee_107" model="hr.employee"><field name="employee_pis">12676056095</field><field name="name">IRINEU TIAGO DE OLIVEIRA</field></record>
+        <record id="hr_employee_108" model="hr.employee"><field name="employee_pis">12558443250</field><field name="name">RICARDO DE JESUS CAMARGO JUNIOR</field></record>
+        <record id="hr_employee_109" model="hr.employee"><field name="employee_pis">d20492650483</field><field name="name">WELLINGTON DA SILVA CAMARGO</field></record>
+        <record id="hr_employee_110" model="hr.employee"><field name="employee_pis">13017680818</field><field name="name">FABRICIO VIEIRA MAMEDE</field></record>
+        <record id="hr_employee_111" model="hr.employee"><field name="employee_pis">d12759087818</field><field name="name">EWERTON TAVARES DA COSTA OHARA</field></record>
+        <record id="hr_employee_112" model="hr.employee"><field name="employee_pis">d13222430933</field><field name="name">RODRIGO RAPHAEL YAMASHITA BATISTA</field></record>
+        <record id="hr_employee_113" model="hr.employee"><field name="employee_pis">d12999057891</field><field name="name">ADEMIR PEREIRA FERNANDES</field></record>
+        <record id="hr_employee_114" model="hr.employee"><field name="employee_pis">d13375358775</field><field name="name">JOSE LUIS AMARAL TEIXEIRA</field></record>
+        <record id="hr_employee_115" model="hr.employee"><field name="employee_pis">12400749711</field><field name="name">RODANY DA SILVA MACEDO</field></record>
+        <record id="hr_employee_116" model="hr.employee"><field name="employee_pis">d12387322586</field><field name="name">HAMILTON CUNHA JUNIOR</field></record>
+        <record id="hr_employee_117" model="hr.employee"><field name="employee_pis">16106370959</field><field name="name">DIEGO PEDRO DA SILVA</field></record>
+        <record id="hr_employee_118" model="hr.employee"><field name="employee_pis">16683564613</field><field name="name">WANDERSON HENRIQUE SANTOS</field></record>
+        <record id="hr_employee_119" model="hr.employee"><field name="employee_pis">d20616012742</field><field name="name">BRUNO DA SILVA MORAES</field></record>
+        <record id="hr_employee_120" model="hr.employee"><field name="employee_pis">12752843773</field><field name="name">CELSO NICOLAU MARIA</field></record>
+        <record id="hr_employee_121" model="hr.employee"><field name="employee_pis">d12994311773</field><field name="name">JONNY CRISTYAN DE MATOS</field></record>
+        <record id="hr_employee_122" model="hr.employee"><field name="employee_pis">d16192292028</field><field name="name">JOSÉ ALEX DA SILVA</field></record>
+        <record id="hr_employee_123" model="hr.employee"><field name="employee_pis">d13409535852</field><field name="name">ANDERSON JOSÉ DE FARIAS</field></record>
+        <record id="hr_employee_124" model="hr.employee"><field name="employee_pis">16634016330</field><field name="name">WILLIAM DE SOUZA PAULA</field></record>
+        <record id="hr_employee_125" model="hr.employee"><field name="employee_pis">13570146811</field><field name="name">CLAUDEMIR GONÇALVES DA SILVA</field></record>
+        <record id="hr_employee_126" model="hr.employee"><field name="employee_pis">d16258960066</field><field name="name">JONATÃ MARQUES NUNES</field></record>
+        <record id="hr_employee_127" model="hr.employee"><field name="employee_pis">d12994311773</field><field name="name">JONY CRISTYAN DE MATOS</field></record>
+        <record id="hr_employee_128" model="hr.employee"><field name="employee_pis">d20424159125</field><field name="name">MATHEUS PRADO DE MELO</field></record>
+        <record id="hr_employee_129" model="hr.employee"><field name="employee_pis">10790462521</field><field name="name">SILVIO RODRIGUES DE AGUIAR</field></record>
+        <record id="hr_employee_130" model="hr.employee"><field name="employee_pis">d20160777946</field><field name="name">LUIZ GUILHERME TOMAS DE OLIVEIRA</field></record>
+        <record id="hr_employee_131" model="hr.employee"><field name="employee_pis">13221769775</field><field name="name">FELIPE FERNANDES DE SOUZA</field></record>
+        <record id="hr_employee_132" model="hr.employee"><field name="employee_pis">d15505992459</field><field name="name">SABRINA APARECIDA DAMACENO GONÇALVES</field></record>
+        <record id="hr_employee_133" model="hr.employee"><field name="employee_pis">d20138627651</field><field name="name">RAFAEL DE JESUS MOREIRA DE PAULA</field></record>
+        <record id="hr_employee_134" model="hr.employee"><field name="employee_pis">d23761717810</field><field name="name">YASMIM NIVEA PONTES ANTUNES</field></record>
+        <record id="hr_employee_135" model="hr.employee"><field name="employee_pis">21289731545</field><field name="name">CAIO FERNANDO PINTO</field></record>
+        <record id="hr_employee_136" model="hr.employee"><field name="employee_pis">16311776244</field><field name="name">IAGO CANDIDO DOS SANTOS</field></record>
+        <record id="hr_employee_137" model="hr.employee"><field name="employee_pis">d16106669393</field><field name="name">EVERSON PEDRO DA SILVA</field></record>
+        <record id="hr_employee_138" model="hr.employee"><field name="employee_pis">d22805081144</field><field name="name">LARISSA DA FONTE MARTINS</field></record>
+        <record id="hr_employee_139" model="hr.employee"><field name="employee_pis">d23816239958</field><field name="name">NATANAEL LIMA NUNES</field></record>
+        <record id="hr_employee_140" model="hr.employee"><field name="employee_pis">13739480857</field><field name="name">BRUNO RICARDO PULSO CORREIA FERRO</field></record>
+        <record id="hr_employee_141" model="hr.employee"><field name="employee_pis">12999057891</field><field name="name">ADEMIR PEREIRA FERNANDES</field></record>
+        <record id="hr_employee_142" model="hr.employee"><field name="employee_pis">d20492597876</field><field name="name">EVERTON FELIPE PONTES BARBOSA</field></record>
+        <record id="hr_employee_143" model="hr.employee"><field name="employee_pis">d20616012742</field><field name="name">BRUNO DA SILVA MORAES</field></record>
+        <record id="hr_employee_144" model="hr.employee"><field name="employee_pis">d20669542800</field><field name="name">MAYARA SILVA SOUZA</field></record>
+        <record id="hr_employee_145" model="hr.employee"><field name="employee_pis">d16071492352</field><field name="name">MARIA FERNANDA VILHALVA</field></record>
+        <record id="hr_employee_146" model="hr.employee"><field name="employee_pis">13499969938</field><field name="name">ALINE ERICA DE JESUS</field></record>
+        <record id="hr_employee_147" model="hr.employee"><field name="employee_pis">d14241360137</field><field name="name">LUIZ HENRIQUE SANTOS DO AMARAL</field></record>
+        <record id="hr_employee_148" model="hr.employee"><field name="employee_pis">16590269808</field><field name="name">ROGERIO FERREIRA DIAS</field></record>
+        <record id="hr_employee_149" model="hr.employee"><field name="employee_pis">d14269592296</field><field name="name">EVANDRO JOSE CASE DOS SANTOS JUNIOR</field></record>
+        <record id="hr_employee_150" model="hr.employee"><field name="employee_pis">d26827353751</field><field name="name">RAPHAEL FERREIRA MANJKO</field></record>
+        <record id="hr_employee_151" model="hr.employee"><field name="employee_pis">d14555167585</field><field name="name">MATEUS ZAMAI BAPTISTA MACEDO</field></record>
+        <record id="hr_employee_152" model="hr.employee"><field name="employee_pis">d23751789517</field><field name="name">GABRIEL BENEDITO RODRIGUES MARTINS</field></record>
+        <record id="hr_employee_153" model="hr.employee"><field name="employee_pis">d16107275348</field><field name="name">EDSON SANTOS VIEIRA</field></record>
+        <record id="hr_employee_154" model="hr.employee"><field name="employee_pis">d14306451212</field><field name="name">GABRIEL MADRID DE SINO CAMARA</field></record>
+        <record id="hr_employee_155" model="hr.employee"><field name="employee_pis">12520287138</field><field name="name">EDMARCOS DA SILVA MONTEIRO</field></record>
+        <record id="hr_employee_156" model="hr.employee"><field name="employee_pis">16018738970</field><field name="name">EDSON MARCELINO DE MOURA</field></record>
+        <record id="hr_employee_157" model="hr.employee"><field name="employee_pis">12387322586</field><field name="name">HAMILTON CUNHA JUNIOR</field></record>
+        <record id="hr_employee_158" model="hr.employee"><field name="employee_pis">20492609173</field><field name="name">RENAN ODAIRA</field></record>
+        <record id="hr_employee_159" model="hr.employee"><field name="employee_pis">13089588853</field><field name="name">WELLINGTON PATRICK FERREIRA AMORIM</field></record>
+        <record id="hr_employee_160" model="hr.employee"><field name="employee_pis">16192292028</field><field name="name">JOSE ALEX DA SILVA</field></record>
+        <record id="hr_employee_161" model="hr.employee"><field name="employee_pis">d12980592813</field><field name="name">ANDRE ALVARO MARIN</field></record>
+        <record id="hr_employee_162" model="hr.employee"><field name="employee_pis">12499193494</field><field name="name">RENILTON CESAR AZALIN</field></record>
+        <record id="hr_employee_163" model="hr.employee"><field name="employee_pis">d12794511779</field><field name="name">ANDRE FELIPE DARIZA</field></record>
+        <record id="hr_employee_164" model="hr.employee"><field name="employee_pis">12271666629</field><field name="name">LUCIANO LOURENCO DE SOUZA</field></record>
+        <record id="hr_employee_165" model="hr.employee"><field name="employee_pis">16323467241</field><field name="name">JONATHAN GONCALVES</field></record>
+        <record id="hr_employee_166" model="hr.employee"><field name="employee_pis">d15445521749</field><field name="name">RODRIGO KIYOSHI TAJIRI</field></record>
+        <record id="hr_employee_167" model="hr.employee"><field name="employee_pis">d16106669393</field><field name="name">EVERSON PEDRO DA SILVA</field></record>
+        <record id="hr_employee_168" model="hr.employee"><field name="employee_pis">10804656301</field><field name="name">FRANCISCO JOSE RAMOS</field></record>
+        <record id="hr_employee_169" model="hr.employee"><field name="employee_pis">15505992459</field><field name="name">SABRINA APARECIDA DAMACENO GONÇALVES</field></record>
+        <record id="hr_employee_170" model="hr.employee"><field name="employee_pis">20616012742</field><field name="name">BRUNO DA SILVA MORAES</field></record>
+        <record id="hr_employee_171" model="hr.employee"><field name="employee_pis">d20414106134</field><field name="name">THAIS CAROLINE DE OLIVEIRA</field></record>
+        <record id="hr_employee_172" model="hr.employee"><field name="employee_pis">d21295134545</field><field name="name">NATALIA QUIRINO DE OLIVEIRA</field></record>
+        <record id="hr_employee_173" model="hr.employee"><field name="employee_pis">d20126445219</field><field name="name">THALLES RODRIGUES</field></record>
+        <record id="hr_employee_174" model="hr.employee"><field name="employee_pis">d22004113358</field><field name="name">JOAO VICTOR CABRAL VIEIRA</field></record>
+        <record id="hr_employee_175" model="hr.employee"><field name="employee_pis">d12097819739</field><field name="name">JOAO DE OLIVEIRA ALVES</field></record>
+        <record id="hr_employee_176" model="hr.employee"><field name="employee_pis">d14278896693</field><field name="name">GABRIELLI YUKI KOBAYASHI GALVEZ</field></record>
+        <record id="hr_employee_177" model="hr.employee"><field name="employee_pis">d23829610862</field><field name="name">KEVIN MICHAEL DE ALMEIDA BARRETO ALVES</field></record>
+        <record id="hr_employee_178" model="hr.employee"><field name="employee_pis">d16461364073</field><field name="name">LUAN SIDNEY DA COSTA</field></record>
+        <record id="hr_employee_179" model="hr.employee"><field name="employee_pis">d15453082740</field><field name="name">FELIPE GONCALVES GARCIA</field></record>
+        <record id="hr_employee_180" model="hr.employee"><field name="employee_pis">d14307071308</field><field name="name">JULIA EMANOELE PIMENTA ALVES</field></record>
+        <record id="hr_employee_181" model="hr.employee"><field name="employee_pis">d13412240566</field><field name="name">VINICIUS SILVA DE MIRANDA</field></record>
+        <record id="hr_employee_182" model="hr.employee"><field name="employee_pis">d23740626557</field><field name="name">ZHEUS MOTA CABRAL</field></record>
+        <record id="hr_employee_183" model="hr.employee"><field name="employee_pis">13101315092</field><field name="name">GABRIEL AUGUSTO APARECIDO DE SIQUEIRA</field></record>
+        <record id="hr_employee_184" model="hr.employee"><field name="employee_pis">d21229106210</field><field name="name">BRENO BORGES DE SOUZA</field></record>
+        <record id="hr_employee_185" model="hr.employee"><field name="employee_pis">d16287133423</field><field name="name">JAELSON SANTOS GONCALVES</field></record>
+        <record id="hr_employee_186" model="hr.employee"><field name="employee_pis">d22820819264</field><field name="name">MARCELO BATISTA DE SOUZA</field></record>
+        <record id="hr_employee_187" model="hr.employee"><field name="employee_pis">15280047140</field><field name="name">GUSTAVO LOURENCO DIAS</field></record>
+        <record id="hr_employee_188" model="hr.employee"><field name="employee_pis">d13992657697</field><field name="name">STEPHANY ELOIZE RIBEIRO GULPIAN TORRES</field></record>
+        <record id="hr_employee_189" model="hr.employee"><field name="employee_pis">20773676974</field><field name="name">PEDRO MIGUEL DE ALMEIDA LEONEL</field></record>
+        <record id="hr_employee_190" model="hr.employee"><field name="employee_pis">d20354083702</field><field name="name">MARCELA ANDRESSA DE OLIVEIRA</field></record>
+        <record id="hr_employee_191" model="hr.employee"><field name="employee_pis">23877785820</field><field name="name">VIVIANE VITORIA FARIA PEREIRA</field></record>
+        <record id="hr_employee_192" model="hr.employee"><field name="employee_pis">16467014023</field><field name="name">LUCAS CAVALCANTE DOS SANTOS</field></record>
+        <record id="hr_employee_193" model="hr.employee"><field name="employee_pis">d20990671040</field><field name="name">ISABEL APARECIDA DE SOUZA</field></record>
+        <record id="hr_employee_194" model="hr.employee"><field name="employee_pis">15711184710</field><field name="name">FELIPE ROCHA DIAS</field></record>
+        <record id="hr_employee_195" model="hr.employee"><field name="employee_pis">d15712512673</field><field name="name">GUSTAVO SALGADO LIMA</field></record>
+        <record id="hr_employee_196" model="hr.employee"><field name="employee_pis">d14590463780</field><field name="name">THALES HENRIQUE SILVA GREGORIO</field></record>
+        <record id="hr_employee_197" model="hr.employee"><field name="employee_pis">21385790018</field><field name="name">THIAGO FRANCELINO SANTOS</field></record>
+        <record id="hr_employee_198" model="hr.employee"><field name="employee_pis">13515815499</field><field name="name">THIAGO FEITOSA MARTINS</field></record>
+        <record id="hr_employee_199" model="hr.employee"><field name="employee_pis">20104276694</field><field name="name">GABRIELA TOKIE PIRES YAMAKAWA</field></record>
+        <record id="hr_employee_200" model="hr.employee"><field name="employee_pis">d26949162730</field><field name="name">REBEKA ESPINDOLA CARNEIRO</field></record>
+        <record id="hr_employee_201" model="hr.employee"><field name="employee_pis">d16294067481</field><field name="name">GIOVANA RODRIGUES DE OLIVEIRA</field></record>
+        <record id="hr_employee_202" model="hr.employee"><field name="employee_pis">13222430933</field><field name="name">RODRIGO RAPHAEL YAMASHITA BATISTA</field></record>
+        <record id="hr_employee_203" model="hr.employee"><field name="employee_pis">21244748163</field><field name="name">ALEX CARDOZO DE OLIVEIRA</field></record>
+        <record id="hr_employee_204" model="hr.employee"><field name="employee_pis">13994216671</field><field name="name">MARIA EDUARDA LIMA SOUZA</field></record>
+        <record id="hr_employee_205" model="hr.employee"><field name="employee_pis">13983816621</field><field name="name">EVERTHON BARBOSA LARANJEIRA</field></record>
+        <record id="hr_employee_206" model="hr.employee"><field name="employee_pis">23707234424</field><field name="name">KAUE FELIPE DOS SANTOS</field></record>
+        <record id="hr_employee_207" model="hr.employee"><field name="employee_pis">12944113811</field><field name="name">FERNANDA SATURNINO MENDES DE ALMEIDA</field></record>
+    </data>
+</odoo>

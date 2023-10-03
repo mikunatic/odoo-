@@ -1,0 +1,17 @@
+<odoo>
+    <data noupdate="1">
+        <record id='company1' model='employee.company'>
+            <field name='name'>Superglass</field>
+            <field name='cnpj'>16.911.205/0001-69</field>
+<!--            <field name='inscricao_estadual'></field>-->
+            <field name='city'>Mogi das Cruzes</field>
+        </record>
+
+        <record id='company2' model='employee.company'>
+            <field name='name'>KANSAI</field>
+            <field name='cnpj'>02.045.855/0001-64</field>
+            <field name='inscricao_estadual'>148.228.624.116</field>
+            <field name='city'>São Paulo</field>
+        </record>
+    </data>
+</odoo>

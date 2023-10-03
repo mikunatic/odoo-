@@ -1,0 +1,17 @@
+<odoo>
+    <record id="wizard_create_punch_time_form" model="ir.ui.view">
+        <field name="name">Apontamento manual</field>
+        <field name="model">wizard.create.punch.time</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="punch_time"/>
+                </group>
+                <footer>
+                    <button name="create_punch_time" class="btn btn-primary" string="Criar"
+                        type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

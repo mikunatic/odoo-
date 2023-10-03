@@ -1,0 +1,39 @@
+<odoo>
+    <record id="employee_remoteness_action" model="ir.actions.act_window">
+        <field name="name">Justificativas</field>
+        <field name="res_model">employee.remoteness</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="employee_remoteness_menu" name="Justificativas" parent="settings_menu" action="employee_remoteness_action"/>
+
+    <record id="employee_remoteness_tree" model="ir.ui.view">
+        <field name="name">Justificativas</field>
+        <field name="model">employee.remoteness</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reason"/>
+                <field name="employee_id"/>
+                <field name="initial_date"/>
+                <field name="final_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="remoteness_form_view" model="ir.ui.view">
+        <field name="name">Justificativas</field>
+        <field name="model">employee.remoteness</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="reason"/>
+                        <field name="employee_id"/>
+                        <field name="initial_date"/>
+                        <field name="final_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

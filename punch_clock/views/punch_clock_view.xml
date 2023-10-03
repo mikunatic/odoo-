@@ -1,0 +1,83 @@
+<odoo>
+    <record id="punch_clock_action" model="ir.actions.act_window">
+        <field name="name">Relógio de ponto</field>
+        <field name="res_model">punch.clock</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="punch_clock_form_menu" name="Registro de ponto" parent="punch_clock_menu" action="punch_clock_action" sequence="1"/>
+
+    <record id="punch_clock_tree_view" model="ir.ui.view">
+        <field name="name">Relógio de ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="employee_id"/>
+                <field name="punch_date"/>
+                <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="employee_pis"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="punch_clock_form_view" model="ir.ui.view">
+        <field name="name">Relógio de ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="open_wizard" class="btn btn-primary" string="Criar apontamento"
+                        type="object"/>
+                </header>
+
+                <sheet>
+                <group>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="punch_date"/>
+                        <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}">
+                            <tree>
+                                <field name="time_punch" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="employee_pis"/>
+                        <field name="worked_hours"/>
+                        <field name="lunch_time"/>
+                        <field name="attears"/>
+                        <field name="extra_hour"/>
+                        <field name="extra_hour_lunch"/>
+                    </group>
+                </group>
+<!--                    <group>-->
+<!--                        <group name="Criar apontamentos manuais">-->
+<!--                            <field name="hour_punch"/>-->
+<!--                            <field name="minute_punch"/>-->
+<!--                            <button name="create_punch_clock_time" class="btn btn-primary" string="Criar"-->
+<!--                        type="object"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="hour_punch_create"/>-->
+<!--                        <field name="minute_punch_create"/>-->
+<!--                        <button name="compute_virtual_time" class="btn btn-primary" string="Criar ponto"-->
+<!--                        type="object"/>-->
+<!--                    </group>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="punck_clock_search_view" model="ir.ui.view">
+        <field name="name">Filtro de Ponto</field>
+        <field name="model">punch.clock</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="employee_pis"/>
+            </search>
+        </field>
+    </record>
+</odoo>

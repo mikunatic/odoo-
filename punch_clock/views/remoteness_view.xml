@@ -1,0 +1,38 @@
+<odoo>
+    <record id="remoteness_action" model="ir.actions.act_window">
+        <field name="name">Afastamento</field>
+        <field name="res_model">remoteness</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="settings_menu" name="Configuração" parent="punch_clock_menu"/>
+    <menuitem id="remoteness_menu" name="Afastamento" parent="settings_menu" action="remoteness_action"/>
+
+    <record id="remoteness_tree_view" model="ir.ui.view">
+        <field name="name">Afastamento</field>
+        <field name="model">remoteness</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="hypothesis"/>
+                <field name="duration"/>
+                <field name="foundation"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="remoteness_form_view" model="ir.ui.view">
+        <field name="name">Afastamento</field>
+        <field name="model">remoteness</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="hypothesis"/>
+                        <field name="duration"/>
+                        <field name="foundation"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

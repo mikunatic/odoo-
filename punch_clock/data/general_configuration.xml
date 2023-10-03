@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+        <record id='general_configuration1' model='general.configuration'>
+            <field name='additional_night'>20</field>
+            <field name='intraday'>60</field>
+            <field name='interjourney'>11</field>
+            <field name='arrears_tolerance'>10</field>
+            <field name='virtual_time_validity'>365</field>
+        </record>
+    </data>
+</odoo>

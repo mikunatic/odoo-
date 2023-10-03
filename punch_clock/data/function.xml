@@ -1,0 +1,162 @@
+<odoo>
+    <data noupdate="1">
+        <record id='function1' model='function'>
+            <field name='name'>Ajudante Geral</field>
+        </record>
+
+        <record id='analista_suporte_sistema' model='function'>
+            <field name='name'>Analista de Suporte de Sistema</field>
+        </record>
+
+        <record id='aprendiz_vidraceiro' model='function'>
+            <field name='name'>Aprendiz de Vidraceiro</field>
+        </record>
+        <record id='assistente_administrativo' model='function'>
+            <field name='name'>Assistente Administrativo</field>
+        </record>
+
+        <record id='assistente_contas_pagar' model='function'>
+            <field name='name'>Assistente de Contas a Pagar</field>
+        </record>
+
+        <record id='assistente_contas_receber' model='function'>
+            <field name='name'>Assistente de Contas a Receber</field>
+        </record>
+
+        <record id='assistente_manutencao' model='function'>
+            <field name='name'>Assistente de Manutenção</field>
+        </record>
+
+        <record id='assistente_recursos_humanos' model='function'>
+            <field name='name'>Assistente de Recursos Humanos</field>
+        </record>
+
+        <record id='assistente_fiscal' model='function'>
+            <field name='name'>Assistente Fiscal</field>
+        </record>
+
+        <record id='atendente' model='function'>
+            <field name='name'>Atendente</field>
+        </record>
+
+        <record id='aux_serv_doc_informacoes_pesquisa' model='function'>
+            <field name='name'>Aux. Serv. de Doc. Informações e Pesquisa</field>
+        </record>
+
+        <record id='auxiliar_administrativo' model='function'>
+            <field name='name'>Auxiliar Administrativo</field>
+        </record>
+
+        <record id='auxiliar_contabil' model='function'>
+            <field name='name'>Auxiliar Contábil</field>
+        </record>
+
+        <record id='auxiliar_servicos_gerais' model='function'>
+            <field name='name'>Auxiliar de Serviços Gerais</field>
+        </record>
+
+        <record id='auxiliar_soldador' model='function'>
+            <field name='name'>Auxiliar de Soldador</field>
+        </record>
+
+        <record id='auxiliar_vendas' model='function'>
+            <field name='name'>Auxiliar de Vendas</field>
+        </record>
+
+        <record id='auxiliar_manutencao' model='function'>
+            <field name='name'>Auxiliar Manutenção</field>
+        </record>
+
+        <record id='encarregado_contas_receber' model='function'>
+            <field name='name'>Encarregado de Contas a Receber</field>
+        </record>
+
+        <record id='estagiario' model='function'>
+            <field name='name'>Estagiário</field>
+        </record>
+
+        <record id='estoquista' model='function'>
+            <field name='name'>Estoquista</field>
+        </record>
+
+        <record id='estoquista_junior' model='function'>
+            <field name='name'>Estoquista Junior</field>
+        </record>
+
+        <record id='estoquista_pleno' model='function'>
+            <field name='name'>Estoquista Pleno</field>
+        </record>
+
+        <record id='estoquista_senior' model='function'>
+            <field name='name'>Estoquista Senior</field>
+        </record>
+
+        <record id='faturista' model='function'>
+            <field name='name'>Faturista</field>
+        </record>
+
+        <record id='gerente_vendas' model='function'>
+            <field name='name'>Gerente de Vendas</field>
+        </record>
+
+        <record id='instalador_autos' model='function'>
+            <field name='name'>Instalador de Autos</field>
+        </record>
+
+        <record id='lider_cobranca' model='function'>
+            <field name='name'>Líder de Cobrança</field>
+        </record>
+
+        <record id='lider_vendas' model='function'>
+            <field name='name'>Líder de Vendas</field>
+        </record>
+
+        <record id='marceneiro' model='function'>
+            <field name='name'>Marceneiro</field>
+        </record>
+
+        <record id='motorista' model='function'>
+            <field name='name'>Motorista</field>
+        </record>
+
+        <record id='oficial_manutencao' model='function'>
+            <field name='name'>Oficial de Manutenção</field>
+        </record>
+
+        <record id='operador_logistico' model='function'>
+            <field name='name'>Operador Logístico</field>
+        </record>
+
+        <record id='programador_junior' model='function'>
+            <field name='name'>Programador Junior</field>
+        </record>
+
+        <record id='repositor' model='function'>
+            <field name='name'>Repositor</field>
+        </record>
+
+        <record id='tesoureiro' model='function'>
+            <field name='name'>Tesoureiro</field>
+        </record>
+
+        <record id='vendedor' model='function'>
+            <field name='name'>Vendedor</field>
+        </record>
+
+        <record id='vidraceiro' model='function'>
+            <field name='name'>Vidraceiro</field>
+        </record>
+
+        <record id='vidraceiro_junior' model='function'>
+            <field name='name'>Vidraceiro Junior</field>
+        </record>
+
+        <record id='vidraceiro_master' model='function'>
+            <field name='name'>Vidraceiro Master</field>
+        </record>
+
+        <record id='vidraceiro_senior' model='function'>
+            <field name='name'>Vidraceiro Senior</field>
+        </record>
+    </data>
+</odoo>

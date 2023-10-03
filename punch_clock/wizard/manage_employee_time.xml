@@ -1,0 +1,60 @@
+<odoo>
+    <record id="manage_employee_time_action" model="ir.actions.act_window">
+        <field name="name">Pesquisa de ponto</field>
+        <field name="res_model">manage.employee.time</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="punch_clock_menu" name="Pontos" web_icon="punch_clock,static/description/icon.png"/>
+    <menuitem id="search_menu_father" name="Pesquisa" parent="punch_clock_menu" sequence="2"/>
+    <menuitem id="manage_employee_time_menu" name="Pesquisa por mês" parent="search_menu_father" action="manage_employee_time_action"/>
+
+    <record id="manage_employee_time_form" model="ir.ui.view">
+        <field name="name">Pesquisa de ponto</field>
+        <field name="model">manage.employee.time</field>
+        <field name="arch" type="xml">
+            <form>
+                <center>
+                    <h2>Pesquise o colaborador</h2>
+                </center>
+                <group>
+                    <group>
+                        <field name="employee_id" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
+                        <field name="month"/>
+                        <field name="year"/>
+                    </group>
+
+                    <group>
+                        <field name="worked_hours_in_range" string="Horas trabalhadas" attrs="{'invisible':[('punch_time_ids','=',[])]}"/>
+                        <field name="overtime_in_range" string="Horas excedente" attrs="{'invisible':[('punch_time_ids','=',[])]}"/>
+                        <field name="attears_hour_in_range" string="Atraso" attrs="{'invisible':[('punch_time_ids','=',[])]}"/>
+                        <field name="lack_dsr_and_lake" string="Faltas (+ DSR)" help="Falta e falta DSR em dias" attrs="{'invisible':[('punch_time_ids','=',[])]}"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="punch_time_ids" readonly="1" attrs="{'invisible':[('punch_time_ids','=',[])]}" nolabel="1">
+                        <tree>
+                            <field name="attention" invisible="1"/>
+                            <field name="justification"/>
+                            <field name="week_day" widget="badge"/>
+                            <field name="day" widget="badge" decoration-warning="attention=='warning'"
+                                   decoration-success="(attention =='success')" decoration-info="(attention =='info')"
+                                   decoration-danger="(attention =='danger')"/>
+                            <field name="punch_time" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="attears_hour_related"/>
+                            <field name="extra_hour_hour_related"/>
+                            <field name="worked_hour_related"/>
+                            <button name="open_wizard" string="Cria justifi." class="btn btn-outline-primary" type="object"/>
+                            <button name="add_punch" type="object" string="Adc. Ponto manual"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="search_employee_punch" class="btn btn-primary" string="Pesquisar"
+                        type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

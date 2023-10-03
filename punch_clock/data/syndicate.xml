@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="syndicate1" model="syndicate">
+            <field name="name">Sindicato do Comércio</field>
+        </record>
+    </data>
+</odoo>

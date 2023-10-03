@@ -1,0 +1,49 @@
+<odoo>
+    <record id="employees_by_interval_action" model="ir.actions.act_window">
+        <field name="name">Pesquisa de ponto</field>
+        <field name="res_model">employees.by.interval</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="employees_by_interval_menu" name="Pesquisa por dia" parent="search_menu_father"
+              action="employees_by_interval_action"/>
+
+    <record id="employees_by_interval_form" model="ir.ui.view">
+        <field name="name">Pesquisa de ponto</field>
+        <field name="model">employees.by.interval</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="inicial_day_to_search"/>
+                    <field name="search_filter"/>
+                    <field name="employee_company"
+                           attrs="{'invisible': [('search_filter','!=', 'company'), ('search_filter', '!=', 'department_company')], 'required':['|', ('search_filter', '=', 'department_company'), ('search_filter','=', 'company')]}"/>
+                    <field name="employee_department"
+                           attrs="{'invisible': [('search_filter','!=', 'department'), ('search_filter', '!=', 'department_company')], 'required': ['|', ('search_filter', '=', 'department_company'), ('search_filter','=', 'department')]}"/>
+                </group>
+                <group>
+                    <field name="punch_time_ids" readonly="1" attrs="{'invisible':[('punch_time_ids','=',[])]}"
+                           nolabel="1">
+                        <tree>
+                            <field name="attention" invisible="1"/>
+                            <field name="justification"/>
+                            <field name="employee_id"/>
+                            <field name="week_day" widget="badge"/>
+                            <field name="day" widget="badge" decoration-warning="attention=='warning'"
+                                   decoration-success="(attention =='success')" decoration-info="(attention =='info')"
+                                   decoration-danger="(attention =='danger')"/>
+                            <field name="punch_time" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="worked_hour_related"/>
+                            <button name="open_wizard" string="Cria justifi." class="btn btn-outline-primary" type="object"/>
+                            <button name="add_punch" type="object" string="Adc. Ponto manual"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="search_employees" class="btn btn-primary" string="Pesquisar"
+                            type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

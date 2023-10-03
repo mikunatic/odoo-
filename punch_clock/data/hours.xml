@@ -1,0 +1,196 @@
+<odoo>
+    <data noupdate="1">
+        <record id='hour0' model='hour'>
+            <field name='time'>00:00</field>
+        </record>
+
+        <record id='hour0_2' model='hour'>
+            <field name='time'>00:30</field>
+        </record>
+
+        <record id='hour1' model='hour'>
+            <field name='time'>01:00</field>
+        </record>
+
+        <record id='hour1_2' model='hour'>
+            <field name='time'>01:30</field>
+        </record>
+
+        <record id='hour2' model='hour'>
+            <field name='time'>02:00</field>
+        </record>
+
+        <record id='hour2_2' model='hour'>
+            <field name='time'>02:30</field>
+        </record>
+
+        <record id='hour3' model='hour'>
+            <field name='time'>03:00</field>
+        </record>
+
+        <record id='hour3_2' model='hour'>
+            <field name='time'>03:30</field>
+        </record>
+
+        <record id='hour4' model='hour'>
+            <field name='time'>04:00</field>
+        </record>
+
+        <record id='hour4_2' model='hour'>
+            <field name='time'>04:30</field>
+        </record>
+
+        <record id='hour5' model='hour'>
+            <field name='time'>05:00</field>
+        </record>
+
+        <record id='hour5_2' model='hour'>
+            <field name='time'>05:30</field>
+        </record>
+
+        <record id='hour6' model='hour'>
+            <field name='time'>06:00</field>
+        </record>
+
+        <record id='hour6_2' model='hour'>
+            <field name='time'>06:30</field>
+        </record>
+
+        <record id='hour7' model='hour'>
+            <field name='time'>07:00</field>
+        </record>
+
+        <record id='hour7_2' model='hour'>
+            <field name='time'>07:30</field>
+        </record>
+
+        <record id='hour8' model='hour'>
+            <field name='time'>08:00</field>
+        </record>
+
+        <record id='hour8_2' model='hour'>
+            <field name='time'>08:30</field>
+        </record>
+
+        <record id='hour9' model='hour'>
+            <field name='time'>09:00</field>
+        </record>
+
+        <record id='hour9_2' model='hour'>
+            <field name='time'>09:30</field>
+        </record>
+
+        <record id='hour10' model='hour'>
+            <field name='time'>10:00</field>
+        </record>
+
+        <record id='hour10_2' model='hour'>
+            <field name='time'>10:30</field>
+        </record>
+
+        <record id='hour11' model='hour'>
+            <field name='time'>11:00</field>
+        </record>
+
+        <record id='hour11_2' model='hour'>
+            <field name='time'>11:30</field>
+        </record>
+
+        <record id='hour12' model='hour'>
+            <field name='time'>12:00</field>
+        </record>
+
+        <record id='hour12_2' model='hour'>
+            <field name='time'>12:30</field>
+        </record>
+
+        <record id='hour13' model='hour'>
+            <field name='time'>13:00</field>
+        </record>
+
+        <record id='hour13_2' model='hour'>
+            <field name='time'>13:30</field>
+        </record>
+
+        <record id='hour14' model='hour'>
+            <field name='time'>14:00</field>
+        </record>
+
+        <record id='hour14_2' model='hour'>
+            <field name='time'>14:30</field>
+        </record>
+
+        <record id='hour15' model='hour'>
+            <field name='time'>15:00</field>
+        </record>
+
+        <record id='hour15_2' model='hour'>
+            <field name='time'>15:30</field>
+        </record>
+
+        <record id='hour16' model='hour'>
+            <field name='time'>16:00</field>
+        </record>
+
+        <record id='hour16_2' model='hour'>
+            <field name='time'>16:30</field>
+        </record>
+
+        <record id='hour17' model='hour'>
+            <field name='time'>17:00</field>
+        </record>
+
+        <record id='hour17_2' model='hour'>
+            <field name='time'>17:30</field>
+        </record>
+
+        <record id='hour18' model='hour'>
+            <field name='time'>18:00</field>
+        </record>
+
+        <record id='hour18_2' model='hour'>
+            <field name='time'>18:30</field>
+        </record>
+
+        <record id='hour19' model='hour'>
+            <field name='time'>19:00</field>
+        </record>
+
+        <record id='hour19_2' model='hour'>
+            <field name='time'>19:30</field>
+        </record>
+
+        <record id='hour20' model='hour'>
+            <field name='time'>20:00</field>
+        </record>
+
+        <record id='hour20_2' model='hour'>
+            <field name='time'>20:30</field>
+        </record>
+
+        <record id='hour21' model='hour'>
+            <field name='time'>21:00</field>
+        </record>
+
+        <record id='hour21_2' model='hour'>
+            <field name='time'>21:30</field>
+        </record>
+
+        <record id='hour22' model='hour'>
+            <field name='time'>22:00</field>
+        </record>
+
+        <record id='hour22_2' model='hour'>
+            <field name='time'>22:30</field>
+        </record>
+
+        <record id='hour23' model='hour'>
+            <field name='time'>23:00</field>
+        </record>
+
+        <record id='hour23_2' model='hour'>
+            <field name='time'>23:30</field>
+        </record>
+
+    </data>
+</odoo>

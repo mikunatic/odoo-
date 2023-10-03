@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="general_configuration_action" model="ir.actions.act_window">
+            <field name="name">general_configuration_action</field>
+            <field name="res_model">general.configuration</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="general_configuration_sub_menu" name="Configuração geral" parent="settings_menu" action="general_configuration_action"/>
+
+        <record id="general_configuration_tree_view" model="ir.ui.view">
+            <field name="name">general_configuration_tree_view</field>
+            <field name="model">general.configuration</field>
+            <field name="arch" type="xml">
+                <tree string="_tree">
+                    <field name="additional_night"/>
+                    <field name="interjourney"/>
+                    <field name="arrears_tolerance"/>
+                    <field name="intraday"/>
+                    <field name="virtual_time_validity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="general_configuration_form_view" model="ir.ui.view">
+            <field name="name">general_configuration_form_view</field>
+            <field name="model">general.configuration</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="additional_night"/>
+                                <field name="interjourney"/>
+                                <field name="intraday"/>
+                            </group>
+                            <group>
+                                <field name="arrears_tolerance"/>
+                                <field name="virtual_time_validity"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+</odoo>
