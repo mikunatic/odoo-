@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="1">
+        <record id='debit1' model='debit.virtual.bank'>
+            <field name='name'>Falta</field>
+        </record>
+
+        <record id='debit2' model='debit.virtual.bank'>
+            <field name='name'>Falta DSR</field>
+        </record>
+
+        <record id='debit3' model='debit.virtual.bank'>
+            <field name='name'>Faltas horas/atraso</field>
+        </record>
+    </data>
+</odoo>

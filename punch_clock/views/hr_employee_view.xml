@@ -14,15 +14,6 @@
                 <field name="overnight_stay"/>
                 <field name="general_configuration_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                 <field name="dsr_week_days_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
-                <field name="virtual_bank_ids">
-                    <tree>
-                        <field name="date"/>
-                        <field name="hours"/>
-                        <field name="employee_id"/>
-                        <field name="move_type"/>
-                        <field name="events_id"/>
-                    </tree>
-                </field>
 <!--                <field name="extract_virtual_hours">-->
 <!--                    <tree>-->
 <!--                        <field name="time"/>-->
@@ -32,10 +23,18 @@
 <!--                </field>-->
                 <field name="workday_id">
                     <tree editable="1">
+                        <field name="week_days_id"/>
                         <field name="entrance_hour" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                         <field name="departure_hour" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
-                        <field name="week_days_id"/>
                         <field name="intraday"/>
+                    </tree>
+                </field>
+                <field name="virtual_bank_ids">
+                    <tree>
+                        <field name="date"/>
+                        <field name="hours"/>
+                        <field name="employee_id"/>
+                        <field name="movement_type"/>
                     </tree>
                 </field>
             </xpath>

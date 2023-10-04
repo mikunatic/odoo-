@@ -1,0 +1,40 @@
+<odoo>
+    <record id="virtual_bank_action" model="ir.actions.act_window">
+        <field name="name">Banco Virtual</field>
+        <field name="res_model">virtual.bank</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="virtual_bank_menu" name="Banco Virtual" parent="punch_clock_menu" action="virtual_bank_action"/>
+
+    <record id="virtual_bank_tree" model="ir.ui.view">
+        <field name="name">virtual.bank</field>
+        <field name="model">virtual.bank</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="hours"/>
+                <field name="employee_id"/>
+                <field name="movement_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="virtual_bank_form" model="ir.ui.view">
+        <field name="name">virtual.bank.form</field>
+        <field name="model">virtual.bank</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="hours"/>
+                        <field name="employee_id"/>
+                        <field name="movement_type"/>
+                        <field name="seconds" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

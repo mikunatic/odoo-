@@ -7,5 +7,7 @@ class VirtualBank(models.Model):
     date = fields.Date("Dia")
     hours = fields.Char("Horas")
     employee_id = fields.Many2one('hr.employee')
-    move_type = fields.Selection([('credit','Crédito'),('debit','Débito')])
-    events_id = fields.Many2one('event')
+    movement_type = fields.Reference([('credit.virtual.bank', 'Crédito'),
+                                      ('debit.virtual.bank', 'Débito')],
+                                     string="Movimentação")
+    seconds = fields.Integer()

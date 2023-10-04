@@ -16,7 +16,6 @@ class ManageEmployeeTime(models.TransientModel):
     overtime_in_range = fields.Char(readonly=True)
     attears_hour_in_range = fields.Char(readonly=True)
     lack_dsr_and_lake = fields.Integer(readonly=True)
-
     month = fields.Selection([('01', 'Janeiro'),
                               ('02', 'Fevereiro'),
                               ('03', 'Março'),
@@ -32,8 +31,63 @@ class ManageEmployeeTime(models.TransientModel):
                               ], string="Mês")
     year = fields.Integer("Ano", default=int(date.today().year))
 
-    def deltatime_to_hours_minutes(self, deltatime):#objeto de tempo em uma lista onde são retornadas horas e minutos separadamente
+    # @api.onchange('punch_time_ids')
+    def create_virtual_bank_line(self):
+        #fazer create de linha do virtual bank de acordo com as informações dessa pesquisa
+        #verificar o tipo de horas e colocar de acordo
+        #fazer for nas linhas da pesquisa para facilitar na criação das linhas do virtual bank
+        # ESTÁ FALTANDO A MOVIMENTAÇÃO PARA QUANDO HÁ FALTA, E FALTA DSR, SÓ HÁ ATRASO NO DÉBITO
+        if self.punch_time_ids:
+            for line in self.punch_time_ids:
+                # if line.extra_hour_hour_related:
+                    punch_clock_id = line.punch_date.ids
+                    #verificar se já tem o registro com esse dia criado
+                    move = self.env['virtual.bank'].search([('employee_id','=',self.employee_id.id),
+                                                            ('date','=',line.day)])
+                    if not move:
+                        #Hora excedente
+                        if punch_clock_id.extra_hour != '00:00':
+                            hours, minutes = map(int, punch_clock_id.extra_hour.split(':'))
+                            vals_list = {
+                                'date': punch_clock_id.punch_date,
+                                'hours': punch_clock_id.extra_hour,
+                                'employee_id': self.employee_id.id,
+                                'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
+                                    [('name', '=like', 'HE 50%')]).id),
+                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
+                            }
+                            self.env['virtual.bank'].create(vals_list)
+                        #Hora extra de almoço
+                        if punch_clock_id.extra_hour_lunch != '00:00':
+                            hours, minutes = map(int, punch_clock_id.extra_hour_lunch.split(':'))
+                            vals_list = {
+                                'date': punch_clock_id.punch_date,
+                                'hours': punch_clock_id.extra_hour_lunch,
+                                'employee_id': self.employee_id.id,
+                                'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
+                                    [('name', '=like', 'HE 50%')]).id),
+                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
+                            }
+                            self.env['virtual.bank'].create(vals_list)
+                        #Atraso
+                        if punch_clock_id.attears != '00:00':
+                            hours, minutes = map(int, punch_clock_id.attears.split(':'))
+                            vals_list = {
+                                'date': punch_clock_id.punch_date,
+                                'hours': punch_clock_id.attears,
+                                'employee_id': self.employee_id.id,
+                                'movement_type': 'debit.virtual.bank, {}'.format(self.env['debit.virtual.bank'].search(
+                                    [('name', '=like', 'Faltas horas/atraso')]).id),
+                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
+                            }
+                            self.env['virtual.bank'].create(vals_list)
+                    else:
+                        pass
 
+                # fazer criação caso tenha bonus aqui
+                # verificar o tipo de hora, se é noturna, qual he
+
+    def deltatime_to_hours_minutes(self, deltatime):#objeto de tempo em uma lista onde são retornadas horas e minutos separadamente
         total_minutes_work = deltatime.days * 24 * 60 + deltatime.seconds // 60
         hours_work = total_minutes_work // 60
         minutes_work = total_minutes_work % 60
@@ -255,6 +309,7 @@ class ManageEmployeeTime(models.TransientModel):
 
         ctx = dict()
         ctx.update({
+            'default_onchange_virtual_bank': True,
             'default_month': self.month,
             'default_year': self.year,
             'default_employee_id': self.employee_id.id,

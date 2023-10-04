@@ -19,7 +19,8 @@ holiday,holiday,model_holiday,base.group_user,1,1,1,1
 create_justification,create_justification,model_create_justification,base.group_user,1,1,1,1
 employees_by_interval,employees_by_interval,model_employees_by_interval,base.group_user,1,1,1,1
 manual_point,manual_point,model_manual_point,base.group_user,1,1,1,1
-extract_virtual_hours,extract_virtual_hours,model_extract_virtual_hours,base.group_user,1,1,1,1
 hour_move,hour_move,model_hour_move,base.group_user,1,1,1,1
 hour,hour,model_hour,base.group_user,1,1,1,1
 virtual_bank,virtual_bank,model_virtual_bank,base.group_user,1,1,1,1
+debit_virtual_bank,debit_virtual_bank,model_debit_virtual_bank,base.group_user,1,1,1,1
+credit_virtual_bank,credit_virtual_bank,model_credit_virtual_bank,base.group_user,1,1,1,1
