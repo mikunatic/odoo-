@@ -6,5 +6,5 @@ class Syndicate(models.Model):
 
     name = fields.Char()
 
-    events_syndicate = fields.One2many('events.syndicate', 'syndicate_id', string="Eventos por Sindicato")
+    event_ids = fields.Many2many('event', string="Eventos")
 

@@ -78,3 +78,25 @@ class PunchTime(models.TransientModel):
             'context': ctx,
             'target': 'new',
         }
+
+    def add_event(self):
+        ctx = dict()
+        ctx.update({
+            'default_date': self.day,
+            'default_punch_clock_time_ids': self.punch_time.ids,
+            'default_arrears': self.punch_date.attears,
+            'default_employee_id': self.employee_id.id,
+            'default_extra_hour': self.punch_date.extra_hour,
+            'default_extra_hour_lunch': self.punch_date.extra_hour_lunch,
+            # 'default_movement_type': self.employee_id.id,
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Criar movimentação',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'add.event',
+            'views': [[self.env.ref("punch_clock.add_event_form_view").id, 'form']],
+            'context': ctx,
+            'target': 'new',
+        }

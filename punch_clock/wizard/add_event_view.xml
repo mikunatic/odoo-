@@ -1,0 +1,36 @@
+<odoo>
+    <record id="add_event_form_view" model="ir.ui.view">
+        <field name="name">Criar movimentação</field>
+        <field name="model">add.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date"/>
+                        <field name="employee_id"/>
+                        <field name="punch_clock_time_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    </group>
+                    <group>
+                        <field name="arrears"/>
+                        <field name="arrears_movement" attrs="{'invisible':[('arrears','=','00:00')],'required':[('arrears','!=','00:00')]}"
+                               options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <field name="extra_hour"/>
+                        <field name="extra_hour_movement" attrs="{'invisible':[('extra_hour','=','00:00')],'required':[('extra_hour','!=','00:00')]}"
+                               options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                    <group>
+                        <field name="extra_hour_lunch"/>
+                        <field name="extra_hour_lunch_movement" attrs="{'invisible':[('extra_hour_lunch','=','00:00')],'required':[('extra_hour_lunch','!=','00:00')]}"
+                               options="{'no_open':True, 'no_create':True, 'no_create_edit':True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="create_move" class="btn btn-primary" string="Criar"
+                        type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

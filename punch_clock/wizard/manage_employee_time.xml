@@ -45,8 +45,9 @@
                             <field name="attears_hour_related"/>
                             <field name="extra_hour_hour_related"/>
                             <field name="worked_hour_related"/>
-                            <button name="open_wizard" string="Cria justifi." class="btn btn-outline-primary" type="object"/>
-                            <button name="add_punch" type="object" string="Adc. Ponto manual"/>
+                            <button name="open_wizard" string="J" class="btn btn-outline-primary" type="object"/>
+                            <button name="add_punch" type="object" string="M" class="btn btn-outline-warning"/>
+                            <button name="add_event" type="object" string="E" class="btn btn-outline-success"/>
                         </tree>
                     </field>
                 </group>

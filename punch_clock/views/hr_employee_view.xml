@@ -29,14 +29,15 @@
                         <field name="intraday"/>
                     </tree>
                 </field>
-                <field name="virtual_bank_ids">
-                    <tree>
-                        <field name="date"/>
-                        <field name="hours"/>
-                        <field name="employee_id"/>
-                        <field name="movement_type"/>
-                    </tree>
-                </field>
+                <button name="open_virtual_bank" type="object" string="Abrir Banco Virtual"/>
+<!--                <field name="virtual_bank_ids">-->
+<!--                    <tree>-->
+<!--                        <field name="date"/>-->
+<!--                        <field name="hours"/>-->
+<!--                        <field name="employee_id"/>-->
+<!--                        <field name="movement_type"/>-->
+<!--                    </tree>-->
+<!--                </field>-->
             </xpath>
         </field>
     </record>

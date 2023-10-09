@@ -33,56 +33,47 @@ class ManageEmployeeTime(models.TransientModel):
 
     # @api.onchange('punch_time_ids')
     def create_virtual_bank_line(self):
-        #fazer create de linha do virtual bank de acordo com as informações dessa pesquisa
         #verificar o tipo de horas e colocar de acordo
-        #fazer for nas linhas da pesquisa para facilitar na criação das linhas do virtual bank
-        # ESTÁ FALTANDO A MOVIMENTAÇÃO PARA QUANDO HÁ FALTA, E FALTA DSR, SÓ HÁ ATRASO NO DÉBITO
         if self.punch_time_ids:
             for line in self.punch_time_ids:
-                # if line.extra_hour_hour_related:
-                    punch_clock_id = line.punch_date.ids
-                    #verificar se já tem o registro com esse dia criado
-                    move = self.env['virtual.bank'].search([('employee_id','=',self.employee_id.id),
-                                                            ('date','=',line.day)])
-                    if not move:
-                        #Hora excedente
-                        if punch_clock_id.extra_hour != '00:00':
-                            hours, minutes = map(int, punch_clock_id.extra_hour.split(':'))
-                            vals_list = {
-                                'date': punch_clock_id.punch_date,
-                                'hours': punch_clock_id.extra_hour,
-                                'employee_id': self.employee_id.id,
-                                'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
-                                    [('name', '=like', 'HE 50%')]).id),
-                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
-                            }
-                            self.env['virtual.bank'].create(vals_list)
-                        #Hora extra de almoço
-                        if punch_clock_id.extra_hour_lunch != '00:00':
-                            hours, minutes = map(int, punch_clock_id.extra_hour_lunch.split(':'))
-                            vals_list = {
-                                'date': punch_clock_id.punch_date,
-                                'hours': punch_clock_id.extra_hour_lunch,
-                                'employee_id': self.employee_id.id,
-                                'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
-                                    [('name', '=like', 'HE 50%')]).id),
-                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
-                            }
-                            self.env['virtual.bank'].create(vals_list)
-                        #Atraso
-                        if punch_clock_id.attears != '00:00':
-                            hours, minutes = map(int, punch_clock_id.attears.split(':'))
-                            vals_list = {
-                                'date': punch_clock_id.punch_date,
-                                'hours': punch_clock_id.attears,
-                                'employee_id': self.employee_id.id,
-                                'movement_type': 'debit.virtual.bank, {}'.format(self.env['debit.virtual.bank'].search(
-                                    [('name', '=like', 'Faltas horas/atraso')]).id),
-                                'seconds': (int(hours) * 3600) + (int(minutes) * 60),
-                            }
-                            self.env['virtual.bank'].create(vals_list)
-                    else:
-                        pass
+                punch_clock_id = line.punch_date
+                #verificar se já tem o registro com esse dia criado
+                move = self.env['virtual.bank'].search([('employee_id','=',self.employee_id.id),
+                                                        ('date','=',line.day)])
+                if not move:
+                    #Hora excedente
+                    if punch_clock_id.extra_hour != '00:00' and punch_clock_id.extra_hour != False:
+                        # Dar dinâmicamente um valor para este campo de acordo com as horas trabalhadas
+                        #se alguma hora do expediente od funcionário estivendo dentro do range de hora noturna
+                        #(22-5) ele recebe adicional noturno
+                        #primeiro verificar se o funcionario pode fazer alguma hora extra ou ter adicional noturno
+                        #caso não, entra como hora normal
+                        # credit =
+
+                        hours, minutes = map(int, punch_clock_id.extra_hour.split(':'))
+                        vals_list = {
+                            'date': punch_clock_id.punch_date,
+                            'hours': punch_clock_id.extra_hour,
+                            'employee_id': self.employee_id.id,
+                            'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
+                                [('name', '=like', 'HE 50%')]).id),
+                            'seconds': (int(hours) * 3600) + (int(minutes) * 60),
+                        }
+                        self.env['virtual.bank'].create(vals_list)
+                    #Hora extra de almoço
+                    if punch_clock_id.extra_hour_lunch != '00:00' and punch_clock_id.extra_hour_lunch != False:
+                        hours, minutes = map(int, punch_clock_id.extra_hour_lunch.split(':'))
+                        vals_list = {
+                            'date': punch_clock_id.punch_date,
+                            'hours': punch_clock_id.extra_hour_lunch,
+                            'employee_id': self.employee_id.id,
+                            'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
+                                [('name', '=like', 'HE 50%')]).id),
+                            'seconds': (int(hours) * 3600) + (int(minutes) * 60),
+                        }
+                        self.env['virtual.bank'].create(vals_list)
+                else:
+                    pass
 
                 # fazer criação caso tenha bonus aqui
                 # verificar o tipo de hora, se é noturna, qual he
@@ -154,6 +145,9 @@ class ManageEmployeeTime(models.TransientModel):
         #fazer dica das vals que mila falou
 
         while final_day_to_search >= day:
+            move = self.env['virtual.bank'].search([
+                ('employee_id','=',self.employee_id.id),('date','=',day)])
+
             # valida se a justificativa para o dia da iteração do while
             justifications = search_justifications.filtered(lambda x: day >= x.initial_date and day <= x.final_date)
             punch_ids = self.env['punch.clock'].search(

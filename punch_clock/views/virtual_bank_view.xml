@@ -5,17 +5,21 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="virtual_bank_menu" name="Banco Virtual" parent="punch_clock_menu" action="virtual_bank_action"/>
+<!--    <menuitem id="virtual_bank_menu" name="Banco Virtual" parent="punch_clock_menu" action="virtual_bank_action"/>-->
 
     <record id="virtual_bank_tree" model="ir.ui.view">
         <field name="name">virtual.bank</field>
         <field name="model">virtual.bank</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="id"/>
                 <field name="date"/>
                 <field name="hours"/>
                 <field name="employee_id"/>
-                <field name="movement_type"/>
+                <field name="reference_bool" invisible="1"/>
+                <field name="movement_type" widget="badge"
+                       decoration-success="movement_type == 'credit.virtual.bank'"
+                       decoration-danger="movement_type == 'debit.virtual.bank'"/>
             </tree>
         </field>
     </record>

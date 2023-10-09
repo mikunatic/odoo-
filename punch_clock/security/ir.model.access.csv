@@ -24,3 +24,4 @@ hour,hour,model_hour,base.group_user,1,1,1,1
 virtual_bank,virtual_bank,model_virtual_bank,base.group_user,1,1,1,1
 debit_virtual_bank,debit_virtual_bank,model_debit_virtual_bank,base.group_user,1,1,1,1
 credit_virtual_bank,credit_virtual_bank,model_credit_virtual_bank,base.group_user,1,1,1,1
+add_event,add_event,model_add_event,base.group_user,1,1,1,1

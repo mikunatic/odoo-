@@ -36,6 +36,7 @@
         'wizard/create_justification_view.xml',
         'wizard/employees_by_interval_view.xml',
         'wizard/manual_point_view.xml',
+        'wizard/add_event_view.xml',
         'data/general_configuration.xml',
         'data/hours.xml',
     ],
