@@ -5,4 +5,5 @@ from . import create_justification
 from . import employees_by_interval
 from . import punch_clock_integration
 from . import manual_point
-from . import add_event
+from . import bank_register
+

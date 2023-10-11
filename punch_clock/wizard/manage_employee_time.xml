@@ -45,9 +45,13 @@
                             <field name="attears_hour_related"/>
                             <field name="extra_hour_hour_related"/>
                             <field name="worked_hour_related"/>
-                            <button name="open_wizard" string="J" class="btn btn-outline-primary" type="object"/>
-                            <button name="add_punch" type="object" string="M" class="btn btn-outline-warning"/>
-                            <button name="add_event" type="object" string="E" class="btn btn-outline-success"/>
+                            <button name="open_wizard" string="J" class="btn btn-outline-primary" type="object"
+                                    help="Botão para criação de Evento"/>
+                            <button name="add_punch" type="object" string="M" class="btn btn-outline-warning"
+                                    help="Botão para criação de Evento"/>
+                            <button name="return_extra_hours" type="object" string="E" class="btn btn-outline-success"
+                                    attrs="{'invisible':[('allow_move_creation','=',False)]}" help="Botão para criação de Evento"/>
+                            <field name="allow_move_creation" invisible="1"/>
                         </tree>
                     </field>
                 </group>

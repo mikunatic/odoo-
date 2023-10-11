@@ -16,6 +16,7 @@ class ManageEmployeeTime(models.TransientModel):
     overtime_in_range = fields.Char(readonly=True)
     attears_hour_in_range = fields.Char(readonly=True)
     lack_dsr_and_lake = fields.Integer(readonly=True)
+
     month = fields.Selection([('01', 'Janeiro'),
                               ('02', 'Fevereiro'),
                               ('03', 'Março'),
@@ -31,74 +32,29 @@ class ManageEmployeeTime(models.TransientModel):
                               ], string="Mês")
     year = fields.Integer("Ano", default=int(date.today().year))
 
-    # @api.onchange('punch_time_ids')
-    def create_virtual_bank_line(self):
-        #verificar o tipo de horas e colocar de acordo
-        if self.punch_time_ids:
-            for line in self.punch_time_ids:
-                punch_clock_id = line.punch_date
-                #verificar se já tem o registro com esse dia criado
-                move = self.env['virtual.bank'].search([('employee_id','=',self.employee_id.id),
-                                                        ('date','=',line.day)])
-                if not move:
-                    #Hora excedente
-                    if punch_clock_id.extra_hour != '00:00' and punch_clock_id.extra_hour != False:
-                        # Dar dinâmicamente um valor para este campo de acordo com as horas trabalhadas
-                        #se alguma hora do expediente od funcionário estivendo dentro do range de hora noturna
-                        #(22-5) ele recebe adicional noturno
-                        #primeiro verificar se o funcionario pode fazer alguma hora extra ou ter adicional noturno
-                        #caso não, entra como hora normal
-                        # credit =
-
-                        hours, minutes = map(int, punch_clock_id.extra_hour.split(':'))
-                        vals_list = {
-                            'date': punch_clock_id.punch_date,
-                            'hours': punch_clock_id.extra_hour,
-                            'employee_id': self.employee_id.id,
-                            'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
-                                [('name', '=like', 'HE 50%')]).id),
-                            'seconds': (int(hours) * 3600) + (int(minutes) * 60),
-                        }
-                        self.env['virtual.bank'].create(vals_list)
-                    #Hora extra de almoço
-                    if punch_clock_id.extra_hour_lunch != '00:00' and punch_clock_id.extra_hour_lunch != False:
-                        hours, minutes = map(int, punch_clock_id.extra_hour_lunch.split(':'))
-                        vals_list = {
-                            'date': punch_clock_id.punch_date,
-                            'hours': punch_clock_id.extra_hour_lunch,
-                            'employee_id': self.employee_id.id,
-                            'movement_type': 'credit.virtual.bank, {}'.format(self.env['credit.virtual.bank'].search(
-                                [('name', '=like', 'HE 50%')]).id),
-                            'seconds': (int(hours) * 3600) + (int(minutes) * 60),
-                        }
-                        self.env['virtual.bank'].create(vals_list)
-                else:
-                    pass
-
-                # fazer criação caso tenha bonus aqui
-                # verificar o tipo de hora, se é noturna, qual he
-
-    def deltatime_to_hours_minutes(self, deltatime):#objeto de tempo em uma lista onde são retornadas horas e minutos separadamente
+    def deltatime_to_hours_minutes(self,
+                                   deltatime):  # objeto de tempo em uma lista onde são retornadas horas e minutos separadamente
         total_minutes_work = deltatime.days * 24 * 60 + deltatime.seconds // 60
         hours_work = total_minutes_work // 60
         minutes_work = total_minutes_work % 60
         return hours_work, minutes_work
 
-    def compute_worked_hours_mounth(self):#
+    def compute_worked_hours_mounth(self):  #
         worked_hours = timedelta()
         overtime = timedelta()
         arrears_hour = timedelta()
         lack_dsr_and_lack = 0
 
-        #passa pelas batidas e soma os atributos acima de cada batida
+        # passa pelas batidas e soma os atributos acima de cada batida
         for rec in self.punch_time_ids:
             if rec.punch_date:
                 worked_hours += rec.punch_date.compute_virtual_time()
                 overtime += rec.punch_date.compute_extra_hour()
                 arrears_hour += rec.punch_date.compute_attears()
-            elif rec.justification.id == self.env['remoteness'].search([('hypothesis','=','Falta DSR')]).id:
+            elif rec.justification.id == self.env['remoteness'].search([('hypothesis', '=', 'Falta DSR')]).id:
                 lack_dsr_and_lack += 1
-            elif rec.justification.id == self.env['remoteness'].search([('hypothesis','=','Faltas não justificadas')]).id:
+            elif rec.justification.id == self.env['remoteness'].search(
+                    [('hypothesis', '=', 'Faltas não justificadas')]).id:
                 lack_dsr_and_lack += 1
 
         # separa hora e minuto de cada atributo
@@ -106,23 +62,23 @@ class ManageEmployeeTime(models.TransientModel):
         format_overtime = self.deltatime_to_hours_minutes(overtime)
         format_arrears = self.deltatime_to_hours_minutes(arrears_hour)
         # formata os campos acima pra string
-        self.worked_hours_in_range = "{:02d}:{:02d}".format(format_work[0],format_work[1])
+        self.worked_hours_in_range = "{:02d}:{:02d}".format(format_work[0], format_work[1])
         self.lack_dsr_and_lake = lack_dsr_and_lack
-        self.overtime_in_range = "{:02d}:{:02d}".format(format_overtime[0],format_overtime[1])
-        self.attears_hour_in_range = "{:02d}:{:02d}".format(format_arrears[0],format_arrears[1])
+        self.overtime_in_range = "{:02d}:{:02d}".format(format_overtime[0], format_overtime[1])
+        self.attears_hour_in_range = "{:02d}:{:02d}".format(format_arrears[0], format_arrears[1])
 
     def search_employee_punch(self):
-        #apagar todas a lista de batidas pra evitar problemas
+        # apagar todas a lista de batidas pra evitar problemas
         if self.punch_time_ids:
             self.punch_time_ids.unlink()
 
         # definindo o range de pesquisa
         today = datetime.today().date()
-        inicial_day_to_search = today.replace(year=self.year, month=int(self.month),day=1)
+        inicial_day_to_search = today.replace(year=self.year, month=int(self.month), day=1)
         final_day_to_search = inicial_day_to_search + relativedelta(months=1)
         final_day_to_search -= timedelta(days=1)
 
-        #pesquisa feriados
+        # pesquisa feriados
         holiday = self.env['holiday'].search([('inicial_date', '>=', inicial_day_to_search),
                                               ('final_date', '<=', final_day_to_search)])
 
@@ -131,22 +87,25 @@ class ManageEmployeeTime(models.TransientModel):
         records = []
         day = inicial_day_to_search
 
-        #pesquisa todos os pontos do funcionario
-        punch_clock_ids = self.env['punch.clock'].search([('punch_date','>=',inicial_day_to_search),('punch_date','<=',final_day_to_search),('employee_pis','=',self.employee_id.employee_pis)])
+        # pesquisa todos os pontos do funcionario
+        punch_clock_ids = self.env['punch.clock'].search(
+            [('punch_date', '>=', inicial_day_to_search), ('punch_date', '<=', final_day_to_search),
+             ('employee_pis', '=', self.employee_id.employee_pis)])
         punch_ids_date = punch_clock_ids.mapped('punch_date')
 
-        #pesquisa justificativas do funcionario
+        # pesquisa justificativas do funcionario
         search_justifications = self.env['employee.remoteness'].sudo().search(
-            [('employee_id', '=',self.employee_id.id), ('initial_date', '>=', inicial_day_to_search),
+            [('employee_id', '=', self.employee_id.id), ('initial_date', '>=', inicial_day_to_search),
              ('final_date', '<=', final_day_to_search)])
 
-        #!!!!!!!IMPORTANTE!!!!!!!
+        # !!!!!!!IMPORTANTE!!!!!!!
 
-        #fazer dica das vals que mila falou
+        # fazer dica das vals que mila falou
 
         while final_day_to_search >= day:
-            move = self.env['virtual.bank'].search([
-                ('employee_id','=',self.employee_id.id),('date','=',day)])
+            move = self.env['extract.virtual.hours'].search([
+                ('employee_id', '=', self.employee_id.id), ('date', '=', day)])
+            allow_move_creation = True if not move else False
 
             # valida se a justificativa para o dia da iteração do while
             justifications = search_justifications.filtered(lambda x: day >= x.initial_date and day <= x.final_date)
@@ -157,70 +116,74 @@ class ManageEmployeeTime(models.TransientModel):
             # valida se a feriados para o dia da iteração do while
             is_holiday = holiday.filtered(lambda x: day <= x.final_date and day >= x.inicial_date)
 
-            #verifica se é dia de trabalho
+            # verifica se é dia de trabalho
             day_object = self.env['week.days'].search(
                 [('day', '=', day.strftime('%A').capitalize())]).id
             workday = self.employee_id.workday_id.week_days_id.mapped('id')
 
-            if day in dsr_lack:#verifica se tem alguma falta dsr
+            if day in dsr_lack:  # verifica se tem alguma falta dsr
                 dsr_lack.remove(day)
                 vals = {
                     'manage_employee_time_id': self.id,
                     'employee_id': self.employee_id.id,
                     'punch_date': punch_ids.ids,
                     'punch_time': punch_time.ids if punch_ids else False,
-                    'justification': self.env['remoteness'].search([('hypothesis','=','Falta DSR')]).id,
+                    'justification': self.env['remoteness'].search([('hypothesis', '=', 'Falta DSR')]).id,
                     'attention': 'danger',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
-            elif is_holiday: #verifica se existe feriado pro funcionario
+            elif is_holiday:  # verifica se existe feriado pro funcionario
                 vals = {
                     'manage_employee_time_id': self.id,
                     'punch_date': punch_ids.ids,
                     'punch_time': punch_time.ids,
                     'employee_id': self.employee_id.id,
-                    'justification': self.env['remoteness'].search([('hypothesis','=','Feriados')]).id,
+                    'justification': self.env['remoteness'].search([('hypothesis', '=', 'Feriados')]).id,
                     'attention': 'warning' if len(punch_time) != 4 else 'success',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
-            elif day_object == self.employee_id.dsr_week_days_id.id:#registra dsr do funcionario
+            elif day_object == self.employee_id.dsr_week_days_id.id:  # registra dsr do funcionario
                 vals = {
                     'manage_employee_time_id': self.id,
                     'employee_id': self.employee_id.id,
                     'punch_date': punch_ids.ids,
                     'punch_time': punch_time.ids if punch_ids else False,
-                    'justification': self.env['remoteness'].search([('hypothesis','=','DSR')]).id,
+                    'justification': self.env['remoteness'].search([('hypothesis', '=', 'DSR')]).id,
                     'attention': 'success',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
             elif day_object not in workday and day_object != self.employee_id.dsr_week_days_id.id:
-                #dia compensado ou seja dia que não esta na lista de trabalho(mudar depois colocar dia compensado na lista porem com boolean para diferenciar)
+                # dia compensado ou seja dia que não esta na lista de trabalho(mudar depois colocar dia compensado na lista porem com boolean para diferenciar)
                 vals = {
                     'manage_employee_time_id': self.id,
                     'employee_id': self.employee_id.id,
                     'punch_date': punch_ids.ids,
                     'punch_time': punch_time.ids if punch_ids else False,
-                    'justification': self.env['remoteness'].sudo().search([('hypothesis','=','Dia compensado')]).id,
+                    'justification': self.env['remoteness'].sudo().search([('hypothesis', '=', 'Dia compensado')]).id,
                     'attention': 'success',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
-            elif day in punch_ids_date:#se os pontos existirem eles serão criado cenario ideal
+            elif day in punch_ids_date:  # se os pontos existirem eles serão criado cenario ideal
                 vals = {
                     'manage_employee_time_id': self.id,
                     'punch_date': punch_ids.ids,
@@ -229,21 +192,22 @@ class ManageEmployeeTime(models.TransientModel):
                     'justification': justifications[0].reason.id if justifications else False,
                     'attention': 'warning' if len(punch_time) != 4 else 'info',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
-            elif not justifications:#falta não justificada
+            elif not justifications:  # falta não justificada
                 # verifica o proximo dsr pra ser descontado como falta dsr
                 original_day = day
-                while(day.strftime('%A').capitalize() != self.employee_id.dsr_week_days_id.day):
+                while (day.strftime('%A').capitalize() != self.employee_id.dsr_week_days_id.day):
                     day += timedelta(days=1)
                 if day not in dsr_lack:
                     dsr_lack.append(day)
                 day = original_day
 
-                #verifica se tem feriado pra descontar caso haja falta
+                # verifica se tem feriado pra descontar caso haja falta
                 while (day.strftime('%A').capitalize() != 'Domingo'):
                     day += timedelta(days=1)
                 sunday = day
@@ -267,43 +231,49 @@ class ManageEmployeeTime(models.TransientModel):
                     'employee_id': self.employee_id.id,
                     'punch_date': punch_ids.ids,
                     'punch_time': punch_time.ids if punch_ids else False,
-                    'justification': self.env['remoteness'].search([('hypothesis','=','Faltas não justificadas')]).id,
+                    'justification': self.env['remoteness'].search([('hypothesis', '=', 'Faltas não justificadas')]).id,
                     'attention': 'warning' if len(punch_time) != 4 else 'danger',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
 
-            else:#se tiver justificativa
+            else:  # se tiver justificativa
                 vals = {
                     'manage_employee_time_id': self.id,
                     'employee_id': self.employee_id.id,
                     'justification': justifications[0].reason.id,
                     'attention': 'warning' if len(punch_time) != 4 else 'danger',
                     'week_day': day.strftime('%A').capitalize(),
-                    'day': day
+                    'day': day,
+                    'allow_move_creation': allow_move_creation,
                 }
                 record_created = self.env['punch.time'].create(vals)
                 records.append(record_created.id)
             day += timedelta(days=1)
 
-        #se houver falta de um dsr que não esta no range de pesquisa adiciona falta no proximo dsr
+        # se houver falta de um dsr que não esta no range de pesquisa adiciona falta no proximo dsr
         for rec in dsr_lack:
+            move = self.env['extract.virtual.hours'].search([
+                ('employee_id', '=', self.employee_id.id), ('date', '=', rec)])
+            allow_move_creation = True if not move else False
+
             vals = {
                 'manage_employee_time_id': self.id,
                 'employee_id': self.employee_id.id,
                 'justification': self.env['remoteness'].search([('hypothesis', '=', 'Falta DSR')]).id,
                 'week_day': rec.strftime('%A').capitalize(),
                 'attention': 'danger',
-                'day': rec
+                'day': rec,
+                'allow_move_creation':allow_move_creation,
             }
             record_created = self.env['punch.time'].create(vals)
             records.append(record_created.id)
 
         ctx = dict()
         ctx.update({
-            'default_onchange_virtual_bank': True,
             'default_month': self.month,
             'default_year': self.year,
             'default_employee_id': self.employee_id.id,
@@ -323,3 +293,7 @@ class ManageEmployeeTime(models.TransientModel):
             'context': ctx,
             'target': 'new'
         }
+
+
+
+

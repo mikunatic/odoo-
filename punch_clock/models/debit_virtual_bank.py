@@ -1,7 +1,8 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
-class DebitVirtualBank(models.Model):
+class CreditVirtualBank(models.Model):
     _name = 'debit.virtual.bank'
+    _rec_name = 'debit_name'
 
-    name = fields.Char("Nome")
+    debit_name = fields.Char('evento')

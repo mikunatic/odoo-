@@ -1,7 +1,8 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class CreditVirtualBank(models.Model):
     _name = 'credit.virtual.bank'
+    _rec_name = 'credit_name'
 
-    name = fields.Char("Nome")
+    credit_name = fields.Char('evento')

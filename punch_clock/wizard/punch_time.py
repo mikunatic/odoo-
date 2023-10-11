@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class PunchTime(models.TransientModel):
@@ -17,7 +17,32 @@ class PunchTime(models.TransientModel):
     justification = fields.Many2one('remoteness', string="Justificativa")
     week_day = fields.Char(string='Dia da semana')
     day = fields.Date(string='Dia')
-    attention = fields.Selection([('warning','Atenção'),('success','Sucesso'),('info','Info'),('danger','Danger')])
+    attention = fields.Selection(
+        [('warning', 'Atenção'), ('success', 'Sucesso'), ('info', 'Info'), ('danger', 'Danger')])
+    allow_move_creation = fields.Boolean()
+
+    def return_extra_hours(self):
+        ctx = {
+            'default_employee_id': self.manage_employee_time_id.employee_id.id,
+            'default_date': self.day,
+            'default_punch_clock_time_ids': self.punch_time.ids,
+            'default_extra_hour_lunch': self.punch_date.extra_hour_lunch,
+            'default_extra_hour': self.punch_date.extra_hour,
+            'default_arrears_hour': self.punch_date.attears,
+            'default_extra_night_hours': self.punch_date.attears,
+            'default_nighttime_supplement': self.punch_date.attears,
+            'default_manage_employee_time_id': self.manage_employee_time_id.id,
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Criar movimentações',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'bank.register',
+            'views': [[self.env.ref('punch_clock.bank_register_form_view').id, 'form']],
+            'target': 'new',
+            'context': ctx
+        }
 
     def open_wizard(self):
         active_model = self.env.context.get("active_model")
@@ -33,7 +58,7 @@ class PunchTime(models.TransientModel):
         else:
             view = "punch_clock.wizard_create_justification_form"
             ctx = self._context.copy()
-            ctx.update({'parent_form':  self.employees_by_interval_id.id,
+            ctx.update({'parent_form': self.employees_by_interval_id.id,
                         'child_form': self.id,
                         'employee_id': self.employee_id.id,
                         'initial_date': self.day,
@@ -75,28 +100,6 @@ class PunchTime(models.TransientModel):
             'view_mode': 'form',
             'res_model': 'manual.point',
             'views': [[self.env.ref(view).id, 'form']],
-            'context': ctx,
-            'target': 'new',
-        }
-
-    def add_event(self):
-        ctx = dict()
-        ctx.update({
-            'default_date': self.day,
-            'default_punch_clock_time_ids': self.punch_time.ids,
-            'default_arrears': self.punch_date.attears,
-            'default_employee_id': self.employee_id.id,
-            'default_extra_hour': self.punch_date.extra_hour,
-            'default_extra_hour_lunch': self.punch_date.extra_hour_lunch,
-            # 'default_movement_type': self.employee_id.id,
-        })
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Criar movimentação',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'add.event',
-            'views': [[self.env.ref("punch_clock.add_event_form_view").id, 'form']],
             'context': ctx,
             'target': 'new',
         }

@@ -25,7 +25,12 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="event_ids" widget="many2many_tags"/>
+                        <field name="events_syndicate">
+                            <tree editable="top">
+                                <field name="value"/>
+                                <field name="event_id" decoration-bf="1"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
             </form>

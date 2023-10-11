@@ -1,0 +1,38 @@
+<odoo>
+    <record id="bank_register_form_view" model="ir.ui.view">
+        <field name="name">Registrar evento</field>
+        <field name="model">bank.register</field>
+        <field name="arch" type="xml">
+            <form>
+                <!--Invisible fields-->
+                <group>
+                    <group>
+                        <field name="employee_id" readonly="True"/>
+                        <field name="punch_clock_time_ids" widget="many2many_tags" readonly="True"/>
+                        <field name="extra_hour_lunch" readonly="True"/>
+                        <field name="extra_night_hours" readonly="True"/>
+                    </group>
+                    <group>
+                        <field name="date" readonly="True"/>
+                        <field name="extra_hour" readonly="True"/>
+                        <field name="arrears_hour" readonly="True"/>
+                        <field name="nighttime_supplement" readonly="True"/>
+                    </group>
+                </group>
+                <field name="virtual_hours_lines_ids">
+                    <tree editable="1" create="false" delete="false">
+                        <field name="total_hours"/>
+                        <field name="credit_virtual_bank_id" attrs="{'readonly': [('events','=', 'debit')],
+                        'required':[('events','!=','debit')]}"/>
+                        <field name="debit_virtual_bank_id"  attrs="{'readonly': [('events','!=', 'debit')],
+                        'required':[('events','=','debit')]}"/>
+                        <field name="events" readonly="1"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="confirm" type="object" string="Adicionar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

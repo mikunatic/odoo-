@@ -5,39 +5,38 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="load_virtual_bank" type="object" string="Banco virtual de horas" icon="fa-clock-o"
+                        class="oe_stat_button"/>
+
+            </xpath>
             <xpath expr="//field[@name='job_id']" position="replace">
+
                 <field name="employee_pis"/>
-<!--                <field name="company_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>-->
+                <!--                <field name="company_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>-->
                 <field name="function_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                 <field name="syndicate_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
-                <field name="event_ids" widget="many2many_tags" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
+                <field name="event_ids" widget="many2many_tags"
+                       options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                 <field name="overnight_stay"/>
-                <field name="general_configuration_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
+                <field name="general_configuration_id"
+                       options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                 <field name="dsr_week_days_id" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
-<!--                <field name="extract_virtual_hours">-->
-<!--                    <tree>-->
-<!--                        <field name="time"/>-->
-<!--                        <field name="day"/>-->
-<!--                        <field name="hour_move_id"/>-->
-<!--                    </tree>-->
-<!--                </field>-->
+                <!--                <field name="extract_virtual_hours">-->
+                <!--                    <tree>-->
+                <!--                        <field name="time"/>-->
+                <!--                        <field name="day"/>-->
+                <!--                        <field name="hour_move_id"/>-->
+                <!--                    </tree>-->
+                <!--                </field>-->
                 <field name="workday_id">
                     <tree editable="1">
-                        <field name="week_days_id"/>
                         <field name="entrance_hour" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
                         <field name="departure_hour" options="{'no_open':True,'no_create_edit':True,'no_create':True}"/>
+                        <field name="week_days_id"/>
                         <field name="intraday"/>
                     </tree>
                 </field>
-                <button name="open_virtual_bank" type="object" string="Abrir Banco Virtual"/>
-<!--                <field name="virtual_bank_ids">-->
-<!--                    <tree>-->
-<!--                        <field name="date"/>-->
-<!--                        <field name="hours"/>-->
-<!--                        <field name="employee_id"/>-->
-<!--                        <field name="movement_type"/>-->
-<!--                    </tree>-->
-<!--                </field>-->
             </xpath>
         </field>
     </record>

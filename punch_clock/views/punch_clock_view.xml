@@ -45,10 +45,12 @@
                     <group>
                         <field name="employee_pis"/>
                         <field name="worked_hours"/>
+                        <field name="nighttime_supplement"/>
                         <field name="lunch_time"/>
                         <field name="attears"/>
                         <field name="extra_hour"/>
                         <field name="extra_hour_lunch"/>
+                        <field name="extra_night_hours"/>
                     </group>
                 </group>
 <!--                    <group>-->

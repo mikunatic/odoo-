@@ -1,0 +1,38 @@
+<odoo>
+    <data noupdate="1">
+        <record id='credit1' model='credit.virtual.bank'>
+            <field name='credit_name'>HE 50%</field>
+        </record>
+
+        <record id='credit2' model='credit.virtual.bank'>
+            <field name='credit_name'>HE 60%</field>
+        </record>
+
+        <record id='credit3' model='credit.virtual.bank'>
+            <field name='credit_name'>HE 75%</field>
+        </record>
+
+        <record id='credit4' model='credit.virtual.bank'>
+            <field name='credit_name'>HE 80%</field>
+        </record>
+
+        <record id='credit5' model='credit.virtual.bank'>
+            <field name='credit_name'>HE 100%</field>
+        </record>
+
+        <record id='credit6' model='credit.virtual.bank'>
+            <field name='credit_name'>Adicional Noturno</field>
+        </record>
+
+        <record id='credit7' model='credit.virtual.bank'>
+            <field name='credit_name'>Deslocamento/Transferência</field>
+        </record>
+
+        <record id='credit8' model='credit.virtual.bank'>
+            <field name='credit_name'>Pernoite</field>
+        </record>
+
+    </data>
+</odoo>
+
+

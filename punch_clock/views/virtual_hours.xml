@@ -1,0 +1,42 @@
+<odoo>
+    <record id="virtual_hours_action" model="ir.actions.act_window">
+        <field name="name">Banco de horas virtuais</field>
+        <field name="res_model">extract.virtual.hours</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <record id="virtual_hours_tree" model="ir.ui.view">
+        <field name="name">Banco de horas virtuais</field>
+        <field name="model">extract.virtual.hours</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="employee_id" decoration-bf="1"/>
+                <field name="date"/>
+                <field name="movement_type" widget="badge"/>
+                <field name="hours" decoration-success="(reference_bool == True)" decoration-danger="(reference_bool == False)"/>
+                <field name="balance" decoration-bf="1"/>
+                <field name="balance_in_seconds" invisible="1"/>
+                <field name="reference_bool" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="virtual_hours_menu_form_view" model="ir.ui.view">
+        <field name="name">Banco de horas virtuais</field>
+        <field name="model">extract.virtual.hours</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="date"/>
+                        <field name="hours"/>
+                        <field name="movement_type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

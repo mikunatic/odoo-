@@ -12,6 +12,8 @@ class PunchClockIntegration(models.Model):
     punch_date = fields.Date(string="Dia da Batida")
     punch_ids = fields.One2many('punch.clock.time', 'day_id', string="Horário da batida")
     employee_pis = fields.Char()
+    extra_night_hours = fields.Char(string="Hora extra noturna")
+    nighttime_supplement = fields.Char(string="Adicional noturno")
     lunch_time = fields.Char(string="Horário de almoço")
     worked_hours = fields.Char(compute="compute_virtual_time", string="Horas normais")
     hour_punch = fields.Integer()
@@ -51,23 +53,16 @@ class PunchClockIntegration(models.Model):
         }
         self.env['punch.clock.time'].create(vals)
 
-
         # !!!!!!!!!!!
-
 
     # FUNÇÃO DE HORA EXTRA E ATRASO PODERIAM SER SÓ UMA FUNÇÃO, A PROCESSAMENTO DESNECESSARIO
     # ANOTAÇÃO THIAGO
 
-
-        # !!!!!!!!!!!
-
-
-
-
-
-
+    # !!!!!!!!!!!
 
     def compute_extra_hour(self):
+        extra_hour_night = timedelta()
+        start_night_time = datetime.now().replace(hour=22, minute=0, second=0, microsecond=0)
         for rec in self:
             day_object = self.env['week.days'].search(
                 [('day', '=', self.punch_date.strftime('%A').capitalize())]).id
@@ -85,13 +80,24 @@ class PunchClockIntegration(models.Model):
                 departure_punch = rec.punch_ids[-1].time_punch.split(':')
                 now = datetime.now()
                 ideal_time = departure_hour.split(':')
-                punch_exit = datetime(year=now.year, month=now.month, day=now.day, hour=int(departure_punch[0]), minute=int(departure_punch[1]))
-                ideal_exit = datetime(year=now.year, month=now.month, day=now.day, hour=int(ideal_time[0]), minute=int(ideal_time[1]))
+                punch_exit = datetime(year=now.year, month=now.month, day=now.day, hour=int(departure_punch[0]),
+                                      minute=int(departure_punch[1]))
+                ideal_exit = datetime(year=now.year, month=now.month, day=now.day, hour=int(ideal_time[0]),
+                                      minute=int(ideal_time[1]))
+
+                if punch_exit > start_night_time:
+                    extra_hour_night = punch_exit - start_night_time
+                    format_night_hours = self.deltatime_to_hours_minutes(extra_hour_night)
+                    self.extra_night_hours = "{:02d}:{:02d}".format(format_night_hours[0], format_night_hours[1])
+                else:
+                    self.extra_night_hours = "{:02d}:{:02d}".format(0, 0)
 
                 entrance_punch = rec.punch_ids[0].time_punch.split(':')
                 ideal_entrance_config = entrance_time.split(':')
-                ideal_entrance = datetime(year=now.year, month=now.month, day=now.day, hour=int(ideal_entrance_config[0]), minute=int(ideal_entrance_config[1]))
-                punch_entrance = datetime(year=now.year, month=now.month, day=now.day, hour=int(entrance_punch[0]),minute=int(entrance_punch[1]))
+                ideal_entrance = datetime(year=now.year, month=now.month, day=now.day,
+                                          hour=int(ideal_entrance_config[0]), minute=int(ideal_entrance_config[1]))
+                punch_entrance = datetime(year=now.year, month=now.month, day=now.day, hour=int(entrance_punch[0]),
+                                          minute=int(entrance_punch[1]))
 
                 if ideal_entrance > punch_entrance:
                     arrive_early = ideal_entrance - punch_entrance
@@ -100,6 +106,7 @@ class PunchClockIntegration(models.Model):
 
                 if punch_exit > ideal_exit:
                     extra_hour = (punch_exit - ideal_exit) + arrive_early
+                    extra_hour -= extra_hour_night
                     if extra_hour > timedelta(minutes=rec.employee_id.general_configuration_id.arrears_tolerance):
                         format_excess = rec.deltatime_to_hours_minutes(extra_hour)
                         rec.extra_hour = "{:02d}:{:02d}".format(format_excess[0], format_excess[1])
@@ -133,12 +140,11 @@ class PunchClockIntegration(models.Model):
                 time = rec.punch_ids[0].time_punch.split(':')
                 ideal_time = entrance_time.split(':')
                 date_time_1 = timedelta(hours=int(time[0]), minutes=int(time[1]))
-                date_time_2 = timedelta(hours=int(ideal_time[0]),minutes=int(ideal_time[1]))
+                date_time_2 = timedelta(hours=int(ideal_time[0]), minutes=int(ideal_time[1]))
 
                 ideal_departure = departure_hour.split(':')
-                punch_exit = timedelta(hours=int(ideal_departure[0]),minutes=int(ideal_departure[1]))
+                punch_exit = timedelta(hours=int(ideal_departure[0]), minutes=int(ideal_departure[1]))
                 ideal_exit = timedelta(hours=int(ideal_time[0]), minutes=int(ideal_time[1]))
-
 
                 if date_time_1 > date_time_2:
                     arrears = date_time_1 - date_time_2
@@ -195,6 +201,8 @@ class PunchClockIntegration(models.Model):
                 return timedelta(0)
 
     def compute_virtual_time(self):
+        now = datetime.now()
+        start_night_time = datetime.now().replace(hour=22, minute=0, second=0, microsecond=0)
         for rec in self:
             worked_hours_in_day = timedelta()
             # verifica se as batidas são pares
@@ -206,7 +214,6 @@ class PunchClockIntegration(models.Model):
                     if i + 1 < len(rec.punch_ids):
                         time_1 = rec.punch_ids[i].time_punch.split(':')
                         time_2 = rec.punch_ids[i + 1].time_punch.split(':')
-                        now = datetime.now()
                         date_time_1 = datetime(year=now.year, month=now.month, day=now.day, hour=int(time_1[0]),
                                                minute=int(time_1[1]))
                         date_time_2 = datetime(year=now.year, month=now.month, day=now.day, hour=int(time_2[0]),
@@ -214,10 +221,23 @@ class PunchClockIntegration(models.Model):
                         worked_hours_in_day += date_time_2 - date_time_1
                 rec.compute_lunch_time()
                 rec.compute_attears()
+
                 worked_hours_in_day -= rec.compute_extra_hour()
 
                 # self.lunch_time = rec.punch_ids[(len(rec.punch_ids)/2)+1] - rec.punch_ids[len(rec.punch_ids)/2]
             horas = worked_hours_in_day.seconds // 3600  # 1 hora = 3600 segundos
             minutos = (worked_hours_in_day.seconds % 3600) // 60
-            rec.worked_hours = "{:02d}:{:02d}".format(horas, minutos)
+            get_punch = rec.punch_ids[0].time_punch.split(':')
+            convert = datetime(year=now.year, month=now.month, day=now.day, hour=int(get_punch[0]),
+                                               minute=int(get_punch[1]))
+            if convert >= start_night_time:
+                rec.nighttime_supplement = "{:02d}:{:02d}".format(horas, minutos)
+                rec.worked_hours = "{:02d}:{:02d}".format(0, 0)
+            else:
+                rec.worked_hours = "{:02d}:{:02d}".format(horas, minutos)
+                rec.nighttime_supplement = "{:02d}:{:02d}".format(0, 0)
             return worked_hours_in_day
+
+    # def compute_night_time(self):
+    #     for rec in self:
+    #         worked_hours
