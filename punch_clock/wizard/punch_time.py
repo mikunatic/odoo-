@@ -13,6 +13,8 @@ class PunchTime(models.TransientModel):
     lunch_time_related = fields.Char(related="punch_date.lunch_time")
     attears_hour_related = fields.Char(related="punch_date.attears")
     extra_hour_hour_related = fields.Char(related="punch_date.extra_hour")
+    extra_night_hours_related = fields.Char(related="punch_date.extra_night_hours")
+    nighttime_supplement_related = fields.Char(related="punch_date.nighttime_supplement")
     employee_pis = fields.Char(string="PIS do Funcionário")
     justification = fields.Many2one('remoteness', string="Justificativa")
     week_day = fields.Char(string='Dia da semana')
@@ -29,8 +31,8 @@ class PunchTime(models.TransientModel):
             'default_extra_hour_lunch': self.punch_date.extra_hour_lunch,
             'default_extra_hour': self.punch_date.extra_hour,
             'default_arrears_hour': self.punch_date.attears,
-            'default_extra_night_hours': self.punch_date.attears,
-            'default_nighttime_supplement': self.punch_date.attears,
+            'default_extra_night_hours': self.punch_date.extra_night_hours,
+            'default_nighttime_supplement': self.punch_date.nighttime_supplement,
             'default_manage_employee_time_id': self.manage_employee_time_id.id,
         }
         return {

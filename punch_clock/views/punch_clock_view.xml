@@ -35,6 +35,7 @@
                 <group>
                     <group>
                         <field name="employee_id"/>
+                        <field name="employee_pis"/>
                         <field name="punch_date"/>
                         <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}">
                             <tree>
@@ -43,14 +44,13 @@
                         </field>
                     </group>
                     <group>
-                        <field name="employee_pis"/>
-                        <field name="worked_hours"/>
-                        <field name="nighttime_supplement"/>
-                        <field name="lunch_time"/>
-                        <field name="attears"/>
-                        <field name="extra_hour"/>
-                        <field name="extra_hour_lunch"/>
-                        <field name="extra_night_hours"/>
+                        <field name="worked_hours" attrs="{'invisible':['|',('worked_hours','=','00:00'),(['worked_hours','=',False])]}"/>
+                        <field name="nighttime_supplement" attrs="{'invisible':['|',('nighttime_supplement','=','00:00'),(['nighttime_supplement','=',False])]}"/>
+                        <field name="lunch_time" attrs="{'invisible':['|',('lunch_time','=','00:00'),(['lunch_time','=',False])]}"/>
+                        <field name="attears" attrs="{'invisible':['|',('attears','=','00:00'),(['attears','=',False])]}"/>
+                        <field name="extra_hour" attrs="{'invisible':['|',('extra_hour','=','00:00'),(['extra_hour','=',False])]}"/>
+                        <field name="extra_hour_lunch" attrs="{'invisible':['|',('extra_hour_lunch','=','00:00'),(['extra_hour_lunch','=',False])]}"/>
+                        <field name="extra_night_hours" attrs="{'invisible':['|',('extra_night_hours','=','00:00'),(['extra_night_hours','=',False])]}"/>
                     </group>
                 </group>
 <!--                    <group>-->

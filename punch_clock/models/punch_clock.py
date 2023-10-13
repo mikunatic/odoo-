@@ -11,7 +11,7 @@ class PunchClockIntegration(models.Model):
     employee_id = fields.Many2one('hr.employee', string="Funcionário")
     punch_date = fields.Date(string="Dia da Batida")
     punch_ids = fields.One2many('punch.clock.time', 'day_id', string="Horário da batida")
-    employee_pis = fields.Char()
+    employee_pis = fields.Char("PIS")
     extra_night_hours = fields.Char(string="Hora extra noturna")
     nighttime_supplement = fields.Char(string="Adicional noturno")
     lunch_time = fields.Char(string="Horário de almoço")
@@ -142,8 +142,9 @@ class PunchClockIntegration(models.Model):
                 date_time_1 = timedelta(hours=int(time[0]), minutes=int(time[1]))
                 date_time_2 = timedelta(hours=int(ideal_time[0]), minutes=int(ideal_time[1]))
 
+                time_exit = rec.punch_ids[-1].time_punch.split(':')
                 ideal_departure = departure_hour.split(':')
-                punch_exit = timedelta(hours=int(ideal_departure[0]), minutes=int(ideal_departure[1]))
+                punch_exit = timedelta(hours=int(time_exit[0]), minutes=int(time_exit[1]))
                 ideal_exit = timedelta(hours=int(ideal_time[0]), minutes=int(ideal_time[1]))
 
                 if date_time_1 > date_time_2:
