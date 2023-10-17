@@ -17,48 +17,23 @@ class BankRegister(models.TransientModel):
     extra_night_hours = fields.Char(string="Hora extra noturna")
     nighttime_supplement = fields.Char(string="Adicional noturno")
 
+    def create_virtual_hours_line(self, event, total_hours):
+        if total_hours and total_hours != "00:00":
+            vals_list = {
+                'bank_register_id': self.id,
+                'events': event,
+                'total_hours': total_hours,
+            }
+            self.env['virtual.hours.lines'].create(vals_list)
+
     @api.onchange('virtual_hours_lines_ids')
     def _onchange_virtual_hours_lines(self):
         if not self.virtual_hours_lines_ids:
-            if self.extra_hour != "00:00" and self.extra_hour != False:
-                extra_hours_vals_list = {
-                    'bank_register_id':self.id,
-                    'events': 'credit',
-                    'total_hours': self.extra_hour,
-                }
-                self.env['virtual.hours.lines'].create(extra_hours_vals_list)
-
-            if self.extra_hour_lunch != "00:00" and self.extra_hour_lunch != False:
-                extra_hours_lunch_vals_list = {
-                    'bank_register_id': self.id,
-                    'events': 'intra',
-                    'total_hours': self.extra_hour_lunch,
-                }
-                self.env['virtual.hours.lines'].create(extra_hours_lunch_vals_list)
-
-            if self.arrears_hour != "00:00" and self.arrears_hour != False:
-                arrears_hour_vals_list = {
-                    'bank_register_id': self.id,
-                    'events': 'debit',
-                    'total_hours': self.arrears_hour,
-                }
-                self.env['virtual.hours.lines'].create(arrears_hour_vals_list)
-
-            if self.extra_night_hours != "00:00" and self.extra_night_hours != False:
-                extra_night_hours_vals_list = {
-                    'bank_register_id':self.id,
-                    'events': 'credit',
-                    'total_hours': self.extra_night_hours,
-                }
-                self.env['virtual.hours.lines'].create(extra_night_hours_vals_list)
-
-            if self.nighttime_supplement != "00:00" and self.nighttime_supplement != False:
-                nighttime_supplement_vals_list = {
-                    'bank_register_id':self.id,
-                    'events': 'credit',
-                    'total_hours': self.nighttime_supplement,
-                }
-                self.env['virtual.hours.lines'].create(nighttime_supplement_vals_list)
+            self.create_virtual_hours_line('credit', self.extra_hour)
+            self.create_virtual_hours_line('intra', self.extra_hour_lunch)
+            self.create_virtual_hours_line('debit', self.arrears_hour)
+            self.create_virtual_hours_line('credit', self.extra_night_hours)
+            self.create_virtual_hours_line('credit', self.nighttime_supplement)
 
     def confirm(self):
         for line in self.virtual_hours_lines_ids:

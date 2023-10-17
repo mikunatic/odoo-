@@ -50,7 +50,8 @@ class ManageEmployeeTime(models.TransientModel):
             if rec.punch_date:
                 worked_hours += rec.punch_date.compute_virtual_time()
                 overtime += rec.punch_date.compute_extra_hour()
-                arrears_hour += rec.punch_date.compute_attears()
+                splitted_attears = rec.punch_date.attears.split(":") if rec.punch_date.attears else [0,0]
+                arrears_hour += timedelta(hours=int(splitted_attears[0]), minutes=int(splitted_attears[1]))
             elif rec.justification.id == self.env['remoteness'].search([('hypothesis', '=', 'Falta DSR')]).id:
                 lack_dsr_and_lack += 1
             elif rec.justification.id == self.env['remoteness'].search(

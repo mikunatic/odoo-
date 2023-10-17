@@ -32,6 +32,10 @@
             <field name='credit_name'>Pernoite</field>
         </record>
 
+        <record id='credit9' model='credit.virtual.bank'>
+            <field name='credit_name'>Hora excedente</field>
+        </record>
+
     </data>
 </odoo>
 

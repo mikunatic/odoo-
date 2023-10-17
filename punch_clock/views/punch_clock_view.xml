@@ -45,6 +45,7 @@
                     </group>
                     <group>
                         <field name="worked_hours" attrs="{'invisible':['|',('worked_hours','=','00:00'),(['worked_hours','=',False])]}"/>
+<!--                        <field name="exit_earlier" attrs="{'invisible':['|',('exit_earlier','=','00:00'),(['exit_earlier','=',False])]}"/>-->
                         <field name="nighttime_supplement" attrs="{'invisible':['|',('nighttime_supplement','=','00:00'),(['nighttime_supplement','=',False])]}"/>
                         <field name="lunch_time" attrs="{'invisible':['|',('lunch_time','=','00:00'),(['lunch_time','=',False])]}"/>
                         <field name="attears" attrs="{'invisible':['|',('attears','=','00:00'),(['attears','=',False])]}"/>
