@@ -1,249 +1,271 @@
+<?xml version="1.0"?>
 <odoo>
     <data>
-        <record id="remoteness1" model="remoteness">
+        <record model="remoteness" id="remoteness1">
             <field name="hypothesis">Férias</field>
             <field name="duration">Período do gozo de férias</field>
             <field name="foundation">CLT, art. 129</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness2" model="remoteness">
+        <record model="remoteness" id="remoteness2">
             <field name="hypothesis">RSR</field>
             <field name="duration">1 dia por semana</field>
             <field name="foundation">CF, art. 7º, XV</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness3" model="remoteness">
+        <record model="remoteness" id="remoteness3">
             <field name="hypothesis">Feriados</field>
             <field name="duration">-</field>
             <field name="foundation">-</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness4" model="remoteness">
+        <record model="remoteness" id="remoteness4">
             <field name="hypothesis">Intervalos Remunerados</field>
             <field name="duration">-</field>
             <field name="foundation">-</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness5" model="remoteness">
+        <record model="remoteness" id="remoteness5">
             <field name="hypothesis">Faltas justificadas (abonadas)</field>
             <field name="duration">-</field>
             <field name="foundation">CLT, art. 131, IV</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness6" model="remoteness">
+        <record model="remoteness" id="remoteness6">
             <field name="hypothesis">Afastamento previdenciário, de até 15 dias, por doença ou acidente</field>
             <field name="duration">Período do afastamento</field>
             <field name="foundation">Lei 8.213/91, art. 60, § 3º</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness7" model="remoteness">
+        <record model="remoteness" id="remoteness7">
             <field name="hypothesis">Convocação da Justiça Eleitoral</field>
             <field name="duration">pelo dobro dos dias de convocação</field>
             <field name="foundation">Lei 9.504/97, art.98</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness8" model="remoteness">
+        <record model="remoteness" id="remoteness8">
             <field name="hypothesis">Lockout</field>
             <field name="duration">Período da paralisação</field>
             <field name="foundation">Lei 7.783/89, art. 17</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id="remoteness9" model="remoteness">
+        <record model="remoteness" id="remoteness9">
             <field name="hypothesis">Representações no Conselho Curador do FGTS e CNPS</field>
             <field name="duration">durante as ausências</field>
             <field name="foundation">Lei 8.036/90, art. 3º, § 7º</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness10' model='remoteness'>
-            <field name='hypothesis'>Participação em Comissão de Concilação de Prévia</field>
-            <field name='duration'>período em que for convocado para atuar como conciliador</field>
-            <field name='foundation'>CLT,art.652-B, §2º</field>
+        <record model="remoteness" id="remoteness10">
+            <field name="hypothesis">Participação em Comissão de Concilação de Prévia</field>
+            <field name="duration">período em que for convocado para atuar como conciliador</field>
+            <field name="foundation">CLT,art.652-B, §2º</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness11' model='remoteness'>
-            <field name='hypothesis'>Licença maternidade</field>
-            <field name='duration'>120 dias / 180 dias</field>
-            <field name='foundation'>CLT,art.392 Lei 11.770/08 Lei 13.985/2020, art 5º, I</field>
+        <record model="remoteness" id="remoteness11">
+            <field name="hypothesis">Licença maternidade</field>
+            <field name="duration">120 dias / 180 dias</field>
+            <field name="foundation">CLT,art.392 Lei 11.770/08 Lei 13.985/2020, art 5º, I</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness12' model='remoteness'>
-            <field name='hypothesis'>Redução da jornada no curso do aviso prévio</field>
-            <field name='duration'>7 dias corridos / 2 horas diárias</field>
-            <field name='foundation'>CLT,art.448</field>
+        <record model="remoteness" id="remoteness12">
+            <field name="hypothesis">Redução da jornada no curso do aviso prévio</field>
+            <field name="duration">7 dias corridos / 2 horas diárias</field>
+            <field name="foundation">CLT,art.448</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness13' model='remoteness'>
-            <field name='hypothesis'>Aborto comprovado por atestado médico oficial</field>
-            <field name='duration'>2 semanas</field>
-            <field name='foundation'>CLT,art.395</field>
+        <record model="remoteness" id="remoteness13">
+            <field name="hypothesis">Aborto comprovado por atestado médico oficial</field>
+            <field name="duration">2 semanas</field>
+            <field name="foundation">CLT,art.395</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness14' model='remoteness'>
-            <field name='hypothesis'>Falecimento de CADI ou dependente na CPTS</field>
-            <field name='duration'>2 dias consecutivos</field>
-            <field name='foundation'>CLT,art.473, I</field>
+        <record model="remoteness" id="remoteness14">
+            <field name="hypothesis">Falecimento de CADI ou dependente na CPTS</field>
+            <field name="duration">2 dias consecutivos</field>
+            <field name="foundation">CLT,art.473, I</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness15' model='remoteness'>
-            <field name='hypothesis'>Casamento</field>
-            <field name='duration'>3 dias consecutivos</field>
-            <field name='foundation'>CLT,art.473, II</field>
+        <record model="remoteness" id="remoteness15">
+            <field name="hypothesis">Casamento</field>
+            <field name="duration">3 dias consecutivos</field>
+            <field name="foundation">CLT,art.473, II</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness16' model='remoteness'>
-            <field name='hypothesis'>Licença-paternidade</field>
-            <field name='duration'>5 dias / 20 dias</field>
-            <field name='foundation'>ADCT,art.10, §1º lEI 11.770/08</field>
+        <record model="remoteness" id="remoteness16">
+            <field name="hypothesis">Licença-paternidade</field>
+            <field name="duration">5 dias / 20 dias</field>
+            <field name="foundation">ADCT,art.10, §1º Lei 11.770/08</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness17' model='remoteness'>
-            <field name='hypothesis'>Doação voluntária de sangue</field>
-            <field name='duration'>1 dia (a cada 12 meses)</field>
-            <field name='foundation'>CLT,art.473, IV</field>
+        <record model="remoteness" id="remoteness17">
+            <field name="hypothesis">Doação voluntária de sangue</field>
+            <field name="duration">1 dia (a cada 12 meses)</field>
+            <field name="foundation">CLT,art.473, IV</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness18' model='remoteness'>
-            <field name='hypothesis'>Alistamento eleitoral</field>
-            <field name='duration'>2 dias</field>
-            <field name='foundation'>CLT,art.473, V</field>
+        <record model="remoteness" id="remoteness18">
+            <field name="hypothesis">Alistamento eleitoral</field>
+            <field name="duration">2 dias</field>
+            <field name="foundation">CLT,art.473, V</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness19' model='remoteness'>
-            <field name='hypothesis'>Exigências do Serviço Militar</field>
-            <field name='duration'>no periodo necessário</field>
-            <field name='foundation'>CLT,art.473, VI</field>
+        <record model="remoteness" id="remoteness19">
+            <field name="hypothesis">Exigências do Serviço Militar</field>
+            <field name="duration">no periodo necessário</field>
+            <field name="foundation">CLT,art.473, VI</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness20' model='remoteness'>
-            <field name='hypothesis'>Exame vestibular</field>
-            <field name='duration'>nos dias que prestar prova</field>
-            <field name='foundation'>CLT,art.473, VII</field>
+        <record model="remoteness" id="remoteness20">
+            <field name="hypothesis">Exame vestibular</field>
+            <field name="duration">nos dias que prestar prova</field>
+            <field name="foundation">CLT,art.473, VII</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness21' model='remoteness'>
-            <field name='hypothesis'>Comparecimento em juízo</field>
-            <field name='duration'>pelo tempo necessário</field>
-            <field name='foundation'>CLT,art.473, VIII</field>
+        <record model="remoteness" id="remoteness21">
+            <field name="hypothesis">Comparecimento em juízo</field>
+            <field name="duration">pelo tempo necessário</field>
+            <field name="foundation">CLT,art.473, VIII</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness22' model='remoteness'>
-            <field name='hypothesis'>Representante sindical em reunião oficial do organismo internacional</field>
-            <field name='duration'>>pelo tempo necessário</field>
-            <field name='foundation'>CLT,art.473, IX</field>
+        <record model="remoteness" id="remoteness22">
+            <field name="hypothesis">Representante sindical em reunião oficial do organismo internacional</field>
+            <field name="duration">pelo tempo necessário</field>
+            <field name="foundation">CLT,art.473, IX</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness23' model='remoteness'>
-            <field name='hypothesis'>Acompanhar esposa ou companheira em pré-natal</field>
-            <field name='duration'>até 6 consultas/exames</field>
-            <field name='foundation'>CLT,art.473, X (MP 1116/2022)</field>
+        <record model="remoteness" id="remoteness23">
+            <field name="hypothesis">Acompanhar esposa ou companheira em pré-natal</field>
+            <field name="duration">até 6 consultas/exames</field>
+            <field name="foundation">CLT,art.473, X (MP 1116/2022)</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness24' model='remoteness'>
-            <field name='hypothesis'>Acompanhar filho em consulta médica</field>
-            <field name='duration'>1 dia (a cada ano - até 6 anos)</field>
-            <field name='foundation'>CLT,art.473, XI</field>
+        <record model="remoteness" id="remoteness24">
+            <field name="hypothesis">Acompanhar filho em consulta médica</field>
+            <field name="duration">1 dia (a cada ano - até 6 anos)</field>
+            <field name="foundation">CLT,art.473, XI</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness25' model='remoteness'>
-            <field name='hypothesis'>Exames preventivos de câncer</field>
-            <field name='duration'>até 3 dias (a cada 12 meses)</field>
-            <field name='foundation'>CLT,art.473, XII</field>
+        <record model="remoteness" id="remoteness25">
+            <field name="hypothesis">Exames preventivos de câncer</field>
+            <field name="duration">até 3 dias (a cada 12 meses)</field>
+            <field name="foundation">CLT,art.473, XII</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness26' model='remoteness'>
-            <field name='hypothesis'>Faltas não justificadas</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>CLT,art.131, IV</field>
+        <record model="remoteness" id="remoteness26">
+            <field name="hypothesis">Faltas não justificadas</field>
+            <field name="duration">-</field>
+            <field name="foundation">CLT,art.131, IV</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness27' model='remoteness'>
-            <field name='hypothesis'>Intervalos não remunerados</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>-</field>
+        <record model="remoteness" id="remoteness27">
+            <field name="hypothesis">Intervalos não remunerados</field>
+            <field name="duration">-</field>
+            <field name="foundation">-</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness28' model='remoteness'>
-            <field name='hypothesis'>Greve dos trabalhadores (regra)</field>
-            <field name='duration'>duração da greve</field>
-            <field name='foundation'>Lei 7.783/89, art.7º</field>
+        <record model="remoteness" id="remoteness28">
+            <field name="hypothesis">Greve dos trabalhadores (regra)</field>
+            <field name="duration">duração da greve</field>
+            <field name="foundation">Lei 7.783/89, art.7º</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness29' model='remoteness'>
-            <field name='hypothesis'>Afastamento previdenciário, sueprior a 15 dias, por doença ou acidente (*)</field>
-            <field name='duration'>período do afastamento que superar os 15 primeiros dias</field>
-            <field name='foundation'>Lei 8.213/91, art.60</field>
+        <record model="remoteness" id="remoteness29">
+            <field name="hypothesis">Afastamento previdenciário, superior a 15 dias, por doença ou acidente (*)</field>
+            <field name="duration">período do afastamento que superar os 15 primeiros dias</field>
+            <field name="foundation">Lei 8.213/91, art.60</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness30' model='remoteness'>
-            <field name='hypothesis'>Aposentadoria por invalidez</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>CLT,art.475</field>
+        <record model="remoteness" id="remoteness30">
+            <field name="hypothesis">Aposentadoria por invalidez</field>
+            <field name="duration">-</field>
+            <field name="foundation">CLT,art.475</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness38' model='remoteness'>
-            <field name='hypothesis'>Suspensão disciplinar</field>
-            <field name='duration'>máximo de 30 dias</field>
-            <field name='foundation'>CLT,art.474</field>
+        <record model="remoteness" id="remoteness38">
+            <field name="hypothesis">Suspensão disciplinar</field>
+            <field name="duration">máximo de 30 dias</field>
+            <field name="foundation">CLT,art.474</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness31' model='remoteness'>
-            <field name='hypothesis'>Prisão provisória</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>-</field>
+        <record model="remoteness" id="remoteness31">
+            <field name="hypothesis">Prisão provisória</field>
+            <field name="duration">-</field>
+            <field name="foundation">-</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness32' model='remoteness'>
-            <field name='hypothesis'>Afastamento para inquérito de apuração de falta grave</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>CLT,art.494</field>
+        <record model="remoteness" id="remoteness32">
+            <field name="hypothesis">Afastamento para inquérito de apuração de falta grave</field>
+            <field name="duration">-</field>
+            <field name="foundation">CLT,art.494</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness33' model='remoteness'>
-            <field name='hypothesis'>Afastamento para participação em curso ou programa de qualificação (lay-off)</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>CLT,art.476-A</field>
+        <record model="remoteness" id="remoteness33">
+            <field name="hypothesis">Afastamento para participação em curso ou programa de qualificação (lay-off)
+            </field>
+            <field name="duration">-</field>
+            <field name="foundation">CLT,art.476-A</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness34' model='remoteness'>
-            <field name='hypothesis'>Empregado eleito para direção de empresa (regra)</field>
-            <field name='duration'>-</field>
-            <field name='foundation'>SUM-269</field>
+        <record model="remoteness" id="remoteness34">
+            <field name="hypothesis">Empregado eleito para direção de empresa (regra)</field>
+            <field name="duration">-</field>
+            <field name="foundation">SUM-269</field>
+            <field name="remuneration">1</field>
         </record>
 
-        <record id='remoteness35' model='remoteness'>
-            <field name='hypothesis'>Empregado eleito dirigente sindical que se ausenta do trabalho</field>
-            <field name='duration'>Durante ausência para desempenho das funções</field>
-            <field name='foundation'>CLT,art.543, §2º</field>
+        <record model="remoteness" id="remoteness35">
+            <field name="hypothesis">Empregado eleito dirigente sindical que se ausenta do trabalho</field>
+            <field name="duration">Durante ausência para desempenho das funções</field>
+            <field name="foundation">CLT,art.543, §2º</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness36' model='remoteness'>
-            <field name='hypothesis'>Serviço militar obrigatório (**)</field>
-            <field name='duration'>12 meses</field>
-            <field name='foundation'>Lei 4.375/64, art.6º</field>
+        <record model="remoteness" id="remoteness36">
+            <field name="hypothesis">Serviço militar obrigatório (**)</field>
+            <field name="duration">12 meses</field>
+            <field name="foundation">Lei 4.375/64, art.6º</field>
+            <field name="remuneration">0</field>
         </record>
 
-        <record id='remoteness37' model='remoteness'>
-            <field name='hypothesis'>Violência doméstica contra a empregada</field>
-            <field name='duration'>até 6 meses (STJ: após 15 dias)</field>
-            <field name='foundation'>Lei 11.340/2006, art.9º, §2º, II (Lei Maria da Penha)</field>
-        </record>
-
-        <record id='remoteness39' model='remoteness'>
-            <field name='hypothesis'>Dia compensado</field>
-            <field name='duration'>--</field>
-            <field name='foundation'>--</field>
-        </record>
-
-        <record id='remoteness40' model='remoteness'>
-            <field name='hypothesis'>DSR</field>
-            <field name='duration'>--</field>
-            <field name='foundation'>--</field>
-        </record>
-
-        <record id='remoteness41' model='remoteness'>
-            <field name='hypothesis'>Falta DSR</field>
-            <field name='duration'>--</field>
-            <field name='foundation'>--</field>
+        <record model="remoteness" id="remoteness37">
+            <field name="hypothesis">Violência doméstica contra a empregada</field>
+            <field name="duration">até 6 meses (STJ: após 15 dias)</field>
+            <field name="foundation">Lei 11.340/2006, art.9º, §2º, II (Lei Maria da Penha)</field>
+            <field name="remuneration">0</field>
         </record>
     </data>
 </odoo>

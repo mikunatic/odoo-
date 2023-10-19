@@ -15,11 +15,8 @@ class HrEmployeeInherit(models.Model):
     syndicate_id = fields.Many2one('syndicate', string='Sindicato')
     week_days_ids = fields.Many2many('week.days', string='Dias trabalhados')
     event_ids = fields.Many2many('event', string="Eventos")
-    general_configuration_id = fields.Many2one('general.configuration')
-    # virtual_time = fields.Char(compute='compute_virtual_time')
-    # extra_hour_lunch = fields.Char()
+    general_configuration_id = fields.Many2one('general.configuration', string="Configuração Geral")
     dsr_week_days_id = fields.Many2one('week.days', string='DSR')
-    # extract_virtual_hours = fields.One2many('extract.virtual.hours','employee_id', compute="compute_extract")
 
     def name_get(self):# rec_name para diferenciar os funcionários demitidos dos admitidos
         return [(rec.id, rec.name + " (demitido)" if rec.employee_pis[0] == "d" else rec.name) for rec in self]

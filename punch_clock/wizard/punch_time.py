@@ -1,4 +1,5 @@
 from odoo import models, fields
+from datetime import timedelta
 
 
 class PunchTime(models.TransientModel):
@@ -7,7 +8,7 @@ class PunchTime(models.TransientModel):
     manage_employee_time_id = fields.Many2one('manage.employee.time')
     employees_by_interval_id = fields.Many2one('employees.by.interval')
     employee_id = fields.Many2one('hr.employee', string="Funcionário")
-    punch_date = fields.Many2many('punch.clock', string="Batidas")
+    punch_date = fields.Many2many('punch.clock', string="Dia da Batida")
     punch_time = fields.Many2many('punch.clock.time', string="Batidas")
     worked_hour_related = fields.Char(related="punch_date.worked_hours", string="Trabalho")
     lunch_time_related = fields.Char(related="punch_date.lunch_time")
@@ -24,7 +25,30 @@ class PunchTime(models.TransientModel):
     allow_move_creation = fields.Boolean()
 
     def return_extra_hours(self):
-        ctx = {
+        ctx = dict()
+        if self.justification and not self.justification.remuneration:
+            day = self.env['workday'].search([('week_days_id', '=', self.env['week.days'].search(
+                [('day', '=', self.day.strftime('%A').capitalize())]).id),('employee_id','=',self.employee_id)])
+            departure_hours, departure_minutes = map(int, day.departure_hour.time.split(":"))
+            departure_hour = timedelta(hours=departure_hours, minutes=departure_minutes)
+
+            entrance_hours, entrance_minutes = map(int, day.entrance_hour.time.split(":"))
+            entrance_hour = timedelta(hours=entrance_hours, minutes=entrance_minutes)
+            if day.intraday > 0:
+                to_work_hours = (departure_hour - entrance_hour) - timedelta(minutes=day.intraday)
+            else:
+                to_work_hours = departure_hour - entrance_hour
+            if self.punch_time:
+                worked_hours = self.punch_date.worked_hours.split(":")
+                worked_hours = timedelta(hours=int(worked_hours[0]), minutes=int(worked_hours[1]))
+
+                to_work_hours = to_work_hours - worked_hours
+
+            ctx.update({
+                'default_justification': str(to_work_hours),
+            })
+
+        ctx.update({
             'default_employee_id': self.manage_employee_time_id.employee_id.id,
             'default_date': self.day,
             'default_punch_clock_time_ids': self.punch_time.ids,
@@ -34,7 +58,7 @@ class PunchTime(models.TransientModel):
             'default_extra_night_hours': self.punch_date.extra_night_hours,
             'default_nighttime_supplement': self.punch_date.nighttime_supplement,
             'default_manage_employee_time_id': self.manage_employee_time_id.id,
-        }
+        })
         return {
             'type': 'ir.actions.act_window',
             'name': 'Criar movimentações',

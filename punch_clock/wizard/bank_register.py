@@ -16,6 +16,7 @@ class BankRegister(models.TransientModel):
     arrears_hour = fields.Char('Atraso')
     extra_night_hours = fields.Char(string="Hora extra noturna")
     nighttime_supplement = fields.Char(string="Adicional noturno")
+    justification = fields.Char("Justificativa não remunerada")
 
     def create_virtual_hours_line(self, event, total_hours):
         if total_hours and total_hours != "00:00":

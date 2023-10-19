@@ -13,14 +13,14 @@ class PunchClockIntegration(models.Model):
     punch_date = fields.Date(string="Dia da Batida")
     punch_ids = fields.One2many('punch.clock.time', 'day_id', string="Horário da batida")
     employee_pis = fields.Char("PIS")
-    extra_night_hours = fields.Char(string="Hora extra noturna", store=False)
-    nighttime_supplement = fields.Char(string="Adicional noturno", store=False)
-    lunch_time = fields.Char(string="Horário de almoço", store=False)
-    worked_hours = fields.Char(compute="compute_virtual_time", string="Horas trabalhadas", store=False)
-    exit_earlier = fields.Char(string="Saída fora da jornada", store=False)
+    extra_night_hours = fields.Char(string="Hora extra noturna")
+    nighttime_supplement = fields.Char(string="Adicional noturno")
+    lunch_time = fields.Char(string="Horário de almoço")
+    worked_hours = fields.Char(compute="compute_virtual_time", string="Horas trabalhadas")
+    exit_earlier = fields.Char(string="Saída fora da jornada")
     hour_punch = fields.Integer()
-    attears = fields.Char(string="Horas negativas", store=False)
-    extra_hour = fields.Char(string="Hora excedente", store=False)
+    attears = fields.Char(string="Horas negativas")
+    extra_hour = fields.Char(string="Hora excedente")
     extra_hour_lunch = fields.Char(string="Hora extra almoço", compute="compute_lunch_time")
 
     def deltatime_to_hours_minutes(self, deltatime):
@@ -235,6 +235,13 @@ class PunchClockIntegration(models.Model):
                     rec.extra_hour_lunch = "{:02d}:{:02d}".format(format_extra_hour_lunch[0],
                                                                   format_extra_hour_lunch[1])
                 else:
+                    lunch_time_remove_extra_minutes = lunch_time - timedelta(minutes=lunch_period)
+                    split_attears = self.attears.split(':')
+                    attears_timedelta = timedelta(hours=float(split_attears[0]), minutes=float(split_attears[1]))
+                    format_attears = lunch_time_remove_extra_minutes + attears_timedelta
+                    convert_to_string = str(format_attears).split(':')
+                    self.attears = "{:02d}:{:02d}".format(int(convert_to_string[0]), int(convert_to_string[1]))
+
                     rec.extra_hour_lunch = "{:02d}:{:02d}".format(00, 00)
                 horas = lunch_time.seconds // 3600  # 1 hora = 3600 segundos
                 minutos = (lunch_time.seconds % 3600) // 60
@@ -298,10 +305,11 @@ class PunchClockIntegration(models.Model):
                         worked_hours_ideal = rec.exit_earlier.split(':')
                         rec.exit_earlier = "{:02d}:{:02d}".format(int(worked_hours_ideal[0]), int(worked_hours_ideal[1]))
 
-                    rec.compute_lunch_time()
                     rec.compute_attears(rec.exit_earlier)
+                    rec.compute_lunch_time()
+                    rec.compute_extra_hour()
 
-                    worked_hours_in_day += rec.compute_extra_hour()
+                    # worked_hours_in_day += rec.compute_extra_hour()
                     worked_hours_in_day -= rec.compute_extra_night()
 
 

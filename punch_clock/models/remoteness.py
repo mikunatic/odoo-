@@ -8,3 +8,4 @@ class Remoteness(models.Model):
     hypothesis = fields.Char("Hipótese")
     duration = fields.Char("Duração")
     foundation = fields.Char("Fundamento")
+    remuneration = fields.Boolean("Remuneração")

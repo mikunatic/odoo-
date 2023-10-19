@@ -17,15 +17,16 @@
                         <field name="extra_hour" readonly="True"/>
                         <field name="arrears_hour" readonly="True"/>
                         <field name="nighttime_supplement" readonly="True"/>
+                        <field name="justification" readonly="True"/>
                     </group>
                 </group>
                 <field name="virtual_hours_lines_ids">
                     <tree editable="1" create="false" delete="false">
                         <field name="total_hours"/>
                         <field name="credit_virtual_bank_id" attrs="{'readonly': [('events','=', 'debit')],
-                        'required':[('events','!=','debit')]}"/>
+                        'required':[('events','!=','debit')]}" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
                         <field name="debit_virtual_bank_id"  attrs="{'readonly': [('events','!=', 'debit')],
-                        'required':[('events','=','debit')]}"/>
+                        'required':[('events','=','debit')]}" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
                         <field name="events" readonly="1"/>
                     </tree>
                 </field>
