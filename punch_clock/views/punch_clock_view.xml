@@ -12,8 +12,8 @@
         <field name="name">Relógio de ponto</field>
         <field name="model">punch.clock</field>
         <field name="arch" type="xml">
-            <tree default_order="id desc">
-                <field name="employee_id"/>
+            <tree default_order="id desc" create="false">
+                <field name="employee_id" options="{'no_open':True,'no_create':True,'no_create_edit':True}"/>
                 <field name="punch_date"/>
                 <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="employee_pis"/>
@@ -25,49 +25,35 @@
         <field name="name">Relógio de ponto</field>
         <field name="model">punch.clock</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="false">
                 <header>
                     <button name="open_wizard" class="btn btn-primary" string="Criar apontamento"
                         type="object"/>
+                    <button name="punch_disregard" class="btn btn-primary" type="object" string="Desconsiderar ponto"/>
                 </header>
-
                 <sheet>
-                <group>
                     <group>
-                        <field name="employee_id"/>
-                        <field name="employee_pis"/>
-                        <field name="punch_date"/>
-                        <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}">
-                            <tree>
-                                <field name="time_punch" widget="float_time"/>
-                            </tree>
-                        </field>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="employee_pis"/>
+                            <field name="punch_date"/>
+                            <field name="punch_ids" widget="many2many_tags" options="{'color_field': 'color'}">
+                                <tree>
+                                    <field name="time_punch" widget="float_time"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="worked_hours" attrs="{'invisible':['|',('worked_hours','=','00:00'),(['worked_hours','=',False])]}"/>
+                            <field name="nighttime_supplement" attrs="{'invisible':['|',('nighttime_supplement','=','00:00'),(['nighttime_supplement','=',False])]}"/>
+                            <field name="lunch_time" attrs="{'invisible':['|',('lunch_time','=','00:00'),(['lunch_time','=',False])]}"/>
+                            <field name="attears" attrs="{'invisible':['|',('attears','=','00:00'),(['attears','=',False])]}"/>
+                            <field name="interjourney" attrs="{'invisible':['|',('interjourney','=','00:00'),(['interjourney','=',False])]}"/>
+                            <field name="extra_hour" attrs="{'invisible':['|',('extra_hour','=','00:00'),(['extra_hour','=',False])]}"/>
+                            <field name="extra_hour_lunch" attrs="{'invisible':['|',('extra_hour_lunch','=','00:00'),(['extra_hour_lunch','=',False])]}"/>
+                            <field name="extra_night_hours" attrs="{'invisible':['|',('extra_night_hours','=','00:00'),(['extra_night_hours','=',False])]}"/>
+                        </group>
                     </group>
-                    <group>
-                        <field name="worked_hours" attrs="{'invisible':['|',('worked_hours','=','00:00'),(['worked_hours','=',False])]}"/>
-<!--                        <field name="exit_earlier" attrs="{'invisible':['|',('exit_earlier','=','00:00'),(['exit_earlier','=',False])]}"/>-->
-                        <field name="nighttime_supplement" attrs="{'invisible':['|',('nighttime_supplement','=','00:00'),(['nighttime_supplement','=',False])]}"/>
-                        <field name="lunch_time" attrs="{'invisible':['|',('lunch_time','=','00:00'),(['lunch_time','=',False])]}"/>
-                        <field name="attears" attrs="{'invisible':['|',('attears','=','00:00'),(['attears','=',False])]}"/>
-                        <field name="extra_hour" attrs="{'invisible':['|',('extra_hour','=','00:00'),(['extra_hour','=',False])]}"/>
-                        <field name="extra_hour_lunch" attrs="{'invisible':['|',('extra_hour_lunch','=','00:00'),(['extra_hour_lunch','=',False])]}"/>
-                        <field name="extra_night_hours" attrs="{'invisible':['|',('extra_night_hours','=','00:00'),(['extra_night_hours','=',False])]}"/>
-                    </group>
-                </group>
-<!--                    <group>-->
-<!--                        <group name="Criar apontamentos manuais">-->
-<!--                            <field name="hour_punch"/>-->
-<!--                            <field name="minute_punch"/>-->
-<!--                            <button name="create_punch_clock_time" class="btn btn-primary" string="Criar"-->
-<!--                        type="object"/>-->
-<!--                        </group>-->
-<!--                    </group>-->
-<!--                    <group>-->
-<!--                        <field name="hour_punch_create"/>-->
-<!--                        <field name="minute_punch_create"/>-->
-<!--                        <button name="compute_virtual_time" class="btn btn-primary" string="Criar ponto"-->
-<!--                        type="object"/>-->
-<!--                    </group>-->
                 </sheet>
             </form>
         </field>

@@ -1,0 +1,12 @@
+<odoo>
+    <record model="ir.module.category" id="module_punch_clock">
+        <field name="name">Recursos Humanos</field>
+        <field name="description">Access file Punch Clock</field>
+    </record>
+
+    <record id="group_rh" model="res.groups">
+        <field name="name">Ponto</field>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_punch_clock"/>
+    </record>
+</odoo>

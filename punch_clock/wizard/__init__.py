@@ -6,4 +6,5 @@ from . import employees_by_interval
 from . import punch_clock_integration
 from . import manual_point
 from . import bank_register
+from . import punch_disregard
 

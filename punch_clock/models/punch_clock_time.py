@@ -7,6 +7,7 @@ class PunchClockTime(models.Model):
     _rec_name = 'time_punch'
     _order = 'seconds'
 
+    choose_punch = fields.Boolean()
     day_id = fields.Many2one('punch.clock')
     time_punch = fields.Char()
     status = fields.Selection([('manual','Manual'),('valid','Válido'),('disregarded','Desconsiderado')])

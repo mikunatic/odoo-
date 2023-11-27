@@ -20,7 +20,7 @@
                     </group>
                 </group>
                 <footer>
-                    <button name="create_afd" class="btn btn-primary" string="Ler arquivo"
+                    <button name="call_function" class="btn btn-primary" string="Ler arquivo"
                             type="object"/>
                 </footer>
             </form>

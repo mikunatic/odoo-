@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="reason"/>
+                    <field name="reason" options="{'no_create':True,'no_create_edit':True,'no_open':True}"/>
                 </group>
                 <footer>
                     <button name="create_justification" class="btn btn-primary" string="Criar"

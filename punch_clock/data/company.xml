@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="company1" model="employee.company">
+            <field name="name">Superglass</field>
+            <field name="cnpj">16.911.205/0003-20</field>
+            <field name="city">Mogi das Cruzes</field>
+            <field name="inscricao_estadual">454.239.645.116</field>
+        </record>
+
+        <record id="company2" model="employee.company">
+            <field name="name">Vidroshima</field>
+            <field name="cnpj">67.685.487/0001-64</field>
+            <field name="city">Mogi das Cruzes</field>
+            <field name="inscricao_estadual">454.119.357.119</field>
+        </record>
+    </data>
+</odoo>

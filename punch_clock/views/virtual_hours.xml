@@ -10,11 +10,12 @@
         <field name="name">Banco de horas virtuais</field>
         <field name="model">extract.virtual.hours</field>
         <field name="arch" type="xml">
-            <tree >
+            <tree>
                 <field name="employee_id" decoration-bf="1"/>
                 <field name="date"/>
                 <field name="movement_type" widget="badge"/>
-                <field name="hours" decoration-success="(reference_bool == True)" decoration-danger="(reference_bool == False)"/>
+                <field name="hours" decoration-success="(reference_bool == True)"
+                       decoration-danger="(reference_bool == False)"/>
                 <field name="balance" decoration-bf="1"/>
                 <field name="balance_in_seconds" invisible="1"/>
                 <field name="reference_bool" invisible="1"/>

@@ -1,0 +1,23 @@
+<odoo>
+    <record id="punch_disregard_form_view" model="ir.ui.view">
+        <field name="name">Desconsideração de Ponto</field>
+        <field name="model">punch.disregard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="punch_clock_time_id" invisible="1"/>
+                </group>
+                    <field name="punch_clock_time_ids" widget="one2many" nolabel="1" readonly="1"
+                           options="{'no_open':True}" force_save="1">
+                        <tree editable="1" create="false">
+                            <field name="choose_punch" widget="toggle_button" nolabel="1"/>
+                            <field name="time_punch"/>
+                        </tree>
+                    </field>
+                <footer>
+                    <button class="btn btn-primary" string="Finalizar" type="object" name="disregard_punch"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
